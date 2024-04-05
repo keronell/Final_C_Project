@@ -18,5 +18,3 @@ char*   createDateString(const Date* pDate);
 int		 equalDate(const Date* pDate1, const Date* pDate2);
 #endif
 
-
-printf("Hello World!!!!");
