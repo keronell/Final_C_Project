@@ -10,6 +10,7 @@ typedef enum
     eStar, eAsteroid, ePlanet, eNofTypes
 } CelestialBodyType;
 
+
 typedef struct
 {
     int             ID;
@@ -20,7 +21,7 @@ typedef struct
     CelestialBodyType   type;
 }CelestialBody;
 
-const char* str[eNofTypes];
+
 
 
 int     initCelestialBody(CelestialBody* pBody);

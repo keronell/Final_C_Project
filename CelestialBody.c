@@ -6,6 +6,8 @@
 #include "CelestialBody.h"
 
 
+const char* str[eNofTypes] = {"Star", "Asteroid", "Planet"};
+
 int     initCelestialBody(CelestialBody* pBody)
 {
     pBody->ID = getUniqueID();
@@ -13,8 +15,6 @@ int     initCelestialBody(CelestialBody* pBody)
     pBody->distance = getDistance();
     getLocation(pBody);
     pBody->type = chooseCelestialBodyType();
-
-
 
     return 0;
 }
@@ -57,7 +57,7 @@ CelestialBodyType chooseCelestialBodyType() {
     int choice;
     printf("Choose the type of Celestial Body:\n");
     for (int i = 0; i < eNofTypes; i++) {
-        printf("%d. %s\n", i, str[i]);
+        printf("[%d] %s\n", i, str[i]);
     }
     printf("Enter your choice (0 to %d): ", eNofTypes - 1);
     scanf("%d", &choice);
@@ -72,11 +72,10 @@ CelestialBodyType chooseCelestialBodyType() {
 
 void    printCelestialBody(const CelestialBody* pBody) {
     if (pBody != NULL) {
-        printf("Celestial Body Details:\n");
-        printf("ID: %d\n", pBody->ID);
+        printf("\nID: %d\n", pBody->ID);
         printf("Size: %d km\n", pBody->size);
-        printf("Distance: %d light years\n", pBody->distance);
+        printf("Distance: %d light years away from earth\n", pBody->distance);
         printf("Type: %s\n", str[pBody->type]);
-        printf("Location: X-axis %d, Y-axis %d\n", pBody->location.xAxis, pBody->location.yAxis);
+        printf("Location: (%d, %d)\n", pBody->location.xAxis, pBody->location.yAxis);
     }
 }
