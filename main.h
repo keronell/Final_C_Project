@@ -1,8 +1,8 @@
-#ifndef FINAL_C_PROJECT_MAIN_H
-#define FINAL_C_PROJECT_MAIN_H
+#pragma once
 
+//#include "FileManager.h"
 
+void displayMenu();
 int menu();
 
 
-#endif //FINAL_C_PROJECT_MAIN_H

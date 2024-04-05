@@ -6,9 +6,10 @@
 
 typedef struct
 {
-    int			agencyCounter;
+    int		    agencyCounter;
     SpaceAgency**	agencyArr;
-    LIST		expeditionList;
+    int         numOfExpeditions;
+    LIST        expeditionList;
 }Agency;
 
 

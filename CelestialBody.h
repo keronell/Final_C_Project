@@ -2,19 +2,34 @@
 #define FINAL_C_PROJECT_CELESTIALBODY_H
 
 
+
+#include "Location.h"
+
 typedef enum
 {
-    eStar, eAsteroid, ePlanet, eNofOptions
+    eStar, eAsteroid, ePlanet, eNofTypes
 } CelestialBodyType;
 
-typedef struct CelestialBody
+typedef struct
 {
-    int ID;
-    CelestialBodyType type;
-    int size;
-    int distance;
-    char* foundBy;
-};
+    int             ID;
+    int             size;
+    int             distance;
+    //SpaceAgency*    foundBy;
+    Location        location;
+    CelestialBodyType   type;
+}CelestialBody;
 
-const char* str[eNofOptions];
+const char* str[eNofTypes];
+
+
+int     initCelestialBody(CelestialBody* pBody);
+int     getUniqueID();
+int     getSize();
+int     getDistance();
+void    getLocation(CelestialBody* pBody);
+CelestialBodyType   chooseCelestialBodyType();
+
+void printCelestialBody(const CelestialBody* pBody);
+
 #endif //FINAL_C_PROJECT_CELESTIALBODY_H
