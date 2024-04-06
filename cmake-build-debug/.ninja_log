@@ -1,0 +1,7 @@
+# ninja log v5
+1	29	1712401523164068384	CMakeFiles/Final_C_Project.dir/Location.c.o	3be7428d7ba70e72
+1	43	1712401523176977154	CMakeFiles/Final_C_Project.dir/StringToolBox.c.o	e750713a07bd2775
+43	81	1712401523215444790	Final_C_Project	1ac8f6e648900a2f
+1	40	1712401523173463686	CMakeFiles/Final_C_Project.dir/main.c.o	4d96a0fd2c0ff36b
+1	41	1712401523175413964	CMakeFiles/Final_C_Project.dir/SpaceAgency.c.o	d4a1f3392dbe6f58
+1	43	1712401523177615704	CMakeFiles/Final_C_Project.dir/CelestialBody.c.o	77aea124054c7ab9

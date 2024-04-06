@@ -38,9 +38,9 @@ void displayMenu() {
     CelestialBody   body2;
     CelestialBody   body3;
 
-    initCelestialBody(body1);
-    initCelestialBody(body2);
-    initCelestialBody(body3);
+    initCelestialBody(&body1);
+    initCelestialBody(&body2);
+    initCelestialBody(&body3);
 
     printCelestialBody(&body1);
     printCelestialBody(&body2);
