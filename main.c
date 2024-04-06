@@ -34,13 +34,24 @@ void displayMenu() {
 //    printf("3. Option Three\n");
 //    printf("4. Exit\n");
 //    printf("Enter your choice (1-4): ");
-    CelestialBody   body;
+    CelestialBody   body1;
+    CelestialBody   body2;
+    CelestialBody   body3;
 
-    if (initCelestialBody(&body) == 0) {
-        printCelestialBody(&body);
-    } else {
-        printf("Failed to initialize Celestial Body.\n");
-    }
+    initCelestialBody(body1);
+    initCelestialBody(body2);
+    initCelestialBody(body3);
+
+    printCelestialBody(&body1);
+    printCelestialBody(&body2);
+    printCelestialBody(&body3);
+
+
+//    if (initCelestialBody(&body) == 0) {
+//        printCelestialBody(&body);
+//    } else {
+//        printf("Failed to initialize Celestial Body.\n");
+//    }
 
 }
 

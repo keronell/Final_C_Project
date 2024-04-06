@@ -10,21 +10,14 @@ const char* str[eNofTypes] = {"Star", "Asteroid", "Planet"};
 
 int     initCelestialBody(CelestialBody* pBody)
 {
-    pBody->ID = getUniqueID();
+    pBody->ID = idCounter++;
     pBody->size = getSize();
     pBody->distance = getDistance();
     getLocation(pBody);
     pBody->type = chooseCelestialBodyType();
-
     return 0;
 }
 
-
-int      getUniqueID()
-{
-    static int id = 100000;
-    return id++;
-}
 
 int     getSize()
 {

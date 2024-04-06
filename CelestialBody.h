@@ -21,11 +21,10 @@ typedef struct
     CelestialBodyType   type;
 }CelestialBody;
 
-
+static int idCounter = 10000;
 
 
 int     initCelestialBody(CelestialBody* pBody);
-int     getUniqueID();
 int     getSize();
 int     getDistance();
 void    getLocation(CelestialBody* pBody);
