@@ -13,11 +13,14 @@ const char* ExpeditonTypesStr[eNofOptions] = {"Explore", "Colonial", "Spread dem
 
 typedef struct
 {
+    int             id;
     Date            startDate;
     int             duration; // approximate time the mission will take
     ExpeditionType  type;
     CelestialBody*   destination;
 }Expedition;
+
+static int expIdCount = 30000;
 
 
 int initExpedition (Expedition* expedition, CelestialBody* destination);

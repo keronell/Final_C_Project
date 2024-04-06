@@ -9,10 +9,12 @@ int initExpedition (Expedition* expedition, CelestialBody* destination){
         printf("expedition or destination is null");
         return 1;
     }
+
     getCorrectDate(&expedition->startDate);
     expedition->duration = getDuration();
     expedition->type = chooseExpeditionType();
     expedition->destination = destination;
+    expedition->id = expIdCount++;
 
     return 0;
 }
@@ -53,7 +55,12 @@ ExpeditionType chooseExpeditionType(){
 }
 
 void printExpedtion (Expedition* expedition){
-
+    printf("____________________\n");
+    printf("mission:\nid: %d\n", expedition->id);
+    printf("type: %s\n", ExpeditonTypesStr[expedition->type]);
+    printf("target: %d\n", expedition->destination->ID);
+    printf("start: %d##%d##%d\n", expedition->startDate.day, expedition->startDate.month, expedition->startDate.year);
+    printf("duration: %d", expedition->duration);
 }
 
 

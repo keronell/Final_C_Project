@@ -16,5 +16,4 @@ add_executable(Final_C_Project
         SpaceAgency.h
         StringToolBox.c
         SpaceAgency.c
-        Expedition.c
-        ../../../../../GeneralList.h)
+        Expedition.c)
