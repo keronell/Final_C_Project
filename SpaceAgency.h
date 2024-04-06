@@ -6,6 +6,7 @@ typedef struct
 {
     char* name;
     Expedition expedition;
+    int numOfBodiesFound;
 
 }SpaceAgency;
 

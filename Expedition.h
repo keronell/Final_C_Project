@@ -9,10 +9,10 @@ typedef enum
 
 typedef struct
 {
-    Date    startDate;
-    Date    endDate;
+    Date            startDate;
+    Date            endDate;
     ExpeditionType  type;
-    int     destPoints;
+    int             destPoints;
 
 }Expedition;
 #endif //FINAL_C_PROJECT_EXPEDITION_H
