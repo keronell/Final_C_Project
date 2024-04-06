@@ -75,7 +75,7 @@ void    printCelestialBody(const CelestialBody* pBody) {
         printf("\nID:\t\t\t%d\n", pBody->ID);
         printf("Size:\t\t%d km\n", pBody->size);
         printf("Distance:\t%d light years away from earth\n", pBody->distance);
-        printf("Type:\t%s\n", str[pBody->type]);
+        printf("Type:\t\t%s\n", str[pBody->type]);
         printf("Location:\t(%d,%d)\n", pBody->location.xAxis, pBody->location.yAxis);
     }
 }
