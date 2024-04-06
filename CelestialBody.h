@@ -10,6 +10,8 @@ typedef enum
     eStar, eAsteroid, ePlanet, eNofTypes
 } CelestialBodyType;
 
+const char* str[eNofTypes] = {"Star", "Asteroid", "Planet"};
+
 
 typedef struct
 {

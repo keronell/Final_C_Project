@@ -6,10 +6,12 @@
 #include "CelestialBody.h"
 
 
-const char* str[eNofTypes] = {"Star", "Asteroid", "Planet"};
-
 int     initCelestialBody(CelestialBody* pBody)
 {
+    if (!pBody) {
+        printf("celestial body is null, cant proceed");
+        return 1;
+    }
     pBody->ID = idCounter++;
     pBody->size = getSize();
     pBody->distance = getDistance();
@@ -59,6 +61,7 @@ CelestialBodyType chooseCelestialBodyType() {
         printf("Invalid choice. Please enter a number between 0 and %d: ", eNofTypes - 1);
         scanf("%d", &choice);
     }
+    printf("\n\n");
 
     return (CelestialBodyType)choice;
 }
