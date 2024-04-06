@@ -13,14 +13,14 @@ void displayMenu() {
 
     //  menu options:
     //  automatic DB load
-    //  add Celestial body
-    //  add expedition
-    //  add agency
-    //  print space map
-    //  calculate expedition time
-    //  print all bodies DB
-    //  print all expeditions
-    //  print all agencies
+    //  1) add Celestial body
+    //  2) add expedition
+    //  3) add agency
+    //  4) print space map
+    //  5) calculate expedition time
+    //  6) print all bodies DB
+    //  7) print all expeditions
+    //  8) print all agencies
 
 //    printf("\n--- Welcome to Space Control System  ---\n");
 //    printf("---- LOADING CELESTIAL BODIES DATABASE ----\n");

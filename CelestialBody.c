@@ -72,10 +72,10 @@ CelestialBodyType chooseCelestialBodyType() {
 
 void    printCelestialBody(const CelestialBody* pBody) {
     if (pBody != NULL) {
-        printf("\nID: %d\n", pBody->ID);
-        printf("Size: %d km\n", pBody->size);
-        printf("Distance: %d light years away from earth\n", pBody->distance);
-        printf("Type: %s\n", str[pBody->type]);
-        printf("Location: (%d, %d)\n", pBody->location.xAxis, pBody->location.yAxis);
+        printf("\nID:\t\t\t%d\n", pBody->ID);
+        printf("Size:\t\t%d km\n", pBody->size);
+        printf("Distance:\t%d light years away from earth\n", pBody->distance);
+        printf("Type:\t%s\n", str[pBody->type]);
+        printf("Location:\t(%d,%d)\n", pBody->location.xAxis, pBody->location.yAxis);
     }
 }

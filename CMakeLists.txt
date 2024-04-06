@@ -11,4 +11,8 @@ add_executable(Final_C_Project
         Location.c
         Location.h
         main.c
-        main.h)
+        main.h
+        StringToolBox.h
+        SpaceAgency.h
+        StringToolBox.c
+        SpaceAgency.c)
