@@ -9,8 +9,16 @@
 
 void     initSpaceAgency(SpaceAgency* pAgency)
 {
+    if (pAgency == NULL)
+        return;
+
     printf("Enter Agency name\t");
     setName(pAgency);
+
+    pAgency->numOfBodiesFound = 0;
+
+    // The expedition field is not initialized here
+
 }
 
 void    setName(SpaceAgency* pAgency)
@@ -24,4 +32,19 @@ int     addExpedition(Expedition pExpedition)
 {
 
     return 0;
+}
+
+void printSpaceAgency(const SpaceAgency* pAgency)
+{
+    if (pAgency == NULL)
+    {
+        printf("Space Agency data is not available.\n");
+        return;
+    }
+
+    printf("Space Agency Name:\t\t %s\n", pAgency->name);
+    printf("Number of Celestial Bodies Found:\t %d\n", pAgency->numOfBodiesFound);
+
+    // If you had more information about expeditions, you could print it here.
+    // For example: printExpeditions(pAgency->expedition);
 }

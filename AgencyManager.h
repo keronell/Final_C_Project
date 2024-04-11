@@ -12,5 +12,6 @@ typedef struct
     LIST        expeditionList;
 }Agency;
 
+int initAgency(Agency* pAgency);
 
 #endif //FINAL_C_PROJECT_AGENCYMANAGER_H
