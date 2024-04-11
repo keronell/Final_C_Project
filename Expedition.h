@@ -2,17 +2,29 @@
 #define FINAL_C_PROJECT_EXPEDITION_H
 
 #include "Date.h"
+#include "CelestialBody.h"
 typedef enum
 {
     eExplore, eColonial, eSpreadDemocracy, eNofOptions
 } ExpeditionType;
 
+
+
 typedef struct
 {
+    int             id;
     Date            startDate;
-    Date            endDate;
+    int             duration; // approximate time the mission will take
     ExpeditionType  type;
-    int             destPoints;
-
+    CelestialBody*   destination;
 }Expedition;
+
+
+
+
+int initExpedition (Expedition* expedition, CelestialBody* destination);
+int getDuration ();
+ExpeditionType chooseExpeditionType();
+void printExpedition (Expedition* expedition);
+
 #endif //FINAL_C_PROJECT_EXPEDITION_H

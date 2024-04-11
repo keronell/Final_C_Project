@@ -12,6 +12,7 @@ typedef struct
 
 void     initSpaceAgency(SpaceAgency* pAgency);
 void    setName(SpaceAgency* pAgency);
+int     initAgencyExpedition(SpaceAgency* pAgency, CelestialBody* destination);
 
 int     addExpedition(Expedition pExpedition);
 void    printSpaceAgency(const SpaceAgency* pAgency);
