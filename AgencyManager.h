@@ -14,4 +14,6 @@ typedef struct
 
 int initAgency(Agency* pAgency);
 
+int addSpaceAgency(Agency* pAgency, SpaceAgency* newAgency);
+
 #endif //FINAL_C_PROJECT_AGENCYMANAGER_H
