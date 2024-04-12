@@ -16,7 +16,7 @@ void MapTest (){
     CelestialBody body1;
     initCelestialBody(&body1);
 
-
+    
 }
 
 
