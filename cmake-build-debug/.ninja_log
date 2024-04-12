@@ -1,11 +1,11 @@
 # ninja log v5
 0	31	1712888904531485718	CMakeFiles/Final_C_Project.dir/Location.c.o	3be7428d7ba70e72
-1	42	1712888904543021602	CMakeFiles/Final_C_Project.dir/main.c.o	4d96a0fd2c0ff36b
-1	43	1712888904542445847	CMakeFiles/Final_C_Project.dir/StringToolBox.c.o	e750713a07bd2775
-1	43	1712888904542480639	CMakeFiles/Final_C_Project.dir/SpaceAgency.c.o	d4a1f3392dbe6f58
-1	43	1712888904542451139	CMakeFiles/Final_C_Project.dir/AgencyManager.c.o	3b1dd30bd2acc5de
 1	43	1712888904543446230	CMakeFiles/Final_C_Project.dir/Expedition.c.o	3444938f35cabcca
 1	43	1712888904542929476	CMakeFiles/Final_C_Project.dir/Date.c.o	df19683b7c9f88aa
+28	55	1712889789861199701	Final_C_Project	afc5605a7d8311e1
+1	43	1712888904542445847	CMakeFiles/Final_C_Project.dir/StringToolBox.c.o	e750713a07bd2775
+0	28	1712889789833792103	CMakeFiles/Final_C_Project.dir/main.c.o	4d96a0fd2c0ff36b
+1	43	1712888904542480639	CMakeFiles/Final_C_Project.dir/SpaceAgency.c.o	d4a1f3392dbe6f58
 0	44	1712888904545609080	CMakeFiles/Final_C_Project.dir/CelestialBody.c.o	77aea124054c7ab9
+1	43	1712888904542451139	CMakeFiles/Final_C_Project.dir/AgencyManager.c.o	3b1dd30bd2acc5de
 31	64	1712888904565491780	CMakeFiles/Final_C_Project.dir/SpaceControlSystem.c.o	514aa1efa537a4ef
-64	94	1712888904595514019	Final_C_Project	afc5605a7d8311e1
