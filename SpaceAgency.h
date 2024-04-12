@@ -14,7 +14,7 @@ void     initSpaceAgency(SpaceAgency* pAgency);
 void    setName(SpaceAgency* pAgency);
 int     initAgencyExpedition(SpaceAgency* pAgency, CelestialBody* destination);
 
-int     addExpedition(Expedition pExpedition);
+int     addExpeditiontoMap(Expedition pExpedition);
 void    printSpaceAgency(const SpaceAgency* pAgency);
 
 #endif //FINAL_C_PROJECT_SPACEAGENCY_H
