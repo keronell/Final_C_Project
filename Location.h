@@ -2,7 +2,7 @@
 #define FINAL_C_PROJECT_LOCATION_H
 
 typedef struct {
-    int xAxis;
-    int yAxis;
+    int x;
+    int y;
 } Location;
 #endif //FINAL_C_PROJECT_LOCATION_H
