@@ -25,6 +25,7 @@ typedef struct
 int initExpedition (Expedition* expedition, CelestialBody* destination);
 int getDuration ();
 ExpeditionType chooseExpeditionType();
+void freeExpedition(void* data);
 void printExpedtion (Expedition* expedition);
 
 #endif //FINAL_C_PROJECT_EXPEDITION_H

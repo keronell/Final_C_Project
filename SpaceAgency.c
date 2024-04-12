@@ -58,6 +58,11 @@ int initAgencyExpedition(SpaceAgency *pAgency, CelestialBody *destination) {
     return 0;
 }
 
+void freeSpaceAgency(SpaceAgency* agency) {
+    if (agency != NULL)
+        free(agency);
+}
+
 
 void printSpaceAgency(const SpaceAgency *pAgency) {
     if (pAgency == NULL) {

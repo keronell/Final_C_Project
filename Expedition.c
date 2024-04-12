@@ -59,6 +59,15 @@ ExpeditionType chooseExpeditionType(){
 
 }
 
+void freeExpedition(void* data)
+{
+    Expedition* expedition = (Expedition*)data;
+
+    if (expedition != NULL)
+        free(expedition);
+
+}
+
 void printExpedtion (Expedition* expedition){
     printf("____________________\n");
     printf("mission:\nid: %d\n", expedition->id);

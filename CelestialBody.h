@@ -31,6 +31,8 @@ int     getDistance();
 void    getLocation(CelestialBody* pBody);
 CelestialBodyType   chooseCelestialBodyType();
 
+void freeCelestialBody(CelestialBody* pBody);
+
 void printCelestialBody(const CelestialBody* pBody);
 
 #endif //FINAL_C_PROJECT_CELESTIALBODY_H

@@ -50,6 +50,23 @@ int addCelestialBody(SpaceControlSystem* pSystem, CelestialBody* newBody)
     return 0; // Success
 }
 
+void freeAllAllocatedMemory(SpaceControlSystem* pSystem) {
+    if (pSystem == NULL) {
+        return;
+    }
+
+    if (pSystem->CelestialBodyArr != NULL) {
+        for (int i = 0; i < pSystem->numOfBodies; i++) {
+            if (pSystem->CelestialBodyArr[i] != NULL) {
+                freeCelestialBody(pSystem->CelestialBodyArr[i]);
+                pSystem->CelestialBodyArr[i] = NULL;
+            }
+        }
+        free(pSystem->CelestialBodyArr);
+        pSystem->CelestialBodyArr = NULL;
+    }
+}
+
 void printSpaceControlSystem(const SpaceControlSystem* pSystem)
 {
     if (pSystem == NULL)

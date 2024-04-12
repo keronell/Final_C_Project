@@ -70,6 +70,11 @@ CelestialBodyType chooseCelestialBodyType() {
     return (CelestialBodyType)choice;
 }
 
+void freeCelestialBody(CelestialBody* pBody)
+{
+    free(pBody);
+}
+
 void    printCelestialBody(const CelestialBody* pBody) {
     if (pBody != NULL) {
         printf("\nID:\t\t\t%d\n", pBody->ID);
