@@ -21,6 +21,8 @@ void freeSpaceMap (SpaceMap* spaceMap);
 
 void printMatrix(SpaceMap * matrix);
 void getTwoPositiveIntegers(int* rows, int* columns);
-void addCircleToMatrix(SpaceMap* spaceMap, int centerX, int centerY, int radius);
+void addCircleToMatrix(SpaceMap * matrix, Location center, int radius);
+void markCircleCells(SpaceMap * matrix, Location center, int radius);
+
 
 #endif //FINAL_C_PROJECT_SPACEMAP_H

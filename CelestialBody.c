@@ -50,8 +50,8 @@ void    getLocation(CelestialBody* pBody)
 
     printf("Type location of the object: (x and y axes from the earth) \n");
     scanf("%d %d", &xAxis, &yAxis);
-    pBody->location.xAxis = xAxis;
-    pBody->location.yAxis = yAxis;
+    pBody->location.x = xAxis;
+    pBody->location.y = yAxis;
 }
 
 CelestialBodyType chooseCelestialBodyType() {
@@ -77,6 +77,6 @@ void    printCelestialBody(const CelestialBody* pBody) {
         printf("Size:\t\t%d km\n", pBody->size);
         printf("Distance:\t%d light years away from earth\n", pBody->distance);
         printf("Type:\t\t%s\n", str[pBody->type]);
-        printf("Location:\t(%d,%d)\n", pBody->location.xAxis, pBody->location.yAxis);
+        printf("Location:\t(%d,%d)\n", pBody->location.x, pBody->location.y);
     }
 }

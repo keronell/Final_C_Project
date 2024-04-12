@@ -15,9 +15,12 @@ void MapTest (){
     printMatrix(&spaceMap1);
 
     CelestialBody body1;
+    CelestialBody body2;
+    CelestialBody body3;
     initCelestialBody(&body1);
 
     addCelestialBodytoMap(&spaceMap1, &body1);
+
     printMatrix(&spaceMap1);
     
 }

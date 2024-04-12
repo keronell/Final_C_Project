@@ -25,12 +25,9 @@ int addCelestialBodytoMap (SpaceMap* spaceMap, CelestialBody* newBody){
         return 1;
     }
 //    int radius = newBody->size;
-        int radius = 3;
+        int radius = 2;
 
-        int x = newBody->location.xAxis;
-        int y = newBody->location.yAxis;
-
-    addCircleToMatrix(spaceMap, x, y, radius);
+    addCircleToMatrix(spaceMap,newBody->location, radius);
     return 0;
 }
 
@@ -62,19 +59,35 @@ void getTwoPositiveIntegers (int* rows, int* columns) {
 //}
 
 
-void addCircleToMatrix(SpaceMap * spaceMap, int centerX, int centerY, int radius) {
-    for (int i = 0; i < spaceMap->rows; i++) {
-        for (int j = 0; j < spaceMap->cols; j++) {
-            // Calculate distance from center to (i, j) using Euclidean distance formula
-            double distance = sqrt(pow(i - centerX, 2) + pow(j - centerY, 2));
-
-            // Check if the distance is less than or equal to the radius (outline of circle)
-            if (distance <= radius + 0.5 && distance >= radius - 0.5) {
-                spaceMap->data[i][j] = 1; // Set the element to represent the circle's outline
+void markCircleCells(SpaceMap * matrix, Location center, int radius) {
+    for (int i = center.x - radius; i <= center.x + radius; i++) {
+        for (int j = center.y - radius; j <= center.y + radius; j++) {
+            if (i >= 0 && i < matrix->rows && j >= 0 && j < matrix->cols) {
+                double distance = sqrt(pow(i - center.x, 2) + pow(j - center.y, 2));
+                if (distance <= radius) {
+                    matrix->data[i][j] = 1; // Mark cell as part of a circle
+                }
             }
         }
     }
 }
+
+void addCircleToMatrix(SpaceMap * matrix, Location center, int radius) {
+    // Check if the new circle overlaps with existing circles
+    for (int i = center.x - radius - 1; i <= center.x + radius + 1; i++) {
+        for (int j = center.y - radius - 1; j <= center.y + radius + 1; j++) {
+            if (i >= 0 && i < matrix->rows && j >= 0 && j < matrix->cols && matrix->data[i][j] == 1) {
+                // Circle overlaps with an existing circle, so we cannot add it
+                printf("Cannot add circle. Overlaps with existing circle.\n");
+                return;
+            }
+        }
+    }
+
+    // Mark cells of the new circle as part of it
+    markCircleCells(matrix, center, radius);
+}
+
 
 void printMatrix(SpaceMap * matrix) {
     for (int i = 0; i < matrix->rows; i++) {
