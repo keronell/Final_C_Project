@@ -17,7 +17,7 @@ void initSpaceAgency(SpaceAgency *pAgency) {
 
     pAgency->numOfBodiesFound = 0;
 
-    pAgency->expeditionID =  0;
+    pAgency->expeditionID = 0;
 
 }
 
@@ -29,7 +29,7 @@ void setName(SpaceAgency *pAgency) {
 
 }
 
-int addExpedition(SpaceAgency *pAgency, Expedition* pExpedition) {
+int addExpedition(SpaceAgency *pAgency, Expedition *pExpedition) {
     pAgency->expeditionID = pExpedition->id;
     return 0;
 }
@@ -39,7 +39,7 @@ int initAgencyExpedition(SpaceAgency *pAgency, CelestialBody *destination) {
     return 0;
 }
 
-void freeSpaceAgency(SpaceAgency* agency) {
+void freeSpaceAgency(SpaceAgency *agency) {
     if (agency != NULL)
         free(agency);
 }
@@ -59,23 +59,33 @@ void printSpaceAgency(const SpaceAgency *pAgency) {
 }
 
 
-int     saveSpaceAgencyToFile(const SpaceAgency* pAgency, FILE *fp)
-{
-    if (fwrite(pAgency, sizeof(SpaceAgency), 1, fp) != 1)
-    {
-        printf("Error saving Agency!\n");
+int saveSpaceAgencyToFileBin(const SpaceAgency *pAgency, FILE *fp) {
+    if (pAgency == NULL || fp == NULL) {
+        printf("Invalid function parameter.\n");
         return 0;
     }
-    if(pAgency->expeditionID != 0)
-        if(!writeIntToFile(pAgency->expeditionID, fp, "Error write Agency expedition ID!\n"))
-            return 0;
+
+    // Save the agency name if present
+    if (!writeStringToFile(pAgency->name, fp, "Error writing agency name.\n")) {
+        return 0;
+    }
+
+    // Save the number of bodies found
+    if (!writeIntToFile(pAgency->numOfBodiesFound, fp, "Error writing number of bodies found.\n")) {
+        return 0;
+    }
+
+    // Save the expedition ID
+    if (!writeIntToFile(pAgency->expeditionID, fp, "Error writing agency expedition ID!\n")) {
+        return 0;
+    }
+
     return 1;
 }
 
-int loadSpaceAgencyFromFile(SpaceAgency** pAgency, FILE* fp)
-{
+int loadSpaceAgencyFromFileBin(SpaceAgency **pAgency, FILE *fp) {
     if (fp == NULL) {
-        printf("Can't open the file.\n");
+        printf("File pointer is NULL.\n");
         return 0;
     }
 
@@ -94,6 +104,7 @@ int loadSpaceAgencyFromFile(SpaceAgency** pAgency, FILE* fp)
     }
     (*pAgency)->name = name;
 
+    // Read the number of bodies found
     if (!readIntFromFile(&((*pAgency)->numOfBodiesFound), fp, "Failed to read number of celestial bodies.\n")) {
         free((*pAgency)->name);
         free(*pAgency);
@@ -101,7 +112,7 @@ int loadSpaceAgencyFromFile(SpaceAgency** pAgency, FILE* fp)
         return 0;
     }
 
-    int expeditionId;
+    // Read the expedition ID
     if (!readIntFromFile(&(*pAgency)->expeditionID, fp, "Failed to read expedition ID.\n")) {
         free((*pAgency)->name);
         free(*pAgency);
@@ -110,5 +121,4 @@ int loadSpaceAgencyFromFile(SpaceAgency** pAgency, FILE* fp)
     }
 
     return 1;
-
 }

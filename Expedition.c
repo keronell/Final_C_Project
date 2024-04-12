@@ -79,7 +79,7 @@ void printExpedtion (Expedition* expedition){
 }
 
 
-int saveExpeditionToFile(const Expedition* expedition, FILE* fp)
+int saveExpeditionToFileBin(const Expedition* expedition, FILE* fp)
 {
     if (expedition == NULL || fp == NULL) {
         printf("Invalid parameters for saving expedition.\n");
@@ -117,7 +117,7 @@ int saveExpeditionToFile(const Expedition* expedition, FILE* fp)
     return 1; // Success
 }
 
-int loadExpeditionFromFile(Expedition* expedition, FILE* fp)
+int loadExpeditionFromFileBin(Expedition* expedition, FILE* fp)
 {
     if (expedition == NULL || fp == NULL) {
         printf("Invalid parameters for loading expedition.\n");

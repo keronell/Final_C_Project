@@ -18,10 +18,10 @@ int addSpaceAgency(Agency* pAgency, SpaceAgency* newAgency);
 void freeAgency(Agency* pAgency);
 Expedition* findExpeditionById(Agency* pManager, int id);
 
-int		saveManagerToFile(const Agency* pAgency, const char* fileName);
+int		saveManagerToFileBin(const Agency* pAgency, const char* fileName);
 int		saveManagerToFileBinary(const Agency* pAgency, const char* fileName);
 
-int loadManagerFromFile(Agency* pAgency, const char* fileName);
+int loadManagerFromFileBin(Agency* pAgency, const char* fileName);
 
 
 
