@@ -193,7 +193,7 @@ void connectDotsWithoutCrossing(SpaceMap * matrix, Location dot1, Location dot2,
 
 int addExpeditiontoMap(SpaceMap* spaceMap, Expedition* expedition){
     Location start = {spaceMap->rows/2, spaceMap->cols/2};
-    connectDotsWithoutCrossing(spaceMap, start, expedition->destination->location, '#');
+   // connectDotsWithoutCrossing(spaceMap, start, expedition->destination->location, '#');
     return 0;
 }
 

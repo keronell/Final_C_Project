@@ -16,7 +16,6 @@ typedef struct
     int                 ID;
     int                 size;
     int                 distance;
-    //SpaceAgency*      foundBy;
     Location            location;
     CelestialBodyType   type;
 }CelestialBody;

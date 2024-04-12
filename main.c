@@ -97,10 +97,14 @@ void displayMenu() {
 
 
     saveManagerToFileTxt(&agencyManager, AgencyManagerTxt);
-//    loadManagerFromFileBin(&agencyManager,AgencyManagerBin);
+    printAgency(&agencyManager);
+    freeAgency(&agencyManager);
+    printf("Done!\n");
+    int i;
+    scanf("%d",&i);
+    loadManagerFromFileBin(&agencyManager,AgencyManagerTxt);
+    printAgency(&agencyManager);
 
-    printExpedtion(&expedition1);
-    printExpedtion(&expedition2);
 
 }
 

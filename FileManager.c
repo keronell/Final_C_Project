@@ -4,6 +4,7 @@
 
 
 #include "FileManager.h"
+#include "StringToolBox.h"
 
 int	 writeStringToFile(char* str, FILE* fp,const char* msg)
 {
@@ -86,5 +87,13 @@ int	  readIntFromFile(int* pVal, FILE* fp, const char* msg)
     }
     return 1;
 
+}
+
+char* getStrFromFile(FILE* fp) {
+    char temp[MAX_STR_LEN];
+    if (myGets(temp, MAX_STR_LEN, fp) == NULL) {
+        return NULL; // Failed to read string
+    }
+    return getDynStr(temp); // Dynamically allocate and copy the string
 }
 

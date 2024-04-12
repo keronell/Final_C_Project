@@ -8,7 +8,7 @@
 int initSystem(SpaceControlSystem* pSystem)
 {
     if (pSystem == NULL)
-        return -1; // Indicate error
+        return 1; // Indicate error
 
 
     // Allocate memory for the array of CelestialBody pointers with initial size of 1

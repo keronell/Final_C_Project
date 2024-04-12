@@ -44,3 +44,15 @@ char*  myGets(char* buffer, int size, FILE* fp)
     }
     return NULL;
 }
+
+char* getStrExactNameFromFile(const char* msg, FILE* fp) {
+    char* str;
+    char temp[MAX_STR_LEN];
+    if (msg) printf("%s\t", msg); // Optionally print a message if provided (can be NULL if not needed)
+    if (myGets(temp, MAX_STR_LEN, fp) == NULL) {
+        return NULL; // Failed to read string
+    }
+
+    str = getDynStr(temp);
+    return str;
+}

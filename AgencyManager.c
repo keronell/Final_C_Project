@@ -164,7 +164,7 @@ int loadManagerFromFileBin(Agency* pAgency, const char* fileName) {
     NODE* currentNode = &pAgency->expeditionList.head;  // Temporary node to start the chain
     for (int i = 0; i < pAgency->numOfExpeditions; i++) {
         NODE* newNode = (NODE*) malloc(sizeof(NODE));  // Allocate memory for a new node
-        if (newNode == NULL || !loadExpeditionFromFileBin(newNode, fp)) {
+        if (newNode == NULL || !loadExpeditionFromFileBin(newNode->key, fp)) {
             // Clean up everything if loading fails
             while (pAgency->expeditionList.head.next) {
                 NODE* temp = pAgency->expeditionList.head.next;
@@ -189,24 +189,13 @@ int loadManagerFromFileBin(Agency* pAgency, const char* fileName) {
 }
 
 int saveManagerToFileTxt(const Agency* pAgency, const char* fileName) {
-    if (pAgency == NULL) {
-        printf("Invalid Agency pointer.\n");
-        return 0;
-    }
-
-    FILE* fp = fopen(fileName, "w");  // Open file in write mode
+    FILE* fp = fopen(fileName, "w");
     if (!fp) {
-        printf("Error opening file to write.\n");
+        printf("Error opening file to write\n");
         return 0;
     }
 
-    // Write the number of agencies
-    if (!writeIntToFile(pAgency->agencyCounter, fp, "Error writing number of agencies!\n")) {
-        fclose(fp);
-        return 0;
-    }
-
-    // Iterate over each SpaceAgency and write its details to the file
+    fprintf(fp, "Number of Agencies: %d\n", pAgency->agencyCounter);
     for (int i = 0; i < pAgency->agencyCounter; i++) {
         if (!saveSpaceAgencyToFileTxt(pAgency->agencyArr[i], fp)) {
             fclose(fp);
@@ -214,7 +203,94 @@ int saveManagerToFileTxt(const Agency* pAgency, const char* fileName) {
         }
     }
 
-    // Close the file
+    fprintf(fp, "Number of Expeditions: %d\n", pAgency->numOfExpeditions);
+    NODE* currentNode = pAgency->expeditionList.head.next;
+    while (currentNode != NULL) {
+        if (!saveExpeditionToFileTxt(currentNode->key, fp)) {
+            fclose(fp);
+            return 0;
+        }
+        currentNode = currentNode->next;
+    }
+
     fclose(fp);
     return 1;
+}
+
+int loadManagerFromFileTxt(Agency* pAgency, const char* fileName) {
+    FILE* fp = fopen(fileName, "r");
+    if (!fp) {
+        printf("Error opening file to read\n");
+        return 0;
+    }
+
+    char buffer[1024];
+    // Read the number of agencies
+    if (!fgets(buffer, sizeof(buffer), fp) || sscanf(buffer, "Number of Agencies: %d", &pAgency->agencyCounter) != 1) {
+        fclose(fp);
+        return 0;
+    }
+
+    pAgency->agencyArr = (SpaceAgency**)malloc(pAgency->agencyCounter * sizeof(SpaceAgency*));
+    if (!pAgency->agencyArr) {
+        printf("Failed to allocate memory for agency array.\n");
+        fclose(fp);
+        return 0;
+    }
+
+    for (int i = 0; i < pAgency->agencyCounter; i++) {
+        if (!loadSpaceAgencyToFileTxt(pAgency->agencyArr[i],fp )) {
+            // Clean up already loaded agencies
+            while (i-- > 0) freeSpaceAgency(pAgency->agencyArr[i]);
+            free(pAgency->agencyArr);
+            fclose(fp);
+            return 0;
+        }
+    }
+
+    // Read number of expeditions
+    if (!fgets(buffer, sizeof(buffer), fp) || sscanf(buffer, "Number of Expeditions: %d", &pAgency->numOfExpeditions) != 1) {
+        fclose(fp);
+        return 0;
+    }
+
+    L_init(&pAgency->expeditionList); // Initialize the expedition list
+
+    for (int i = 0; i < pAgency->numOfExpeditions; i++) {
+        NODE* newNode = (NODE*)malloc(sizeof(NODE));
+        if (!newNode || !loadExpeditionFromFileTxt(fp, (newNode->key))) {
+            // Clean up everything if loading fails
+            fclose(fp);
+            return 0;
+        }
+        L_insert(&(pAgency->expeditionList.head), newNode);
+    }
+
+    fclose(fp);
+    return 1;
+}
+void printAgency(const Agency* pAgency)
+{
+    printf("Total Agencies Managed: %d\n", pAgency->agencyCounter);
+    printf("Total Expeditions Managed: %d\n\n", pAgency->numOfExpeditions);
+
+    // Loop through each agency and use the provided printSpaceAgency function
+    for (int i = 0; i < pAgency->agencyCounter; i++) {
+        SpaceAgency* agency = pAgency->agencyArr[i];
+        if (agency != NULL) {
+            printf("Agency %d Details:\n", i + 1);
+            printSpaceAgency(agency);
+            printf("\n");
+        } else {
+            printf("Agency %d: [Data Not Available]\n", i + 1);
+        }
+    }
+
+    // Print details about each expedition using the provided printExpedition function
+    printf("Expedition Details:\n");
+    NODE* currentNode = pAgency->expeditionList.head.next;
+    while (currentNode != NULL && currentNode->key != NULL) {
+        printExpedition((Expedition*)currentNode->key);
+        currentNode = currentNode->next;
+    }
 }
