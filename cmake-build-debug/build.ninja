@@ -119,6 +119,13 @@ build CMakeFiles/Final_C_Project.dir/SpaceMap.c.o: C_COMPILER__Final_C_Project_u
   OBJECT_DIR = CMakeFiles/Final_C_Project.dir
   OBJECT_FILE_DIR = CMakeFiles/Final_C_Project.dir
 
+build CMakeFiles/Final_C_Project.dir/input.c.o: C_COMPILER__Final_C_Project_unscanned_Debug /Users/itaminoko/Documents/GitHub/Final_C_Project/input.c || cmake_object_order_depends_target_Final_C_Project
+  DEP_FILE = CMakeFiles/Final_C_Project.dir/input.c.o.d
+  FLAGS = -g -std=gnu11 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk -mmacosx-version-min=14.1 -fcolor-diagnostics
+  INCLUDES = -I/Users/itaminoko/Documents/GitHub/Final_C_Project/.
+  OBJECT_DIR = CMakeFiles/Final_C_Project.dir
+  OBJECT_FILE_DIR = CMakeFiles/Final_C_Project.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target Final_C_Project
@@ -127,7 +134,7 @@ build CMakeFiles/Final_C_Project.dir/SpaceMap.c.o: C_COMPILER__Final_C_Project_u
 #############################################
 # Link the executable Final_C_Project
 
-build Final_C_Project: C_EXECUTABLE_LINKER__Final_C_Project_Debug CMakeFiles/Final_C_Project.dir/CelestialBody.c.o CMakeFiles/Final_C_Project.dir/Location.c.o CMakeFiles/Final_C_Project.dir/main.c.o CMakeFiles/Final_C_Project.dir/StringToolBox.c.o CMakeFiles/Final_C_Project.dir/SpaceAgency.c.o CMakeFiles/Final_C_Project.dir/AgencyManager.c.o CMakeFiles/Final_C_Project.dir/Expedition.c.o CMakeFiles/Final_C_Project.dir/Date.c.o CMakeFiles/Final_C_Project.dir/SpaceControlSystem.c.o CMakeFiles/Final_C_Project.dir/SpaceMap.c.o
+build Final_C_Project: C_EXECUTABLE_LINKER__Final_C_Project_Debug CMakeFiles/Final_C_Project.dir/CelestialBody.c.o CMakeFiles/Final_C_Project.dir/Location.c.o CMakeFiles/Final_C_Project.dir/main.c.o CMakeFiles/Final_C_Project.dir/StringToolBox.c.o CMakeFiles/Final_C_Project.dir/SpaceAgency.c.o CMakeFiles/Final_C_Project.dir/AgencyManager.c.o CMakeFiles/Final_C_Project.dir/Expedition.c.o CMakeFiles/Final_C_Project.dir/Date.c.o CMakeFiles/Final_C_Project.dir/SpaceControlSystem.c.o CMakeFiles/Final_C_Project.dir/SpaceMap.c.o CMakeFiles/Final_C_Project.dir/input.c.o
   FLAGS = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk -mmacosx-version-min=14.1
   OBJECT_DIR = CMakeFiles/Final_C_Project.dir
   POST_BUILD = :

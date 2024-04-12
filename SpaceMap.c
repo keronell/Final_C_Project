@@ -5,28 +5,65 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "SpaceMap.h"
+#include "input.h"
+
+
+
+
+void addEarth (SpaceMap* spaceMap) {
+    CelestialBody Earth = {0000, 1000, 0, spaceMap->rows/2, spaceMap->cols/2, ePlanet};
+    addCelestialBodytoMap(spaceMap, &Earth);
+}
 
 int initSpaceMap (SpaceMap* spaceMap){
+    int size;
     printf("\n\nMap Initialization: \n");
-    getTwoPositiveIntegers(&spaceMap->rows, &spaceMap->cols);
+    printf("enter size of the map: ");
+    size = getPositveInt(10);
+    spaceMap->rows = size;
+    spaceMap->cols = size;
+    
     spaceMap->data = malloc(spaceMap->rows * sizeof(int*));
     if (spaceMap->data == NULL) return 1;
     for (int i = 0; i < spaceMap->rows; i++) {
         spaceMap->data[i] = malloc(spaceMap->cols * sizeof(int));
         if (!spaceMap->data[i]) return 1;
     }
+
+
+
     return 0;
 }
 
 
 int addCelestialBodytoMap (SpaceMap* spaceMap, CelestialBody* newBody){
+    int radius;
+    char sign;
+    
     if (!spaceMap || !newBody) {
         printf("cant add new body");
         return 1;
     }
-//    int radius = newBody->size;
-        int radius = 2;
 
+    switch (newBody->type) {
+        case eAsteroid:
+            radius = 1;
+            sign = '!';
+            break;
+        case ePlanet:
+            radius = 2;
+            sign = 'o';
+            break;
+        case eStar:
+            radius = 3;
+            sign = '*';
+            break;
+        case eNofTypes:
+            radius = 0;
+            return 1;
+            break;
+    }
+    
     addCircleToMatrix(spaceMap,newBody->location, radius);
     return 0;
 }
@@ -37,17 +74,6 @@ int rmExpedition (Expedition* expedition);
 void freeSpaceMap (SpaceMap* spaceMap);
 
 
-void getTwoPositiveIntegers (int* rows, int* columns) {
-    do {
-        printf("enter height: ");
-        scanf("%d", rows);
-    } while (*rows <= 0);  // Repeat until a positive integer is entered
-
-    do {
-        printf("enter length: ");
-        scanf("%d", columns);
-    } while (*columns <= 0);  // Repeat until a positive integer is entered
-}
 
 
 //void freeMatrix(SpaceMap *matrix) {
@@ -89,7 +115,7 @@ void addCircleToMatrix(SpaceMap * matrix, Location center, int radius) {
 }
 
 
-void printMatrix(SpaceMap * matrix) {
+void printSpaceMap(SpaceMap * matrix) {
     for (int i = 0; i < matrix->rows; i++) {
         for (int j = 0; j < matrix->cols; j++) {
             printf("%c ", matrix->data[i][j] ? '*' : ' '); // Print '*' if the element is 1, else print ' '
@@ -97,3 +123,55 @@ void printMatrix(SpaceMap * matrix) {
         printf("\n");
     }
 }
+
+
+
+void plotPoint(SpaceMap * matrix, int x, int y, char symbol) {
+    if (x >= 0 && x < matrix->cols && y >= 0 && y < matrix->rows) {
+        matrix->data[y][x] = symbol;
+    }
+}
+
+void drawLine(SpaceMap * matrix, Point start, Point end, char symbol) {
+    int dx = abs(end.x - start.x);
+    int dy = abs(end.y - start.y);
+    int sx = start.x < end.x ? 1 : -1;
+    int sy = start.y < end.y ? 1 : -1;
+    int err = dx - dy;
+    int e2;
+
+    while (1) {
+        plotPoint(matrix, start.x, start.y, symbol);
+        if (start.x == end.x && start.y == end.y) break;
+        e2 = 2 * err;
+        if (e2 > -dy) {
+            err -= dy;
+            start.x += sx;
+        }
+        if (e2 < dx) {
+            err += dx;
+            start.y += sy;
+        }
+    }
+}
+
+void connectDotsWithoutCrossing(SpaceMap * matrix,  dot1, Point dot2, char symbol) {
+    int dx = abs(dot2.x - dot1.x);
+    int dy = abs(dot2.y - dot1.y);
+
+    if (dx > dy) {
+        if (dot1.x > dot2.x) {
+            drawLine(matrix, dot2, dot1, symbol);
+        } else {
+            drawLine(matrix, dot1, dot2, symbol);
+        }
+    } else {
+        if (dot1.y > dot2.y) {
+            drawLine(matrix, dot2, dot1, symbol);
+        } else {
+            drawLine(matrix, dot1, dot2, symbol);
+        }
+    }
+}
+
+

@@ -19,10 +19,10 @@ int rmExpedition (Expedition* expedition);
 
 void freeSpaceMap (SpaceMap* spaceMap);
 
-void printMatrix(SpaceMap * matrix);
+void printSpaceMap(SpaceMap * matrix);
 void getTwoPositiveIntegers(int* rows, int* columns);
 void addCircleToMatrix(SpaceMap * matrix, Location center, int radius);
 void markCircleCells(SpaceMap * matrix, Location center, int radius);
-
+void addEarth (SpaceMap* spaceMap);
 
 #endif //FINAL_C_PROJECT_SPACEMAP_H

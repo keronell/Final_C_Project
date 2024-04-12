@@ -10,19 +10,25 @@
 #include "Expedition.h"
 #include "main.h"
 void MapTest (){
-    SpaceMap spaceMap1;
-    initSpaceMap(&spaceMap1);
-    printMatrix(&spaceMap1);
+    int choice  = 1;
 
-    CelestialBody body1;
-    CelestialBody body2;
-    CelestialBody body3;
-    initCelestialBody(&body1);
+    if (choice == 1){
+        SpaceMap myMap;
+        initSpaceMap(&myMap);
 
-    addCelestialBodytoMap(&spaceMap1, &body1);
+        CelestialBody body1;
+        initCelestialBody(&body1);
 
-    printMatrix(&spaceMap1);
-    
+        CelestialBody body2;
+        initCelestialBody(&body2);
+
+
+        addCelestialBodytoMap(&myMap, &body1);
+        addCelestialBodytoMap(&myMap, &body2);
+
+        printSpaceMap(&myMap);
+    }
+
 }
 
 
