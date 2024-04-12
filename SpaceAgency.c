@@ -5,6 +5,7 @@
 #include "SpaceAgency.h"
 #include "StringToolBox.h"
 #include "Expedition.h"
+#include "FileManager.h"
 
 
 void initSpaceAgency(SpaceAgency *pAgency) {
@@ -16,7 +17,7 @@ void initSpaceAgency(SpaceAgency *pAgency) {
 
     pAgency->numOfBodiesFound = 0;
 
-    // The expedition field is not initialized here
+    pAgency->expedition =  NULL;
 
 }
 
@@ -28,33 +29,13 @@ void setName(SpaceAgency *pAgency) {
 
 }
 
-int addExpedition(Expedition pExpedition) {
-
+int addExpedition(SpaceAgency *pAgency, Expedition* pExpedition) {
+    pAgency->expedition = pExpedition;
     return 0;
 }
 
 int initAgencyExpedition(SpaceAgency *pAgency, CelestialBody *destination) {
-//    if (pAgency == NULL || destination == NULL)
-//    {
-//        printf("Space Agency or destination is NULL.\n");
-//        return 1;
-//    }
-//
-//    // Assuming expedition is a pointer in SpaceAgency. If it's not, adjustments are needed.
-//    pAgency->expedition = (Expedition*)malloc(sizeof(Expedition));
-//    if (pAgency->expedition == NULL)
-//    {
-//        printf("Error: Memory allocation failed for Expedition.\n");
-//        return;
-//    }
-//
-//    // Initialize the expedition
-//    if (initExpedition(pAgency->expedition, destination) != 0)
-//    {
-//        printf("Failed to initialize the Expedition.\n");
-//        free(pAgency->expedition); // Clean up in case of failure
-//        pAgency->expedition = NULL;
-//    }
+
     return 0;
 }
 
@@ -75,4 +56,65 @@ void printSpaceAgency(const SpaceAgency *pAgency) {
 
     // If you had more information about expeditions, you could print it here.
     // For example: printExpeditions(pAgency->expedition);
+}
+
+
+int     saveSpaceAgencyToFile(const SpaceAgency* pAgency, FILE *fp)
+{
+    if (fwrite(pAgency, sizeof(SpaceAgency), 1, fp) != 1)
+    {
+        printf("Error saving Agency!\n");
+        return 0;
+    }
+    if(pAgency->expedition != NULL)
+        if(!writeIntToFile(pAgency->expedition->id, fp, "Error write Agency expedition ID!\n"))
+            return 0;
+    return 1;
+}
+
+int loadSpaceAgencyFromFile(Agency* pManager, SpaceAgency** pAgency, FILE* fp)
+{
+    if (fp == NULL) {
+        printf("Can't open the file.\n");
+        return 0;
+    }
+
+    *pAgency = (SpaceAgency*)malloc(sizeof(SpaceAgency));
+    if (*pAgency == NULL) {
+        printf("Memory allocation failed for SpaceAgency.\n");
+        return 0;
+    }
+
+    // Read the name of the agency
+    char* name = readStringFromFile(fp, "Failed to read agency name.\n");
+    if (name == NULL) {
+        free(*pAgency);
+        *pAgency = NULL;
+        return 0;
+    }
+    (*pAgency)->name = name;
+
+    if (!readIntFromFile(&((*pAgency)->numOfBodiesFound), fp, "Failed to read number of celestial bodies.\n")) {
+        free((*pAgency)->name);
+        free(*pAgency);
+        *pAgency = NULL;
+        return 0;
+    }
+
+    int expeditionId;
+    if (!readIntFromFile(&expeditionId, fp, "Failed to read expedition ID.\n")) {
+        free((*pAgency)->name);
+        free(*pAgency);
+        *pAgency = NULL;
+        return 0;
+    }
+
+    if (expeditionId > 0) {
+        (*pAgency)->expedition = findExpeditionById(pManager, expeditionId);
+    } else {
+        (*pAgency)->expedition = NULL;
+    }
+
+    return 1;
+
 }

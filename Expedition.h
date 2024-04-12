@@ -28,4 +28,7 @@ ExpeditionType chooseExpeditionType();
 void freeExpedition(void* data);
 void printExpedtion (Expedition* expedition);
 
+int saveExpeditionToFile(const Expedition* expedition, FILE* fp);
+int loadExpeditionFromFile(Expedition* expedition, FILE* fp);
+
 #endif //FINAL_C_PROJECT_EXPEDITION_H

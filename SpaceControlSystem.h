@@ -21,4 +21,6 @@ void    spaceMap();
 void freeAllAllocatedMemory(SpaceControlSystem* pSystem);
 
 void printSpaceControlSystem(const SpaceControlSystem* pSystem);
+
+
 #endif //FINAL_C_PROJECT_SPACECONTROLSYSTEM_H

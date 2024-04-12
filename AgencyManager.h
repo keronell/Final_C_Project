@@ -17,5 +17,14 @@ int initAgency(Agency* pAgency);
 int addSpaceAgency(Agency* pAgency, SpaceAgency* newAgency);
 void freeAgency(Agency* pAgency);
 
+int getNumOfExpeditions();
+Expedition* findExpeditionById(Agency* pManager, int id);
+
+int		saveManagerToFile(const Agency* pAgency, const char* fileName);
+int		saveManagerToFileBinary(const Agency* pAgency, const char* fileName);
+
+int loadManagerFromFile(Agency* pAgency, const char* fileName);
+
+
 
 #endif //FINAL_C_PROJECT_AGENCYMANAGER_H

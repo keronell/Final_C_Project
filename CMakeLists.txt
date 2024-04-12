@@ -26,5 +26,4 @@ add_executable(Final_C_Project
         SpaceControlSystem.c
         SpaceMap.h
         SpaceMap.c
-        input.h
         input.c)
