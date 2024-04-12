@@ -55,3 +55,18 @@ void getTwoPositiveIntegers (int* rows, int* columns) {
 //    free(matrix->data);
 //    free(matrix);
 //}
+
+
+//void addCircleToMatrix(Matrix* matrix, int centerX, int centerY, int radius) {
+//    for (int i = 0; i < matrix->rows; i++) {
+//        for (int j = 0; j < matrix->cols; j++) {
+//            // Calculate distance from center to (i, j) using Euclidean distance formula
+//            double distance = sqrt(pow(i - centerX, 2) + pow(j - centerY, 2));
+//
+//            // Check if the distance is less than or equal to the radius (outline of circle)
+//            if (distance <= radius + 0.5 && distance >= radius - 0.5) {
+//                matrix->data[i][j] = 1; // Set the element to represent the circle's outline
+//            }
+//        }
+//    }
+//}
