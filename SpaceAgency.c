@@ -122,3 +122,29 @@ int loadSpaceAgencyFromFileBin(SpaceAgency **pAgency, FILE *fp) {
 
     return 1;
 }
+
+int saveSpaceAgencyToFileTxt(const SpaceAgency* pAgency, FILE* fp) {
+    if (fp == NULL || pAgency == NULL) {
+        puts("Invalid file pointer or SpaceAgency pointer.");
+        return 0;
+    }
+
+    // Write Agency Name
+    if (!writeStringToFile(pAgency->name, fp, "Failed to write agency name.\n")) {
+        return 0;
+    }
+
+    // Write number of celestial bodies found
+    if (!writeIntToFile(pAgency->numOfBodiesFound, fp, "Failed to write number of bodies found.\n")) {
+        return 0;
+    }
+
+    // Write expedition ID if applicable
+    if (pAgency->expeditionID != 0) {
+        if (!writeIntToFile(pAgency->expeditionID, fp, "Failed to write expedition ID.\n")) {
+            return 0;
+        }
+    }
+
+    return 1;
+}

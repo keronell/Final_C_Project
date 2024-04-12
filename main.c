@@ -58,45 +58,45 @@ void displayMenu() {
 //    printf("4. Exit\n");
 //    printf("Enter your choice (1-4): ");
     SpaceControlSystem controlSystem;
-//    initSystem(&controlSystem);
-//
-//    // Initialize Agency Manager
+    initSystem(&controlSystem);
+
+    // Initialize Agency Manager
     Agency agencyManager;
-//    initAgency(&agencyManager);
-//
-//    // Initialize 3 Space Agencies
-//    SpaceAgency agency1, agency2, agency3;
-//    initSpaceAgency(&agency1);
-//    initSpaceAgency(&agency2);
-//    initSpaceAgency(&agency3);
-//
-//    // Add Space Agencies to Agency Manager
-//    addSpaceAgency(&agencyManager, &agency1);
-//    addSpaceAgency(&agencyManager, &agency2);
-//    addSpaceAgency(&agencyManager, &agency3);
-//
-//    // Initialize 10 Celestial Bodies
-//    CelestialBody bodies[10];
-//    for (int i = 0; i < 3; i++) {
-//        initCelestialBody(&bodies[i]);
-//        // Add each celestial body to the Space Control System
-//        addCelestialBody(&controlSystem, &bodies[i]);
-//    }
-//
+    initAgency(&agencyManager);
+
+    // Initialize 3 Space Agencies
+    SpaceAgency agency1, agency2, agency3;
+    initSpaceAgency(&agency1);
+    initSpaceAgency(&agency2);
+    initSpaceAgency(&agency3);
+
+    // Add Space Agencies to Agency Manager
+    addSpaceAgency(&agencyManager, &agency1);
+    addSpaceAgency(&agencyManager, &agency2);
+    addSpaceAgency(&agencyManager, &agency3);
+
+    // Initialize 10 Celestial Bodies
+    CelestialBody bodies[10];
+    for (int i = 0; i < 3; i++) {
+        initCelestialBody(&bodies[i]);
+        // Add each celestial body to the Space Control System
+        addCelestialBody(&controlSystem, &bodies[i]);
+    }
+
     Expedition expedition1, expedition2;
-//
-//    if (initExpedition(&expedition1, &bodies[0]) != 0) {
-//        printf("Failed to initialize the first expedition.\n");
-//        return ;
-//    }
-//
-//    if (initExpedition(&expedition2, &bodies[1]) != 0) {
-//        printf("Failed to initialize the second expedition.\n");
-//        return ;
-//    }
+
+    if (initExpedition(&expedition1, &bodies[0]) != 0) {
+        printf("Failed to initialize the first expedition.\n");
+        return ;
+    }
+
+    if (initExpedition(&expedition2, &bodies[1]) != 0) {
+        printf("Failed to initialize the second expedition.\n");
+        return ;
+    }
 
 
-  //  saveManagerToFileBin(&agencyManager, AgencyManagerBin);
+    saveManagerToFileTxt(&agencyManager, AgencyManagerTxt);
 //    loadManagerFromFileBin(&agencyManager,AgencyManagerBin);
 
     printExpedtion(&expedition1);

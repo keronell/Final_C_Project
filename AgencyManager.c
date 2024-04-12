@@ -74,26 +74,6 @@ void freeAgency(Agency* pAgency) {
     pAgency->numOfExpeditions = 0;
 }
 
-
-Expedition* findExpeditionById(Agency* pManager, int id)
-{
-    if (pManager == NULL) {
-        printf("Agency pointer is NULL.\n");
-        return NULL;
-    }
-
-    NODE* currentNode = pManager->expeditionList.head.next;
-    while (currentNode != NULL) {
-        Expedition* expedition = (Expedition*) currentNode->key;
-        if (expedition != NULL && expedition->id == id) {
-            return expedition;
-        }
-        currentNode = currentNode->next;
-    }
-    return NULL;
-
-}
-
 int		saveManagerToFileBin(const Agency* pAgency, const char* fileName)
 {
     FILE* fp;
@@ -204,6 +184,37 @@ int loadManagerFromFileBin(Agency* pAgency, const char* fileName) {
     }
     currentNode->next = NULL;  // Terminate the last node
 
+    fclose(fp);
+    return 1;
+}
+
+int saveManagerToFileTxt(const Agency* pAgency, const char* fileName) {
+    if (pAgency == NULL) {
+        printf("Invalid Agency pointer.\n");
+        return 0;
+    }
+
+    FILE* fp = fopen(fileName, "w");  // Open file in write mode
+    if (!fp) {
+        printf("Error opening file to write.\n");
+        return 0;
+    }
+
+    // Write the number of agencies
+    if (!writeIntToFile(pAgency->agencyCounter, fp, "Error writing number of agencies!\n")) {
+        fclose(fp);
+        return 0;
+    }
+
+    // Iterate over each SpaceAgency and write its details to the file
+    for (int i = 0; i < pAgency->agencyCounter; i++) {
+        if (!saveSpaceAgencyToFileTxt(pAgency->agencyArr[i], fp)) {
+            fclose(fp);
+            return 0;
+        }
+    }
+
+    // Close the file
     fclose(fp);
     return 1;
 }

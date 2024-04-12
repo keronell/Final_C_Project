@@ -23,4 +23,6 @@ void    printSpaceAgency(const SpaceAgency* pAgency);
 int     saveSpaceAgencyToFileBin(const SpaceAgency* pAgency, FILE *fp);
 int loadSpaceAgencyFromFileBin(SpaceAgency** pAgency, FILE* fp);
 
+int saveSpaceAgencyToFileTxt(const SpaceAgency* pAgency, FILE* fp);
+
 #endif //FINAL_C_PROJECT_SPACEAGENCY_H
