@@ -1,3 +1,6 @@
+//
+// Created by Vlad Pavlyuk on 05/04/2024.
+//
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -19,7 +22,7 @@ int initSpaceMap (SpaceMap* spaceMap){
     size = getPositveInt(10);
     spaceMap->rows = size;
     spaceMap->cols = size;
-    
+
     spaceMap->data = malloc(spaceMap->rows * sizeof(int*));
     if (spaceMap->data == NULL) return 1;
     for (int i = 0; i < spaceMap->rows; i++) {
@@ -27,7 +30,7 @@ int initSpaceMap (SpaceMap* spaceMap){
         if (!spaceMap->data[i]) return 1;
     }
 
-
+    addEarth(spaceMap);
 
     return 0;
 }
@@ -36,7 +39,7 @@ int initSpaceMap (SpaceMap* spaceMap){
 int addCelestialBodytoMap (SpaceMap* spaceMap, CelestialBody* newBody){
     int radius;
     char sign;
-    
+
     if (!spaceMap || !newBody) {
         printf("cant add new body");
         return 1;
@@ -60,12 +63,12 @@ int addCelestialBodytoMap (SpaceMap* spaceMap, CelestialBody* newBody){
             return 1;
             break;
     }
-    
+
     addCircleToMatrix(spaceMap,newBody->location, radius);
     return 0;
 }
 
-int     addExpeditiontoMap(Expedition pExpedition);
+
 int rmCelestialBody (CelestialBody* body);
 int rmExpedition (Expedition* expedition);
 void freeSpaceMap (SpaceMap* spaceMap);
@@ -113,62 +116,85 @@ void addCircleToMatrix(SpaceMap * matrix, Location center, int radius) {
 
 
 void printSpaceMap(SpaceMap * matrix) {
+
+    for (int i = 0; i < matrix->cols*2; i++) {
+        printf("_");
+    }
     for (int i = 0; i < matrix->rows; i++) {
         for (int j = 0; j < matrix->cols; j++) {
-            printf("%c ", matrix->data[i][j] ? '*' : ' '); // Print '*' if the element is 1, else print ' '
+            if (j == 0) printf("|");
+
+
+            if (matrix->data[i][j] == 1) printf("%c ", '*');
+            else if (!matrix->data[i][j]) printf("%c ", ' ');
+            else printf("%c ", '^');
+
+
+            if (j == matrix->cols-1) printf("|");
         }
         printf("\n");
+    }
+    for (int i = 0; i < matrix->cols*2; i++) {
+        printf("_");
     }
 }
 
 
 
-//void plotPoint(SpaceMap * matrix, int x, int y, char symbol) {
-//    if (x >= 0 && x < matrix->cols && y >= 0 && y < matrix->rows) {
-//        matrix->data[y][x] = symbol;
-//    }
-//}
-//
-//void drawLine(SpaceMap * matrix, Point start, Point end, char symbol) {
-//    int dx = abs(end.x - start.x);
-//    int dy = abs(end.y - start.y);
-//    int sx = start.x < end.x ? 1 : -1;
-//    int sy = start.y < end.y ? 1 : -1;
-//    int err = dx - dy;
-//    int e2;
-//
-//    while (1) {
-//        plotPoint(matrix, start.x, start.y, symbol);
-//        if (start.x == end.x && start.y == end.y) break;
-//        e2 = 2 * err;
-//        if (e2 > -dy) {
-//            err -= dy;
-//            start.x += sx;
-//        }
-//        if (e2 < dx) {
-//            err += dx;
-//            start.y += sy;
-//        }
-//    }
-//}
-//
-//void connectDotsWithoutCrossing(SpaceMap * matrix,  dot1, Point dot2, char symbol) {
-//    int dx = abs(dot2.x - dot1.x);
-//    int dy = abs(dot2.y - dot1.y);
-//
-//    if (dx > dy) {
-//        if (dot1.x > dot2.x) {
-//            drawLine(matrix, dot2, dot1, symbol);
-//        } else {
-//            drawLine(matrix, dot1, dot2, symbol);
-//        }
-//    } else {
-//        if (dot1.y > dot2.y) {
-//            drawLine(matrix, dot2, dot1, symbol);
-//        } else {
-//            drawLine(matrix, dot1, dot2, symbol);
-//        }
-//    }
-//}
+void plotPoint(SpaceMap * matrix, int x, int y, char symbol) {
+    if (x >= 0 && x < matrix->cols && y >= 0 && y < matrix->rows) {
+        if(matrix->data[y][x] != 1)
+            matrix->data[y][x] = 2;
+    }
+}
+
+void drawLine(SpaceMap * matrix, Location start, Location end, char symbol) {
+    int dx = abs(end.x - start.x);
+    int dy = abs(end.y - start.y);
+    int sx = start.x < end.x ? 1 : -1;
+    int sy = start.y < end.y ? 1 : -1;
+    int err = dx - dy;
+    int e2;
+
+    while (1) {
+        plotPoint(matrix, start.x, start.y, symbol);
+        if (start.x == end.x && start.y == end.y) break;
+        e2 = 2 * err;
+        if (e2 > -dy) {
+            err -= dy;
+            start.x += sx;
+        }
+        if (e2 < dx) {
+            err += dx;
+            start.y += sy;
+        }
+    }
+}
+
+void connectDotsWithoutCrossing(SpaceMap * matrix, Location dot1, Location dot2, char symbol) {
+
+    int dx = abs(dot2.x - dot1.x);
+    int dy = abs(dot2.y - dot1.y);
+
+    if (dx > dy) {
+        if (dot1.x > dot2.x) {
+            drawLine(matrix, dot2, dot1, symbol);
+        } else {
+            drawLine(matrix, dot1, dot2, symbol);
+        }
+    } else {
+        if (dot1.y > dot2.y) {
+            drawLine(matrix, dot2, dot1, symbol);
+        } else {
+            drawLine(matrix, dot1, dot2, symbol);
+        }
+    }
+}
+
+int addExpeditiontoMap(SpaceMap* spaceMap, Expedition* expedition){
+    Location start = {spaceMap->rows/2, spaceMap->cols/2};
+    connectDotsWithoutCrossing(spaceMap, start, expedition->destination->location, '#');
+    return 0;
+}
 
 

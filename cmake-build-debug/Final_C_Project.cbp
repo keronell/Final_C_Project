@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="Final_C_Project"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/Users/itaminoko/Documents/GitHub/Final_C_Project/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j10 -f &quot;/Users/itaminoko/Documents/GitHub/Final_C_Project/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j10 -f &quot;/Users/itaminoko/Documents/GitHub/Final_C_Project/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j10 -f &quot;/Users/itaminoko/Documents/GitHub/Final_C_Project/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j10 -f &quot;/Users/itaminoko/Documents/GitHub/Final_C_Project/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Final_C_Project">
+				<Option output="/Users/itaminoko/Documents/GitHub/Final_C_Project/cmake-build-debug/Final_C_Project" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/itaminoko/Documents/GitHub/Final_C_Project/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/itaminoko/Documents/GitHub/Final_C_Project/."/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/15.0.0/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j10 -f &quot;/Users/itaminoko/Documents/GitHub/Final_C_Project/cmake-build-debug/Makefile&quot;  VERBOSE=1 Final_C_Project"/>
+					<CompileFile command="/usr/bin/make -j10 -f &quot;/Users/itaminoko/Documents/GitHub/Final_C_Project/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j10 -f &quot;/Users/itaminoko/Documents/GitHub/Final_C_Project/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j10 -f &quot;/Users/itaminoko/Documents/GitHub/Final_C_Project/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Final_C_Project/fast">
+				<Option output="/Users/itaminoko/Documents/GitHub/Final_C_Project/cmake-build-debug/Final_C_Project" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/itaminoko/Documents/GitHub/Final_C_Project/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/itaminoko/Documents/GitHub/Final_C_Project/."/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/15.0.0/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j10 -f &quot;/Users/itaminoko/Documents/GitHub/Final_C_Project/cmake-build-debug/Makefile&quot;  VERBOSE=1 Final_C_Project/fast"/>
+					<CompileFile command="/usr/bin/make -j10 -f &quot;/Users/itaminoko/Documents/GitHub/Final_C_Project/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j10 -f &quot;/Users/itaminoko/Documents/GitHub/Final_C_Project/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j10 -f &quot;/Users/itaminoko/Documents/GitHub/Final_C_Project/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/Users/itaminoko/Documents/GitHub/Final_C_Project/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j10 -f &quot;/Users/itaminoko/Documents/GitHub/Final_C_Project/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j10 -f &quot;/Users/itaminoko/Documents/GitHub/Final_C_Project/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j10 -f &quot;/Users/itaminoko/Documents/GitHub/Final_C_Project/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j10 -f &quot;/Users/itaminoko/Documents/GitHub/Final_C_Project/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/Users/itaminoko/Documents/GitHub/Final_C_Project/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j10 -f &quot;/Users/itaminoko/Documents/GitHub/Final_C_Project/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j10 -f &quot;/Users/itaminoko/Documents/GitHub/Final_C_Project/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j10 -f &quot;/Users/itaminoko/Documents/GitHub/Final_C_Project/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j10 -f &quot;/Users/itaminoko/Documents/GitHub/Final_C_Project/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/Users/itaminoko/Documents/GitHub/Final_C_Project/AgencyManager.c">
+			<Option target="Final_C_Project"/>
+		</Unit>
+		<Unit filename="/Users/itaminoko/Documents/GitHub/Final_C_Project/AgencyManager.h">
+			<Option target="Final_C_Project"/>
+		</Unit>
+		<Unit filename="/Users/itaminoko/Documents/GitHub/Final_C_Project/CelestialBody.c">
+			<Option target="Final_C_Project"/>
+		</Unit>
+		<Unit filename="/Users/itaminoko/Documents/GitHub/Final_C_Project/CelestialBody.h">
+			<Option target="Final_C_Project"/>
+		</Unit>
+		<Unit filename="/Users/itaminoko/Documents/GitHub/Final_C_Project/Date.c">
+			<Option target="Final_C_Project"/>
+		</Unit>
+		<Unit filename="/Users/itaminoko/Documents/GitHub/Final_C_Project/Date.h">
+			<Option target="Final_C_Project"/>
+		</Unit>
+		<Unit filename="/Users/itaminoko/Documents/GitHub/Final_C_Project/Expedition.c">
+			<Option target="Final_C_Project"/>
+		</Unit>
+		<Unit filename="/Users/itaminoko/Documents/GitHub/Final_C_Project/Expedition.h">
+			<Option target="Final_C_Project"/>
+		</Unit>
+		<Unit filename="/Users/itaminoko/Documents/GitHub/Final_C_Project/FileManager.c">
+			<Option target="Final_C_Project"/>
+		</Unit>
+		<Unit filename="/Users/itaminoko/Documents/GitHub/Final_C_Project/FileManager.h">
+			<Option target="Final_C_Project"/>
+		</Unit>
+		<Unit filename="/Users/itaminoko/Documents/GitHub/Final_C_Project/GeneralList.c">
+			<Option target="Final_C_Project"/>
+		</Unit>
+		<Unit filename="/Users/itaminoko/Documents/GitHub/Final_C_Project/GeneralList.h">
+			<Option target="Final_C_Project"/>
+		</Unit>
+		<Unit filename="/Users/itaminoko/Documents/GitHub/Final_C_Project/Location.c">
+			<Option target="Final_C_Project"/>
+		</Unit>
+		<Unit filename="/Users/itaminoko/Documents/GitHub/Final_C_Project/Location.h">
+			<Option target="Final_C_Project"/>
+		</Unit>
+		<Unit filename="/Users/itaminoko/Documents/GitHub/Final_C_Project/SpaceAgency.c">
+			<Option target="Final_C_Project"/>
+		</Unit>
+		<Unit filename="/Users/itaminoko/Documents/GitHub/Final_C_Project/SpaceAgency.h">
+			<Option target="Final_C_Project"/>
+		</Unit>
+		<Unit filename="/Users/itaminoko/Documents/GitHub/Final_C_Project/SpaceControlSystem.c">
+			<Option target="Final_C_Project"/>
+		</Unit>
+		<Unit filename="/Users/itaminoko/Documents/GitHub/Final_C_Project/SpaceControlSystem.h">
+			<Option target="Final_C_Project"/>
+		</Unit>
+		<Unit filename="/Users/itaminoko/Documents/GitHub/Final_C_Project/SpaceMap.c">
+			<Option target="Final_C_Project"/>
+		</Unit>
+		<Unit filename="/Users/itaminoko/Documents/GitHub/Final_C_Project/SpaceMap.h">
+			<Option target="Final_C_Project"/>
+		</Unit>
+		<Unit filename="/Users/itaminoko/Documents/GitHub/Final_C_Project/StringToolBox.c">
+			<Option target="Final_C_Project"/>
+		</Unit>
+		<Unit filename="/Users/itaminoko/Documents/GitHub/Final_C_Project/StringToolBox.h">
+			<Option target="Final_C_Project"/>
+		</Unit>
+		<Unit filename="/Users/itaminoko/Documents/GitHub/Final_C_Project/input.c">
+			<Option target="Final_C_Project"/>
+		</Unit>
+		<Unit filename="/Users/itaminoko/Documents/GitHub/Final_C_Project/input.h">
+			<Option target="Final_C_Project"/>
+		</Unit>
+		<Unit filename="/Users/itaminoko/Documents/GitHub/Final_C_Project/main.c">
+			<Option target="Final_C_Project"/>
+		</Unit>
+		<Unit filename="/Users/itaminoko/Documents/GitHub/Final_C_Project/main.h">
+			<Option target="Final_C_Project"/>
+		</Unit>
+		<Unit filename="/Users/itaminoko/Documents/GitHub/Final_C_Project/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>
