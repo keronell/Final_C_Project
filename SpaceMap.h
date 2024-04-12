@@ -12,7 +12,7 @@ typedef struct {
 
 int initSpaceMap (SpaceMap* spaceMap);
 
-int addCelestialBody (SpaceMap* spaceMap, CelestialBody* newBody);
+int addCelestialBodytoMap (SpaceMap* spaceMap, CelestialBody* newBody);
 int addExpedition (Expedition* newExpedition);
 int rmCelestialBody (CelestialBody* body);
 int rmExpedition (Expedition* expedition);

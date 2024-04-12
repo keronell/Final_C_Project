@@ -4,6 +4,7 @@
 #include "SpaceMap.h"
 
 int initSpaceMap (SpaceMap* spaceMap){
+    printf("\n\nMap Initialization: \n");
     getTwoPositiveIntegers(&spaceMap->rows, &spaceMap->cols);
     spaceMap->data = malloc(spaceMap->rows * sizeof(int*));
     if (spaceMap->data == NULL) return 1;
@@ -15,10 +16,10 @@ int initSpaceMap (SpaceMap* spaceMap){
 }
 
 
-int addCelestialBody (SpaceMap* spaceMap, CelestialBody* newBody){
+int addCelestialBodytoMap (SpaceMap* spaceMap, CelestialBody* newBody){
     if (!spaceMap || !newBody) {
         printf("cant add new body");
-        return 0;
+        return 1;
     }
 //    int radius = newBody->size;
         int radius = 3;
@@ -27,10 +28,10 @@ int addCelestialBody (SpaceMap* spaceMap, CelestialBody* newBody){
         int y = newBody->location.yAxis;
 
     addCircleToMatrix(spaceMap, x, y, radius);
-
+    return 0;
 }
 
-int addExpedition (Expedition* newExpedition);
+int     addExpeditiontoMap(Expedition pExpedition);
 int rmCelestialBody (CelestialBody* body);
 int rmExpedition (Expedition* expedition);
 void freeSpaceMap (SpaceMap* spaceMap);
@@ -39,12 +40,12 @@ void freeSpaceMap (SpaceMap* spaceMap);
 void getTwoPositiveIntegers (int* rows, int* columns) {
     do {
         printf("enter height: ");
-        scanf("%d\n", rows);
+        scanf("%d", rows);
     } while (*rows <= 0);  // Repeat until a positive integer is entered
 
     do {
         printf("enter length: ");
-        scanf("%d\n", columns);
+        scanf("%d", columns);
     } while (*columns <= 0);  // Repeat until a positive integer is entered
 }
 

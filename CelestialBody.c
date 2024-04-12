@@ -10,6 +10,7 @@ const char* str[eNofTypes] = {"Star", "Asteroid", "Planet"};
 
 int     initCelestialBody(CelestialBody* pBody)
 {
+    printf("Celestial body initialization: \n");
     pBody->ID = getUniqueID();
     pBody->size = getSize();
     pBody->distance = getDistance();

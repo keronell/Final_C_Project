@@ -12,10 +12,13 @@
 void MapTest (){
     SpaceMap spaceMap1;
     initSpaceMap(&spaceMap1);
+    printMatrix(&spaceMap1);
 
     CelestialBody body1;
     initCelestialBody(&body1);
 
+    addCelestialBodytoMap(&spaceMap1, &body1);
+    printMatrix(&spaceMap1);
     
 }
 
@@ -137,6 +140,6 @@ int main() {
 
 
 
-    void MapTest ();
+    MapTest();
 //    displayMenu();
 }
