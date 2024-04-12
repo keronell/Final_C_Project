@@ -9,7 +9,15 @@
 #include "CelestialBody.h"
 #include "Expedition.h"
 #include "main.h"
+void MapTest (){
+    SpaceMap spaceMap1;
+    initSpaceMap(&spaceMap1);
 
+    CelestialBody body1;
+    initCelestialBody(&body1);
+
+
+}
 
 
 
@@ -97,7 +105,6 @@ void displayMenu() {
 
 
 int main() {
-    printf("hiiii");
 //    int choice;
 //    char term;
 //
@@ -130,6 +137,6 @@ int main() {
 
 
 
-
-    displayMenu();
+    void MapTest ();
+//    displayMenu();
 }
