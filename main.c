@@ -5,7 +5,6 @@
 
 #include "SpaceControlSystem.h"
 #include "AgencyManager.h"
-#include "SpaceAgency.h"
 #include "CelestialBody.h"
 #include "Expedition.h"
 #include "main.h"

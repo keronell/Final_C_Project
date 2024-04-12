@@ -16,7 +16,7 @@ typedef struct
     Date            startDate;
     int             duration; // approximate time the mission will take
     ExpeditionType  type;
-    CelestialBody*   destination;
+    int    destinationID;
 }Expedition;
 
 

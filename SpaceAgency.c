@@ -17,7 +17,7 @@ void initSpaceAgency(SpaceAgency *pAgency) {
 
     pAgency->numOfBodiesFound = 0;
 
-    pAgency->expedition =  NULL;
+    pAgency->expeditionID =  0;
 
 }
 
@@ -30,7 +30,7 @@ void setName(SpaceAgency *pAgency) {
 }
 
 int addExpedition(SpaceAgency *pAgency, Expedition* pExpedition) {
-    pAgency->expedition = pExpedition;
+    pAgency->expeditionID = pExpedition->id;
     return 0;
 }
 
@@ -66,13 +66,13 @@ int     saveSpaceAgencyToFile(const SpaceAgency* pAgency, FILE *fp)
         printf("Error saving Agency!\n");
         return 0;
     }
-    if(pAgency->expedition != NULL)
-        if(!writeIntToFile(pAgency->expedition->id, fp, "Error write Agency expedition ID!\n"))
+    if(pAgency->expeditionID != 0)
+        if(!writeIntToFile(pAgency->expeditionID, fp, "Error write Agency expedition ID!\n"))
             return 0;
     return 1;
 }
 
-int loadSpaceAgencyFromFile(Agency* pManager, SpaceAgency** pAgency, FILE* fp)
+int loadSpaceAgencyFromFile(SpaceAgency** pAgency, FILE* fp)
 {
     if (fp == NULL) {
         printf("Can't open the file.\n");
@@ -102,17 +102,11 @@ int loadSpaceAgencyFromFile(Agency* pManager, SpaceAgency** pAgency, FILE* fp)
     }
 
     int expeditionId;
-    if (!readIntFromFile(&expeditionId, fp, "Failed to read expedition ID.\n")) {
+    if (!readIntFromFile(&(*pAgency)->expeditionID, fp, "Failed to read expedition ID.\n")) {
         free((*pAgency)->name);
         free(*pAgency);
         *pAgency = NULL;
         return 0;
-    }
-
-    if (expeditionId > 0) {
-        (*pAgency)->expedition = findExpeditionById(pManager, expeditionId);
-    } else {
-        (*pAgency)->expedition = NULL;
     }
 
     return 1;

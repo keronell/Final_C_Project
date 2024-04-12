@@ -19,7 +19,7 @@ int initExpedition (Expedition* expedition, CelestialBody* destination){
     getCorrectDate(&expedition->startDate);
     expedition->duration = getDuration();
     expedition->type = chooseExpeditionType();
-    expedition->destination = destination;
+    expedition->destinationID = destination->ID;
     expedition->id = expIdCount++;
 
     return 0;
@@ -73,7 +73,7 @@ void printExpedtion (Expedition* expedition){
     printf("____________________\n");
     printf("mission:\nid: %d\n", expedition->id);
     printf("type: %s\n", ExpeditionTypesStr[expedition->type]);
-    printf("target: %d\n", expedition->destination->ID);
+    printf("target: %d\n", expedition->destinationID);
     printf("start: %d##%d##%d\n", expedition->startDate.day, expedition->startDate.month, expedition->startDate.year);
     printf("duration: %d", expedition->duration);
 }
@@ -99,7 +99,7 @@ int saveExpeditionToFile(const Expedition* expedition, FILE* fp)
     }
 
     // Write the destination ID
-    if (writeIntToFile(expedition->destination->ID,fp,  "Failed to write destination ID.\n") != 1) {
+    if (writeIntToFile(expedition->destinationID,fp,  "Failed to write destination ID.\n") != 1) {
         return 0;
     }
 
@@ -134,14 +134,10 @@ int loadExpeditionFromFile(Expedition* expedition, FILE* fp)
         return 0;
     }
 
-    // Read the destination ID and then fetch the actual CelestialBody object
     int destinationId;
-    if (!readIntFromFile(&destinationId, fp, "Failed to read destination ID.\n")) {
+    if (!readIntFromFile(&expedition->destinationID, fp, "Failed to read destination ID.\n")) {
         return 0;
     }
-    expedition->destination = findCelestialBodyById(destinationId); // Assuming such a function exists
-
-    // Read the start date
     if (!readIntFromFile(&(expedition->startDate.day), fp, "Failed to read start day.\n")) {
         return 0;
     }
@@ -152,7 +148,6 @@ int loadExpeditionFromFile(Expedition* expedition, FILE* fp)
         return 0;
     }
 
-    // Read the duration of the expedition
     if (!readIntFromFile(&(expedition->duration), fp, "Failed to read duration.\n")) {
         return 0;
     }

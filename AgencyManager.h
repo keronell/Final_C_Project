@@ -16,8 +16,6 @@ int initAgency(Agency* pAgency);
 
 int addSpaceAgency(Agency* pAgency, SpaceAgency* newAgency);
 void freeAgency(Agency* pAgency);
-
-int getNumOfExpeditions();
 Expedition* findExpeditionById(Agency* pManager, int id);
 
 int		saveManagerToFile(const Agency* pAgency, const char* fileName);

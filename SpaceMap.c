@@ -123,52 +123,52 @@ void printSpaceMap(SpaceMap * matrix) {
 
 
 
-void plotPoint(SpaceMap * matrix, int x, int y, char symbol) {
-    if (x >= 0 && x < matrix->cols && y >= 0 && y < matrix->rows) {
-        matrix->data[y][x] = symbol;
-    }
-}
-
-void drawLine(SpaceMap * matrix, Point start, Point end, char symbol) {
-    int dx = abs(end.x - start.x);
-    int dy = abs(end.y - start.y);
-    int sx = start.x < end.x ? 1 : -1;
-    int sy = start.y < end.y ? 1 : -1;
-    int err = dx - dy;
-    int e2;
-
-    while (1) {
-        plotPoint(matrix, start.x, start.y, symbol);
-        if (start.x == end.x && start.y == end.y) break;
-        e2 = 2 * err;
-        if (e2 > -dy) {
-            err -= dy;
-            start.x += sx;
-        }
-        if (e2 < dx) {
-            err += dx;
-            start.y += sy;
-        }
-    }
-}
-
-void connectDotsWithoutCrossing(SpaceMap * matrix,  dot1, Point dot2, char symbol) {
-    int dx = abs(dot2.x - dot1.x);
-    int dy = abs(dot2.y - dot1.y);
-
-    if (dx > dy) {
-        if (dot1.x > dot2.x) {
-            drawLine(matrix, dot2, dot1, symbol);
-        } else {
-            drawLine(matrix, dot1, dot2, symbol);
-        }
-    } else {
-        if (dot1.y > dot2.y) {
-            drawLine(matrix, dot2, dot1, symbol);
-        } else {
-            drawLine(matrix, dot1, dot2, symbol);
-        }
-    }
-}
+//void plotPoint(SpaceMap * matrix, int x, int y, char symbol) {
+//    if (x >= 0 && x < matrix->cols && y >= 0 && y < matrix->rows) {
+//        matrix->data[y][x] = symbol;
+//    }
+//}
+//
+//void drawLine(SpaceMap * matrix, Point start, Point end, char symbol) {
+//    int dx = abs(end.x - start.x);
+//    int dy = abs(end.y - start.y);
+//    int sx = start.x < end.x ? 1 : -1;
+//    int sy = start.y < end.y ? 1 : -1;
+//    int err = dx - dy;
+//    int e2;
+//
+//    while (1) {
+//        plotPoint(matrix, start.x, start.y, symbol);
+//        if (start.x == end.x && start.y == end.y) break;
+//        e2 = 2 * err;
+//        if (e2 > -dy) {
+//            err -= dy;
+//            start.x += sx;
+//        }
+//        if (e2 < dx) {
+//            err += dx;
+//            start.y += sy;
+//        }
+//    }
+//}
+//
+//void connectDotsWithoutCrossing(SpaceMap * matrix,  dot1, Point dot2, char symbol) {
+//    int dx = abs(dot2.x - dot1.x);
+//    int dy = abs(dot2.y - dot1.y);
+//
+//    if (dx > dy) {
+//        if (dot1.x > dot2.x) {
+//            drawLine(matrix, dot2, dot1, symbol);
+//        } else {
+//            drawLine(matrix, dot1, dot2, symbol);
+//        }
+//    } else {
+//        if (dot1.y > dot2.y) {
+//            drawLine(matrix, dot2, dot1, symbol);
+//        } else {
+//            drawLine(matrix, dot1, dot2, symbol);
+//        }
+//    }
+//}
 
 

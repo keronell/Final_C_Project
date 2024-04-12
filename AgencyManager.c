@@ -74,10 +74,6 @@ void freeAgency(Agency* pAgency) {
     pAgency->numOfExpeditions = 0;
 }
 
-int getNumOfExpeditions()
-{
-
-}
 
 Expedition* findExpeditionById(Agency* pManager, int id)
 {
@@ -142,17 +138,14 @@ int loadManagerFromFile(Agency* pAgency, const char* fileName)
         printf("Error open Agency file to read\n");
         return 0;
     }
-
     // Read number of agencies
-    int agencyCount = readIntFromFile(fp, "Error read number of agencies!\n");
-    if (agencyCount < 0) {
+    if (!readIntFromFile(&pAgency->agencyCounter, fp, "Error read number of agencies!\n")) {
         fclose(fp);
         return 0;
     }
-    pAgency->agencyCounter = agencyCount;
 
     // Allocate memory for agencyArr
-    pAgency->agencyArr = (SpaceAgency**)malloc(agencyCount * sizeof(SpaceAgency*));
+    pAgency->agencyArr = (SpaceAgency**)malloc(pAgency->agencyCounter * sizeof(SpaceAgency*));
     if (!pAgency->agencyArr) {
         printf("Error allocating memory for agencies\n");
         fclose(fp);
@@ -160,7 +153,7 @@ int loadManagerFromFile(Agency* pAgency, const char* fileName)
     }
 
     // Read each agency
-    for (int i = 0; i < agencyCount; i++) {
+    for (int i = 0; i < pAgency->agencyCounter; i++) {
         if (!loadSpaceAgencyFromFile(&pAgency->agencyArr[i], fp)) {
             fclose(fp);
             return 0;
@@ -168,20 +161,19 @@ int loadManagerFromFile(Agency* pAgency, const char* fileName)
     }
 
     // Read number of expeditions
-    int expeditionCount = readIntFromFile(fp, "Error read number of expeditions!\n");
-    if (expeditionCount < 0) {
+
+    if (!readIntFromFile(&pAgency->numOfExpeditions,fp, "Error read number of expeditions!\n")) {
         fclose(fp);
         return 0;
     }
-    pAgency->numOfExpeditions = expeditionCount;
 
     // Initialize expedition list
     L_init(&pAgency->expeditionList);
 
     // Load expedition list
     NODE* currentNode = &pAgency->expeditionList.head;
-    for (int i = 0; i < expeditionCount; i++) {
-        if (!loadExpeditionFromFile(currentNode, fp)) {
+    for (int i = 0; i < pAgency->numOfExpeditions; i++) {
+        if (!loadExpeditionFromFile(currentNode->key, fp)) {
             fclose(fp);
             return 0;
         }

@@ -2,12 +2,12 @@
 #define FINAL_C_PROJECT_SPACEAGENCY_H
 
 #include "Expedition.h"
-#include "AgencyManager.h"
+//#include "AgencyManager.h"
 
 typedef struct
 {
     char* name;
-    Expedition* expedition;
+    int expeditionID;
     int numOfBodiesFound;
 
 }SpaceAgency;
@@ -21,6 +21,6 @@ void freeSpaceAgency(SpaceAgency* agency);
 void    printSpaceAgency(const SpaceAgency* pAgency);
 
 int     saveSpaceAgencyToFile(const SpaceAgency* pAgency, FILE *fp);
-int loadSpaceAgencyFromFile(Agency* pManager, SpaceAgency** pAgency, FILE* fp);
+int loadSpaceAgencyFromFile(SpaceAgency** pAgency, FILE* fp);
 
 #endif //FINAL_C_PROJECT_SPACEAGENCY_H
