@@ -23,4 +23,6 @@ add_executable(Final_C_Project
         Date.h
         Date.c
         SpaceControlSystem.h
-        SpaceControlSystem.c)
+        SpaceControlSystem.c
+        SpaceMap.h
+        SpaceMap.c)

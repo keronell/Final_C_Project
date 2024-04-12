@@ -90,13 +90,14 @@ void displayMenu() {
     // For example, print details of the control system, agencies, etc.
 
     // Cleanup and deallocation (if necessary)
-
+    printf("hiiii");
 
 }
 
 
 
 int main() {
+    printf("hiiii");
 //    int choice;
 //    char term;
 //
