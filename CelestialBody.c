@@ -132,14 +132,20 @@ int loadCelestialBodyFromFile(CelestialBody *body, FILE *fp) {
     return 0; // Success
 }
 
-int compareBodyByDistance(const void *pBody1, const void *pBody2){
-    return 0;
+int compareBodyByDistance(const void *body1, const void *body2){
+    const CelestialBody * pBody1 = *(const CelestialBody **)body1;
+    const CelestialBody * pBody2 = *(const CelestialBody **)body2;
+    return pBody1->distance - pBody2->distance;
 }
 
-int compareBodyByType(const void *pBody1, const void *pBody2){
-    return 0;
+int compareBodyByType(const void *body1, const void *body2){
+    const CelestialBody * pBody1 = *(const CelestialBody **)body1;
+    const CelestialBody * pBody2 = *(const CelestialBody **)body2;
+    return pBody1->type - pBody2->type;
 }
 
-int compareBodyByDate(const void *pBody1, const void *pBody2){
-    return 0;
+int compareBodyByDate(const void *body1, const void *body2){
+    const CelestialBody * pBody1 = *(const CelestialBody **)body1;
+    const CelestialBody * pBody2 = *(const CelestialBody **)body2;
+    return compareDate(&pBody1->dateOfDiscovery,&pBody2->dateOfDiscovery);
 }

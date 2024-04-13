@@ -66,3 +66,26 @@ int		 equalDate(const Date* pDate1, const Date* pDate2)
 	return 0;
 
 }
+
+int		compareDate(const void* d1, const void* d2){
+    const Date* pDate1 = (const Date*)d1;
+    const Date* pDate2 = (const Date*)d2;
+    if (pDate1->year > pDate2->year)
+        return 1;
+    if (pDate1->year < pDate2->year)
+        return -1;
+
+    if (pDate1->month > pDate2->month)
+        return 1;
+
+    if (pDate1->month < pDate2->month)
+        return -1;
+
+    if (pDate1->day > pDate2->day)
+        return 1;
+
+    if (pDate1->day < pDate2->day)
+        return -1;
+
+    return 0;
+}
