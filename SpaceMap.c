@@ -160,11 +160,12 @@ void connectDotsWithoutCrossing(SpaceMap *matrix, Location dot1, Location dot2, 
 }
 
 
-//int addExpeditiontoMap(AgencyManager *agencyManager, int expeditionId) {
+//int addExpeditiontoMap(SpaceMap* spaceMap, Expedition* expedition) {
 //
+//    Location start = {spaceMap->rows/}
 //    return 0;
 //}
-//
+
 
 
 
