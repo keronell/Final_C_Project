@@ -14,8 +14,7 @@ void addEarth(SpaceMap *spaceMap) {
 
 int initSpaceMap(SpaceMap *spaceMap) {
     int size;
-    printf("\n\nMap Initialization: \n");
-    printf("enter size of the map: ");
+    printf("\n\nMap Initialization\nenter size: ");
     size = getPositveInt(10);
     spaceMap->rows = size;
     spaceMap->cols = size;

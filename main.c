@@ -11,22 +11,22 @@
 void MapTest (){
     int choice  = 1;
 
-    if (choice == 1){
-        SpaceMap myMap;
-        initSpaceMap(&myMap);
+    SpaceControlSystem system;
+    initSystem(&system);
 
-        CelestialBody body1;
-        initCelestialBody(&body1);
+    CelestialBody body1 = {1111, 10, 3, {4, 3,}, eStar};
+    CelestialBody body2 = {1111, 10, 3, {23, 13,}, eStar};
+    CelestialBody body3 = {1111, 10, 3, {16, 8,}, eAsteroid};
 
-        CelestialBody body2;
-        initCelestialBody(&body2);
+    addCelestialBody(&system, &body1);
+    addCelestialBody(&system, &body2);
+    addCelestialBody(&system, &body3);
+
+    printSpaceMap(&system.spaceMap);
 
 
-        addCelestialBodytoMap(&myMap, &body1);
-        addCelestialBodytoMap(&myMap, &body2);
 
-        printSpaceMap(&myMap);
-    }
+
 
 }
 
@@ -143,6 +143,6 @@ int main() {
 
 
 
-//    MapTest();
-    displayMenu();
+ MapTest();
+    //displayMenu();
 }

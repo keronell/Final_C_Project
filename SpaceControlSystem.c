@@ -26,6 +26,7 @@ int initSystem(SpaceControlSystem* pSystem)
 
     initSpaceMap(&pSystem->spaceMap); // alex added it
 
+
     return 0; // Success
 }
 

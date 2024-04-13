@@ -3,7 +3,6 @@
 
 #include "CelestialBody.h"
 #include "Expedition.h"
-#include "SpaceControlSystem.h"
 #include "input.h"
 #include "AgencyManager.h"
 typedef struct {
@@ -13,6 +12,7 @@ typedef struct {
     int** data;
 
 } SpaceMap;
+
 
 typedef struct AgencyManager AgencyManager;
 

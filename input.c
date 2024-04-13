@@ -7,7 +7,7 @@ int getPositveInt (int lowerBound){
     int num;
 
     while (1) {
-        printf("Enter a positive integer: ");
+
         if (scanf("%d", &num) != 1 || num <= lowerBound) {
             // Clear input buffer
             while (getchar() != '\n');
