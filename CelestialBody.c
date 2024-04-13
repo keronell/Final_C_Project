@@ -7,14 +7,13 @@
 #include "StringToolBox.h"
 
 
-const char* str[eNofTypes] = {"Star", "Asteroid", "Planet"};
+const char *str[eNofTypes] = {"Star", "Asteroid", "Planet"};
 
-int     initCelestialBody(CelestialBody* pBody)
-{
+int initCelestialBody(CelestialBody *pBody) {
     printf("Celestial body initialization: \n");
     pBody->ID = getUniqueID();
     pBody->size = getSize();
-    pBody->distance = getDistance();
+    pBody->distance = getDistance(pBody);
     getLocation(pBody);
     pBody->type = chooseCelestialBodyType();
     printf("when was it discovered ?\n");
@@ -24,30 +23,20 @@ int     initCelestialBody(CelestialBody* pBody)
 }
 
 
-int      getUniqueID()
-{
+int getUniqueID() {
     static int id = 100000;
     return id++;
 }
 
-int     getSize()
-{
+int getSize() {
     int size;
     printf("Enter a radius: (in km)\n");
     scanf("%d", &size);
     return size;
 }
 
-int    getDistance()
-{
-    int distance;
-    printf("Enter a distance: (in light years)\n");
-    scanf("%d", &distance);
-    return distance;
-}
 
-void    getLocation(CelestialBody* pBody)
-{
+void getLocation(CelestialBody *pBody) {
     int xAxis;
     int yAxis;
 
@@ -71,15 +60,14 @@ CelestialBodyType chooseCelestialBodyType() {
         scanf("%d", &choice);
     }
 
-    return (CelestialBodyType)choice;
+    return (CelestialBodyType) choice;
 }
 
-void freeCelestialBody(CelestialBody* pBody)
-{
+void freeCelestialBody(CelestialBody *pBody) {
     free(pBody);
 }
 
-void    printCelestialBody(const CelestialBody* pBody) {
+void printCelestialBody(const CelestialBody *pBody) {
     if (pBody != NULL) {
         printf("\nID:\t\t\t%d\n", pBody->ID);
         printf("Size:\t\t%d km\n", pBody->size);
@@ -89,7 +77,7 @@ void    printCelestialBody(const CelestialBody* pBody) {
     }
 }
 
-void saveCelestialBodyToFileTxt(FILE* fp, const CelestialBody* pBody) {
+void saveCelestialBodyToFileTxt(FILE *fp, const CelestialBody *pBody) {
     if (fp == NULL || pBody == NULL) {
         fprintf(stderr, "Error: Invalid file pointer or celestial body pointer.\n");
         return;
@@ -103,7 +91,7 @@ void saveCelestialBodyToFileTxt(FILE* fp, const CelestialBody* pBody) {
     fprintf(fp, "Location: (%d, %d)\n\n", pBody->location.x, pBody->location.y);
 }
 
-int loadCelestialBodyFromFile(CelestialBody* body, FILE* fp) {
+int loadCelestialBodyFromFile(CelestialBody *body, FILE *fp) {
     // Implement loading logic for a celestial body based on the format used in saveSystemToFileTxt
     char buffer[MAX_STR_LEN];
     if (fgets(buffer, sizeof(buffer), fp) == NULL) return 0; // Read body info line
@@ -113,4 +101,25 @@ int loadCelestialBodyFromFile(CelestialBody* body, FILE* fp) {
            &body->ID, &body->type, &body->size, &body->distance, &body->location.x, &body->location.y);
 
     return 1;
+}
+
+int compareBodyByDistance(const void *body1, const void *body2) {
+    const CelestialBody *pCBody1 = *(const CelestialBody **) body1;
+    const CelestialBody *pCBody2 = *(const CelestialBody **) body2;
+    return pCBody1->distance - pCBody2->distance;
+
+}
+
+int compareBodyByDate(const void *body1, const void *body2) {
+    const CelestialBody *pCBody1 = *(const CelestialBody **) body1;
+    const CelestialBody *pCBody2 = *(const CelestialBody **) body2;
+    return compareDate(&pCBody1->dateOfDiscovery, &pCBody2->dateOfDiscovery);
+
+}
+
+int compareBodyByType(const void *body1, const void *body2) {
+    const CelestialBody *pCBody1 = *(const CelestialBody **) body1;
+    const CelestialBody *pCBody2 = *(const CelestialBody **) body2;
+    return pCBody1->type - pCBody2->type;
+
 }
