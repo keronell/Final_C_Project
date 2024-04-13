@@ -183,6 +183,7 @@ CMakeFiles/Final_C_Project.dir/CelestialBody.c.o: /Users/itaminoko/Documents/Git
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk/usr/include/sys/wait.h \
   /Library/Developer/CommandLineTools/usr/lib/clang/15.0.0/include/stdint.h \
   /Users/itaminoko/Documents/GitHub/Final_C_Project/CelestialBody.h \
+  /Users/itaminoko/Documents/GitHub/Final_C_Project/Date.h \
   /Users/itaminoko/Documents/GitHub/Final_C_Project/Location.h
 
 CMakeFiles/Final_C_Project.dir/Date.c.o: /Users/itaminoko/Documents/GitHub/Final_C_Project/Date.c \

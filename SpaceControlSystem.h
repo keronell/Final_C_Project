@@ -5,9 +5,9 @@
 #include "CelestialBody.h"
 #include "SpaceMap.h"
 
-typedef enum {
-    eID, eSize, eDistance, eFoundBy, eType, eNofSortOpt
+typedef enum { eNone, eDistance, eDate, eType, eNofSortOpt
 } eSortOption;
+
 static const char *sortOptStr[eNofSortOpt];
 
 
@@ -30,5 +30,8 @@ void freeAllAllocatedMemory(SpaceControlSystem *pSystem);
 
 void printSpaceControlSystem(const SpaceControlSystem *pSystem);
 
+void findCelestialBody (const SpaceControlSystem* pSystem);
+
+void sortCelestialBody (SpaceControlSystem* pSystem);
 
 #endif //FINAL_C_PROJECT_SPACECONTROLSYSTEM_H

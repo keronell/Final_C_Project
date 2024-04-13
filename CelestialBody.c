@@ -16,6 +16,8 @@ int     initCelestialBody(CelestialBody* pBody)
     pBody->distance = getDistance();
     getLocation(pBody);
     pBody->type = chooseCelestialBodyType();
+    printf("when was it discovered ?\n");
+    getCorrectDate(&pBody->dateOfDiscovery);
 
     return 0;
 }

@@ -14,17 +14,17 @@ void MapTest (){
     SpaceControlSystem system;
     initSystem(&system);
 
-    CelestialBody body1 = {1111, 10, 3, {4, 3,}, eStar};
-    CelestialBody body2 = {1111, 10, 3, {23, 13,}, eStar};
-    CelestialBody body3 = {1111, 10, 3, {16, 8,}, eAsteroid};
+    CelestialBody body1 = {1111, 10, 3, {1,2, 2027}, {4, 3,}, eStar};
+    CelestialBody body2 = {1112, 10, 20, {7,2, 2027},{23, 13,}, eStar};
+    CelestialBody body3 = {1113, 10, 16, {1,11, 2027},{16, 8,}, eAsteroid};
 
     addCelestialBody(&system, &body1);
     addCelestialBody(&system, &body2);
     addCelestialBody(&system, &body3);
 
-    printSpaceMap(&system.spaceMap);
+   printSpaceMap(&system.spaceMap);
 
-
+    printSpaceControlSystem(&system);
 
 
 

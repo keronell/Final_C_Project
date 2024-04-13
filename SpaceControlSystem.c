@@ -22,7 +22,7 @@ int initSystem(SpaceControlSystem* pSystem)
     pSystem->numOfBodies = 0;
 
     // Set a default sorting option
-    pSystem->sortOpt = eID; // Or any other default sorting option
+    pSystem->sortOpt = eNone; // Or any other default sorting option
 
     initSpaceMap(&pSystem->spaceMap); // alex added it
 

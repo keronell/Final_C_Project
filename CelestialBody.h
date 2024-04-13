@@ -4,6 +4,7 @@
 
 
 #include "Location.h"
+#include "Date.h"
 
 typedef enum
 {
@@ -16,6 +17,7 @@ typedef struct
     int                 ID;
     int                 size;
     int                 distance;
+    Date                dateOfDiscovery;
     Location            location;
     CelestialBodyType   type;
 }CelestialBody;
