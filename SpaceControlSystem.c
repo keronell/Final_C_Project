@@ -6,14 +6,13 @@
 #include "StringToolBox.h"
 
 
-int initSystem(SpaceControlSystem* pSystem)
-{
+int initSystem(SpaceControlSystem *pSystem) {
     if (pSystem == NULL)
         return 1; // Indicate error
 
 
     // Allocate memory for the array of CelestialBody pointers with initial size of 1
-    pSystem->CelestialBodyArr = (CelestialBody**)malloc(sizeof(CelestialBody*));
+    pSystem->CelestialBodyArr = (CelestialBody **) malloc(sizeof(CelestialBody *));
     if (pSystem->CelestialBodyArr == NULL)
         return -1; // Indicate error
 
@@ -31,18 +30,16 @@ int initSystem(SpaceControlSystem* pSystem)
     return 0; // Success
 }
 
-int addCelestialBody(SpaceControlSystem* pSystem, CelestialBody* newBody)
-{
-    if (pSystem == NULL || newBody == NULL)
-    {
+int addCelestialBody(SpaceControlSystem *pSystem, CelestialBody *newBody) {
+    if (pSystem == NULL || newBody == NULL) {
         printf("Error: Invalid parameters.\n");
         return -1;
     }
 
     // Resize the array to hold one more CelestialBody pointer
-    CelestialBody** tempArr = (CelestialBody**)realloc(pSystem->CelestialBodyArr, (pSystem->numOfBodies + 1) * sizeof(CelestialBody*));
-    if (tempArr == NULL)
-    {
+    CelestialBody **tempArr = (CelestialBody **) realloc(pSystem->CelestialBodyArr,
+                                                         (pSystem->numOfBodies + 1) * sizeof(CelestialBody *));
+    if (tempArr == NULL) {
         printf("Error: Memory reallocation failed.\n");
         return -1;
     }
@@ -55,8 +52,7 @@ int addCelestialBody(SpaceControlSystem* pSystem, CelestialBody* newBody)
     return 0; // Success
 }
 
-int addExpeditionToAgency(Agency *pAgency, SpaceControlSystem *pSystem)
-{
+int addExpeditionToAgency(Agency *pAgency, SpaceControlSystem *pSystem) {
     printAgency(pAgency);
     int agencyIndex = -1;
     while (agencyIndex < 1 || agencyIndex > pAgency->agencyCounter) {
@@ -76,7 +72,7 @@ int addExpeditionToAgency(Agency *pAgency, SpaceControlSystem *pSystem)
 
     printf("Choose Celestial Bodies as a destination point:\n");
     for (int i = 0; i < pSystem->numOfBodies; i++) {
-        printf("%d) ", i+1);
+        printf("%d) ", i + 1);
         printCelestialBody(pSystem->CelestialBodyArr[0]);
     }
 
@@ -91,7 +87,7 @@ int addExpeditionToAgency(Agency *pAgency, SpaceControlSystem *pSystem)
         }
     }
 
-    Expedition *newExpedition = (Expedition *)malloc(sizeof(Expedition));
+    Expedition *newExpedition = (Expedition *) malloc(sizeof(Expedition));
     if (newExpedition == NULL) {
         printf("Failed to allocate memory for new Expedition.\n");
         return 1;
@@ -103,8 +99,7 @@ int addExpeditionToAgency(Agency *pAgency, SpaceControlSystem *pSystem)
 }
 
 
-
-void freeAllAllocatedMemory(SpaceControlSystem* pSystem) {
+void freeAllAllocatedMemory(SpaceControlSystem *pSystem) {
     if (pSystem == NULL) {
         return;
     }
@@ -121,10 +116,8 @@ void freeAllAllocatedMemory(SpaceControlSystem* pSystem) {
     }
 }
 
-void printSpaceControlSystem(const SpaceControlSystem* pSystem)
-{
-    if (pSystem == NULL)
-    {
+void printSpaceControlSystem(const SpaceControlSystem *pSystem) {
+    if (pSystem == NULL) {
         printf("Error: SpaceControlSystem pointer is NULL.\n");
         return;
     }
@@ -132,20 +125,16 @@ void printSpaceControlSystem(const SpaceControlSystem* pSystem)
     printf("Number of Celestial Bodies: %d\n", pSystem->numOfBodies);
     printf("Celestial Bodies:\n");
 
-    for (int i = 0; i < pSystem->numOfBodies; i++)
-    {
-        if (pSystem->CelestialBodyArr[i] != NULL)
-        {
+    for (int i = 0; i < pSystem->numOfBodies; i++) {
+        if (pSystem->CelestialBodyArr[i] != NULL) {
             printCelestialBody(pSystem->CelestialBodyArr[i]);
-        }
-        else
-        {
+        } else {
             printf("Celestial Body %d: NULL\n", i);
         }
     }
 }
-int saveSystemToFileTxt(const SpaceControlSystem *pSystem, const Agency *pAgency, const char *fileName)
-{
+
+int saveSystemToFileTxt(const SpaceControlSystem *pSystem, const Agency *pAgency, const char *fileName) {
     if (pSystem == NULL) {
         printf("System is not initialized! \n");
         return 1;
@@ -170,7 +159,7 @@ int saveSystemToFileTxt(const SpaceControlSystem *pSystem, const Agency *pAgency
             fprintf(fp, "  [Data Not Available]\n");
         }
     }
-    if(saveManagerToFileTxt(pAgency,fileName)){
+    if (saveManagerToFileTxt(pAgency, fileName)) {
         printf("Failed to save Manager data to file!\n");
         return 1;
     }
@@ -215,7 +204,7 @@ int loadSystemFromFileTxt(SpaceControlSystem *pSystem, Agency *pAgency, const ch
     pSystem->sortOpt = sortOpt;
 
     // Allocate memory for celestial bodies array
-    pSystem->CelestialBodyArr = (CelestialBody*)malloc(numOfBodies * sizeof(CelestialBody));
+    pSystem->CelestialBodyArr = (CelestialBody *) malloc(numOfBodies * sizeof(CelestialBody));
     if (pSystem->CelestialBodyArr == NULL) {
         fclose(fp);
         return 1; // Memory allocation failed
@@ -224,7 +213,7 @@ int loadSystemFromFileTxt(SpaceControlSystem *pSystem, Agency *pAgency, const ch
     // Read celestial bodies
     for (int i = 0; i < numOfBodies; i++) {
         fgets(buffer, sizeof(buffer), fp); // Read header line for each body
-        pSystem->CelestialBodyArr[i] = (CelestialBody*)malloc(sizeof(CelestialBody));
+        pSystem->CelestialBodyArr[i] = (CelestialBody *) malloc(sizeof(CelestialBody));
         if (pSystem->CelestialBodyArr[i] == NULL) {
             // Free previously allocated memory
             for (int j = 0; j < i; j++) {
@@ -242,3 +231,77 @@ int loadSystemFromFileTxt(SpaceControlSystem *pSystem, Agency *pAgency, const ch
     return 0;
 }
 
+eSortOption showSortMenu() {
+    int opt;
+    printf("Base on what field do you want to sort?\n");
+    do {
+        for (int i = 1; i < eNofSortOpt; i++)
+            printf("Enter %d for %s\n", i, sortOptStr[i]);
+        scanf("%d", &opt);
+    } while (opt < 0 || opt >= eNofSortOpt);
+
+    return (eSortOption) opt;
+}
+
+
+void findCelestialBody(const SpaceControlSystem *pSystem) {
+    int (*compare)(const void *air1, const void *air2) = NULL;
+    CelestialBody b = {0};
+    CelestialBody *pBody = &b;
+
+    switch (pSystem->sortOpt) {
+        case eDistance:
+            printf("%s\t", "Origin:");
+            b.distance = getPositveInt(0);
+            compare = compareBodyByDistance;
+            break;
+
+        case eType:
+            printf("%s\t", "Destination:");
+            b.type = chooseCelestialBodyType();
+            compare = compareBodyByType;
+            break;
+
+        case eDate:
+            getCorrectDate(&b.dateOfDiscovery);
+            compare = compareBodyByDate;
+            break;
+
+    }
+
+    if (compare != NULL) {
+        CelestialBody **pBodies = bsearch(&pBody, pSystem->CelestialBodyArr, pSystem->numOfBodies,
+                                          sizeof(CelestialBody *), compare);
+        if (pBodies == NULL)
+            printf("Flight was not found\n");
+        else {
+            printf("Flight found, ");
+            printCBody(pBody);
+        }
+    } else {
+        printf("The search cannot be performed, array not sorted\n");
+    }
+
+}
+
+//void sortCelestialBody(SpaceControlSystem *pSystem) {
+//    pComp->flightSortOpt = showSortMenu();
+//    int (*compare)(const void *air1, const void *air2) = NULL;
+//
+//    switch (pComp->flightSortOpt) {
+//        case eSourceCode:
+//            compare = compareFlightBySourceCode;
+//            break;
+//        case eDestCode:
+//            compare = compareFlightByDestCode;
+//            break;
+//        case eDate:
+//            compare = compareFlightByDate;
+//            break;
+//    }
+//
+//    if (compare != NULL)
+//        qsort(pComp->flightArr, pComp->flightCount, sizeof(Flight * ), compare);
+//
+//}
+//

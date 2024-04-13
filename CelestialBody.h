@@ -26,17 +26,22 @@ typedef struct
 
 
 int     initCelestialBody(CelestialBody* pBody);
-int     getUniqueID();
-int     getSize();
-int     getDistance();
+int     getDistance(CelestialBody* body);
 void    getLocation(CelestialBody* pBody);
 CelestialBodyType   chooseCelestialBodyType();
+void    printCBody (CelestialBody* CBody);
 
-void freeCelestialBody(CelestialBody* pBody);
 
-void printCelestialBody(const CelestialBody* pBody);
+void    freeCelestialBody(CelestialBody* pBody);
 
-void saveCelestialBodyToFileTxt(FILE* fp, const CelestialBody* pBody);
-int loadCelestialBodyFromFile(CelestialBody* body, FILE* fp);
+void    printCelestialBody(const CelestialBody* pBody);
 
+void    saveCelestialBodyToFileTxt(FILE* fp, const CelestialBody* pBody);
+int     loadCelestialBodyFromFile(CelestialBody* body, FILE* fp);
+
+
+
+int	    compareBodyByDistance(const void* body1, const void* body2);
+int		compareBodyByDate(const void* body1, const void* body2);
+int		compareBodyByType(const void* body1, const void* body2);
 #endif //FINAL_C_PROJECT_CELESTIALBODY_H
