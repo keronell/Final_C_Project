@@ -34,4 +34,7 @@ void freeCelestialBody(CelestialBody* pBody);
 
 void printCelestialBody(const CelestialBody* pBody);
 
+void saveCelestialBodyToFileTxt(FILE* fp, const CelestialBody* pBody);
+int loadCelestialBodyFromFile(CelestialBody* body, FILE* fp);
+
 #endif //FINAL_C_PROJECT_CELESTIALBODY_H

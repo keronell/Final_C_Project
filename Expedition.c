@@ -71,6 +71,10 @@ void freeExpedition(void* data)
 }
 
 void printExpedition (Expedition* expedition){
+    if (expedition == NULL) {
+        printf("Invalid parameters.\n");
+        return;
+    }
     printf("____________________\n");
     printf("mission:\nid: %d\n", expedition->id);
     printf("type: %s\n", ExpeditionTypesStr[expedition->type]);
