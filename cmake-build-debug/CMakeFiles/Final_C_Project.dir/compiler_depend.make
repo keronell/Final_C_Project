@@ -90,11 +90,9 @@ CMakeFiles/Final_C_Project.dir/AgencyManager.c.o: /Users/keronell/Desktop/Progra
   /Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/CelestialBody.h \
   /Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/Date.h \
   /Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/Expedition.h \
-  /Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/FileManager.h \
   /Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/GeneralList.h \
   /Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/Location.h \
-  /Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/SpaceAgency.h \
-  /Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/StringToolBox.h
+  /Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/SpaceAgency.h
 
 CMakeFiles/Final_C_Project.dir/CelestialBody.c.o: /Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/CelestialBody.c \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/Availability.h \
@@ -188,8 +186,7 @@ CMakeFiles/Final_C_Project.dir/CelestialBody.c.o: /Users/keronell/Desktop/Progra
   /Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/CelestialBody.h \
   /Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/Date.h \
   /Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/FileManager.h \
-  /Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/Location.h \
-  /Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/StringToolBox.h
+  /Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/Location.h
 
 CMakeFiles/Final_C_Project.dir/Date.c.o: /Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/Date.c \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/Availability.h \
@@ -372,8 +369,7 @@ CMakeFiles/Final_C_Project.dir/Expedition.c.o: /Users/keronell/Desktop/Programmi
   /Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/Date.h \
   /Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/Expedition.h \
   /Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/FileManager.h \
-  /Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/Location.h \
-  /Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/StringToolBox.h
+  /Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/Location.h
 
 CMakeFiles/Final_C_Project.dir/FileManager.c.o: /Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/FileManager.c \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/Availability.h \
@@ -643,7 +639,6 @@ CMakeFiles/Final_C_Project.dir/SpaceAgency.c.o: /Users/keronell/Desktop/Programm
   /Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/CelestialBody.h \
   /Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/Date.h \
   /Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/Expedition.h \
-  /Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/FileManager.h \
   /Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/Location.h \
   /Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/SpaceAgency.h \
   /Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/StringToolBox.h
@@ -742,7 +737,6 @@ CMakeFiles/Final_C_Project.dir/SpaceControlSystem.c.o: /Users/keronell/Desktop/P
   /Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/SpaceAgency.h \
   /Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/SpaceControlSystem.h \
   /Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/SpaceMap.h \
-  /Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/StringToolBox.h \
   /Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/input.h
 
 CMakeFiles/Final_C_Project.dir/SpaceMap.c.o: /Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/SpaceMap.c \
@@ -1044,7 +1038,6 @@ CMakeFiles/Final_C_Project.dir/main.c.o: /Users/keronell/Desktop/Programming/C\ 
   /Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/CelestialBody.h \
   /Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/Date.h \
   /Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/Expedition.h \
-  /Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/FileManager.h \
   /Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/GeneralList.h \
   /Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/Location.h \
   /Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/SpaceAgency.h \
@@ -1076,11 +1069,15 @@ CMakeFiles/Final_C_Project.dir/main.c.o: /Users/keronell/Desktop/Programming/C\ 
 
 /Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/Expedition.c:
 
+/Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/StringToolBox.h:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/time.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/sys/_types/_timespec.h:
 
 /Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/Date.c:
+
+/Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/FileManager.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/runetype.h:
 
@@ -1091,8 +1088,6 @@ CMakeFiles/Final_C_Project.dir/main.c.o: /Users/keronell/Desktop/Programming/C\ 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/_types/_uint8_t.h:
 
 /Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/Location.h:
-
-/Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/FileManager.h:
 
 /Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/SpaceAgency.c:
 
@@ -1125,6 +1120,10 @@ CMakeFiles/Final_C_Project.dir/main.c.o: /Users/keronell/Desktop/Programming/C\ 
 /Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/AgencyManager.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/sys/_types/_sigset_t.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/AvailabilityInternal.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/sys/_types/_wint_t.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/arm/arch.h:
 
@@ -1279,12 +1278,6 @@ CMakeFiles/Final_C_Project.dir/main.c.o: /Users/keronell/Desktop/Programming/C\ 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/_ctermid.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/AvailabilityInternalLegacy.h:
-
-/Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/sys/_types/_wint_t.h:
-
-/Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/AvailabilityInternal.h:
-
-/Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/StringToolBox.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/sys/_types/_seek_set.h:
 

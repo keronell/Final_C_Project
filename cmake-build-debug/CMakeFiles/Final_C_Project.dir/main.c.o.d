@@ -88,5 +88,4 @@ CMakeFiles/Final_C_Project.dir/main.c.o: \
   /Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/./SpaceControlSystem.h \
   /Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/./SpaceMap.h \
   /Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/./input.h \
-  /Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/./FileManager.h \
   /Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/./main.h

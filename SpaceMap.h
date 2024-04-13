@@ -21,10 +21,9 @@ int initSpaceMap (SpaceMap* spaceMap);
 int addCelestialBodytoMap(SpaceMap* spaceMap, CelestialBody *body);
 int addExpeditiontoMap(SpaceMap* spaceMap, Expedition* expedition);
 
-void freeSpaceMap (SpaceMap* spaceMap);
+void freeSpaceMap(SpaceMap *spaceMap) ;
 
 void printSpaceMap(SpaceMap * matrix);
-void getTwoPositiveIntegers(int* rows, int* columns);
 void addCircleToMatrix(SpaceMap * matrix, Location center, int radius);
 void markCircleCells(SpaceMap * matrix, Location center, int radius);
 void addEarth (SpaceMap* spaceMap);

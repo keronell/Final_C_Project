@@ -5,7 +5,6 @@
 
 #include "Expedition.h"
 #include "FileManager.h"
-#include "StringToolBox.h"
 
 
 const char* ExpeditionTypesStr[eNofOptions] = {"Explore", "Colonial", "Spread democracy"};
@@ -32,11 +31,9 @@ int getDuration (){
     while (1) {
         printf("Enter expected duration in years: ");
         if (scanf("%d", &num) != 1 || num <= 0) {
-            // Clear input buffer
             while (getchar() != '\n');
             printf("Invalid input. Please enter a positive integer.\n");
         } else {
-            // Clear input buffer
             while (getchar() != '\n');
             return num;
         }
@@ -88,33 +85,32 @@ int saveExpeditionToFileBin(const Expedition* expedition, FILE* fp)
 {
     if (expedition == NULL || fp == NULL) {
         printf("Invalid parameters for saving expedition.\n");
-        return 1; // Error
+        return 1;
     }
 
-    // Write the Expedition ID
     if (fwrite(&expedition->id, sizeof(expedition->id), 1, fp) != 1) {
         printf("Failed to write expedition ID.\n");
-        return 1; // Error
+        return 1;
     }
 
-    // Write the Expedition Type
+
     if (fwrite(&expedition->type, sizeof(expedition->type), 1, fp) != 1) {
         printf("Failed to write expedition type.\n");
-        return 1; // Error
+        return 1;
     }
 
-    // Write the destination ID
+
     if (writeIntToFile(expedition->destinationID, fp, "Failed to write destination ID.\n") != 1) {
         return 1; // Error
     }
 
-    // Write the start date
+
     if (fwrite(&expedition->startDate, sizeof(expedition->startDate), 1, fp) != 1) {
         printf("Failed to write start date.\n");
-        return 1; // Error
+        return 1;
     }
 
-    // Write the duration of the expedition
+
     if (writeIntToFile(expedition->duration, fp, "Failed to write duration.\n") != 1) {
         return 1; // Error
     }
@@ -126,50 +122,50 @@ int saveExpeditionToFileBin(const Expedition* expedition, FILE* fp)
 int loadExpeditionFromFileBin(Expedition* expedition, FILE* fp) {
     if (expedition == NULL || fp == NULL) {
         printf("Invalid parameters for loading expedition.\n");
-        return 1; // Error due to invalid parameters
+        return 1;
     }
 
-    // Read the Expedition ID
+
     if (fread(&(expedition->id), sizeof(expedition->id), 1, fp) != 1) {
         printf("Failed to read expedition ID.\n");
-        return 1; // Return error
+        return 1;
     }
 
-    // Read the Expedition Type
+
     int typeTemp;
     if (fread(&typeTemp, sizeof(typeTemp), 1, fp) != 1) {
         printf("Failed to read expedition type.\n");
-        return 1; // Return error
+        return 1;
     }
     expedition->type = (ExpeditionType)typeTemp; // Cast and assign to enum type
 
-    // Read the destination ID
+
     if (fread(&(expedition->destinationID), sizeof(expedition->destinationID), 1, fp) != 1) {
         printf("Failed to read destination ID.\n");
-        return 1; // Return error
+        return 1;
     }
 
-    // Read the start date components
+
     if (fread(&(expedition->startDate.day), sizeof(expedition->startDate.day), 1, fp) != 1) {
         printf("Failed to read start day.\n");
-        return 1; // Return error
+        return 1;
     }
     if (fread(&(expedition->startDate.month), sizeof(expedition->startDate.month), 1, fp) != 1) {
         printf("Failed to read start month.\n");
-        return 1; // Return error
+        return 1;
     }
     if (fread(&(expedition->startDate.year), sizeof(expedition->startDate.year), 1, fp) != 1) {
         printf("Failed to read start year.\n");
-        return 1; // Return error
+        return 1;
     }
 
-    // Read the duration of the expedition
+
     if (fread(&(expedition->duration), sizeof(expedition->duration), 1, fp) != 1) {
         printf("Failed to read duration.\n");
-        return 1; // Return error
+        return 1;
     }
 
-    return 0; // Success indicates all components were read without error
+    return 0;
 }
 
 
@@ -178,10 +174,10 @@ int loadExpeditionFromFileBin(Expedition* expedition, FILE* fp) {
 int saveExpeditionToFileTxt(const Expedition* pExpedition, FILE* fp) {
     if (!fp || !pExpedition) {
         printf("Invalid file pointer or expedition data.\n");
-        return 1; // Error
+        return 1;
     }
 
-    // Detailed debug output to trace the source of bad values
+
     printf("Debug: Saving Expedition ID %d, Duration %d, Dest ID %d, Type %d, Date %d-%d-%d\n",
            pExpedition->id,
            pExpedition->duration,
@@ -207,10 +203,10 @@ int saveExpeditionToFileTxt(const Expedition* pExpedition, FILE* fp) {
 int loadExpeditionFromFileTxt(Expedition* expedition, FILE* fp) {
     if (!fp || !expedition) {
         printf("Invalid parameters for loading expedition.\n");
-        return 1; // Return 1 for error
+        return 1;
     }
 
-    // Read expedition data from file
+
     if (fscanf(fp, "%d %d %d %d %d-%d-%d\n",
                &expedition->id,
                &expedition->duration,
@@ -220,8 +216,8 @@ int loadExpeditionFromFileTxt(Expedition* expedition, FILE* fp) {
                &expedition->startDate.month,
                &expedition->startDate.day) != 7) {
         printf("Failed to read expedition data from file.\n");
-        return 1; // Return 1 for error
+        return 1;
     }
 
-    return 0; // Return 0 for success
+    return 0;
 }

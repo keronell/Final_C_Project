@@ -5,8 +5,6 @@
 
 #include "SpaceAgency.h"
 #include "StringToolBox.h"
-#include "Expedition.h"
-#include "FileManager.h"
 
 
 void initSpaceAgency(SpaceAgency *pAgency) {
@@ -18,14 +16,7 @@ void initSpaceAgency(SpaceAgency *pAgency) {
 
 }
 
-int addExpedition(SpaceAgency *pAgency, Expedition *pExpedition) {
-    pAgency->expeditionID = pExpedition->id;
-    return 0;
-}
 
-void initAgencyExpedition(SpaceAgency *pAgency, CelestialBody *destination) {
-pAgency->expeditionID = destination->ID;
-}
 
 void freeSpaceAgency(SpaceAgency *agency) {
     if (agency != NULL)
@@ -53,7 +44,6 @@ int saveSpaceAgencyToFileTxt(const SpaceAgency* pAgency, FILE* fp) {
         return 1;
     }
 
-    // Write agency name and expedition ID directly to the file
     if (fprintf(fp, "%s %d\n", pAgency->name, pAgency->expeditionID) < 0) {
         printf("Failed to write agency data to file.\n");
         return 1;
@@ -66,10 +56,9 @@ int loadSpaceAgencyFromFileTxt(SpaceAgency* pAgency, FILE* fp) {
         return 1;
     }
 
-    // Read the agency name and the expedition ID in one go.
-    char nameBuffer[MAX_STR_LEN];  // Increase size as needed
+    char nameBuffer[MAX_STR_LEN];
     int expeditionID;
-    if (fscanf(fp, "%99s %d", nameBuffer, &expeditionID) != 2) {  // Use %99s to prevent buffer overflow
+    if (fscanf(fp, "%99s %d", nameBuffer, &expeditionID) != 2) {
         printf("Failed to read agency name and expedition ID from file.\n");
         return 1;
     }
@@ -83,7 +72,7 @@ int loadSpaceAgencyFromFileTxt(SpaceAgency* pAgency, FILE* fp) {
 
     pAgency->expeditionID = expeditionID;
 
-    // Consume the newline character if necessary to clean up for the next read
+
     fscanf(fp, "\n");
 
     return 0;
@@ -95,15 +84,13 @@ int saveSpaceAgencyToFileBin(const SpaceAgency* pAgency, FILE* fp) {
         return 1; // Error
     }
 
-    // Save the length of the agency name and the name itself
-    int nameLength = strlen(pAgency->name) + 1; // Include null terminator
+    int nameLength = strlen(pAgency->name) + 1;
     if (fwrite(&nameLength, sizeof(nameLength), 1, fp) != 1 ||
         fwrite(pAgency->name, sizeof(char), nameLength, fp) != nameLength) {
         fprintf(stderr, "Failed to write agency name.\n");
         return 1; // Error
     }
 
-    // Save the expedition ID
     if (fwrite(&pAgency->expeditionID, sizeof(pAgency->expeditionID), 1, fp) != 1) {
         fprintf(stderr, "Failed to write expedition ID.\n");
         return 1; // Error
@@ -118,14 +105,12 @@ int loadSpaceAgencyFromFileBin(SpaceAgency* pAgency, FILE* fp) {
         return 1; // Error
     }
 
-    // Read the length of the agency name and the name itself
     int nameLength;
     if (fread(&nameLength, sizeof(nameLength), 1, fp) != 1) {
         printf("Failed to read the length of agency name.\n");
         return 1; // Error
     }
 
-    // Allocate memory for the agency name
     pAgency->name = (char*)malloc(nameLength * sizeof(char));
     if (pAgency->name == NULL) {
         printf("Memory allocation failed for agency name.\n");
@@ -138,13 +123,13 @@ int loadSpaceAgencyFromFileBin(SpaceAgency* pAgency, FILE* fp) {
         return 1; // Error
     }
 
-    // Read the expedition ID
+
     if (fread(&pAgency->expeditionID, sizeof(pAgency->expeditionID), 1, fp) != 1) {
         printf("Failed to read expedition ID.\n");
         free(pAgency->name);
-        return 1; // Error
+        return 1;
     }
 
-    return 0; // Success
+    return 0;
 }
 

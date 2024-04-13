@@ -4,7 +4,6 @@
 #include <ctype.h>
 
 #include "CelestialBody.h"
-#include "StringToolBox.h"
 #include "FileManager.h"
 
 
@@ -46,14 +45,14 @@ void getLocation(CelestialBody *pBody) {
     int xAxis, yAxis;
 
     do {
-        printf("Type location of the object: (x and y axes from the earth, both between -50 and 50) \n");
+        printf("Type location of the object: (x and y axes from the earth, both between 0 and %d) \n",MAX_DISTANCE);
         printf("Enter x-coordinate: ");
         scanf("%d", &xAxis);
         printf("Enter y-coordinate: ");
         scanf("%d", &yAxis);
 
-        if (xAxis < -MAX_DISTANCE || xAxis > MAX_DISTANCE || yAxis < -MAX_DISTANCE || yAxis > MAX_DISTANCE) {
-            printf("Both coordinates must be between -50 and 50.\n");
+        if (xAxis < 0 || xAxis > MAX_DISTANCE || yAxis < 0 || yAxis > MAX_DISTANCE) {
+            printf("Both coordinates must be between 0 and %d.\n", MAX_DISTANCE);
         } else {
             break;
         }
@@ -114,13 +113,12 @@ int loadCelestialBodyFromFile(CelestialBody *body, FILE *fp) {
     getUniqueID(); //to update unic id
     if (fp == NULL || body == NULL) {
         printf("Error: Invalid file pointer or celestial body pointer.\n");
-        return 0; // Failure due to invalid pointers
+        return 1;
     }
 
-    // Read the celestial body data from a single line
     if (fscanf(fp, "%d %d %d %d %d %d",
                &body->ID,
-               &body->type, // Assuming 'type' is read as an integer and matches enum values
+               &body->type,
                &body->size,
                &body->distance,
                &body->location.x,
@@ -130,7 +128,7 @@ int loadCelestialBodyFromFile(CelestialBody *body, FILE *fp) {
     }
 
 
-    return 0; // Success
+    return 0;
 }
 
 
@@ -140,7 +138,6 @@ int saveCelestialBodyToFileBin(const CelestialBody *pBody, FILE *fp) {
         return 1;
     }
 
-    // Write each component of CelestialBody to the file
     if (!writeIntToFile(pBody->ID, fp, "Error writing celestial body ID.\n")) return 1;
     if (!writeIntToFile(pBody->type, fp, "Error writing celestial body type.\n")) return 1;
     if (!writeIntToFile(pBody->size, fp, "Error writing celestial body size.\n")) return 1;
@@ -148,7 +145,7 @@ int saveCelestialBodyToFileBin(const CelestialBody *pBody, FILE *fp) {
     if (!writeIntToFile(pBody->location.x, fp, "Error writing celestial body location x.\n")) return 1;
     if (!writeIntToFile(pBody->location.y, fp, "Error writing celestial body location y.\n")) return 1;
 
-    return 0;  // Success
+    return 0;
 }
 
 
@@ -160,10 +157,10 @@ int loadCelestialBodyFromFileBin(CelestialBody *pBody, FILE *fp) {
 
     int tempType;
 
-    // Read each component of CelestialBody from the file
+
     if (!readIntFromFile(&pBody->ID, fp, "Error reading celestial body ID.\n")) return 1;
     if (!readIntFromFile(&tempType, fp, "Error reading celestial body type.\n")) return 1;
-    pBody->type = (CelestialBodyType)tempType; // Cast and assign to enum
+    pBody->type = (CelestialBodyType)tempType;
     if (!readIntFromFile(&pBody->size, fp, "Error reading celestial body size.\n")) return 1;
     if (!readIntFromFile(&pBody->distance, fp, "Error reading celestial body distance.\n")) return 1;
     if (!readIntFromFile(&pBody->location.x, fp, "Error reading celestial body location x.\n")) return 1;

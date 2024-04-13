@@ -3,8 +3,6 @@
 
 #include "AgencyManager.h"
 #include "SpaceControlSystem.h"
-
-#include "FileManager.h"
 #include "SpaceMap.h"
 
 
@@ -32,7 +30,7 @@ void welcomeScreen(SpaceControlSystem *pSystem, Manager *pAgency)
 void displayMenu()
 {
 
-    printf("1. Add Celestial body.\n");
+    printf("\n1. Add Celestial body.\n");
     printf("2. Add agency to Agency Manager.\n");
     printf("3. Start new Expedition.\n");
     printf("4. Print all Agencies.\n");
@@ -86,19 +84,16 @@ int main() {
                 printExpeditionList( &pManager);
                 break;
             case 6:
-                printf("Printing the Celestial Bodies DataBase...\n");
-                // Call printCelestialBodiesDB() here
+                printCelestialBodies(&pSystem);
                 break;
             case 7:
                 printSpaceControlSystem(&pSystem, &pManager);
                 break;
             case 8:
-                printf("Searching for a Celestial Body in DataBase...\n");
-                // Call searchCelestialBody() here
+                sortCelestialBody(&pSystem);
                 break;
             case 9:
-                printf("Sorting Celestial Bodies...\n");
-                // Call sortCelestialBodies() here
+                findCelestialBody(&pSystem);
                 break;
             case 10:
                 printSpaceMap(&pSystem.spaceMap);
@@ -134,23 +129,23 @@ int dataLoadLogic(SpaceControlSystem *pSystem, Manager *pAgency)
 
         switch (choice) {
             case 1:
-                // Assuming loadSystemFromFileBin() is defined correctly elsewhere
+
                 if (loadSystemFromFileBin(pSystem, pAgency, SystemDataBin)) {
                     printf("Failed to load from binary file.\n");
                     return 1;
                 }
-                return 0;  // Successful load, exit the loop
+                return 0;
 
             case 2:
                 if (loadSystemFromFileTxt(pSystem, pAgency, SystemDataTxt)) {
                     printf("Failed to load from text file.\n");
                     return 1;
                 }
-                return 0;  // Successful load, exit the loop
+                return 0;
 
             case 0:
                 printf("creating...\n");
-                break;  // Exit the loop
+                break;
 
             default:
                 printf("Invalid choice, please try again.\n");

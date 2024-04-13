@@ -93,5 +93,4 @@ CMakeFiles/Final_C_Project.dir/SpaceControlSystem.c.o: \
   /Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/./Expedition.h \
   /Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/./input.h \
   /Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/./AgencyManager.h \
-  /Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/./SpaceAgency.h \
-  /Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/./StringToolBox.h
+  /Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/./SpaceAgency.h

@@ -10,7 +10,7 @@ void addEarth(SpaceMap *spaceMap) {
 }
 
 int initSpaceMap(SpaceMap *spaceMap) {
-    int size = 100;
+    int size = 50;
 
     spaceMap->rows = size;
     spaceMap->cols = size;
@@ -38,11 +38,26 @@ CelestialBody *iterateBodies(CelestialBody **allBodies, int length, int id) {
 }
 
 int addCelestialBodytoMap(SpaceMap *spaceMap, CelestialBody *body) {
+    int radius = 0;
     if (!spaceMap || !body) {
-        printf("cant proceed spaceControlSystem of body is null");
+        printf("cant proceed spaceControlSystem or body is null");
         return 1;
     }
-    addCircleToMatrix(spaceMap, body->location, body->type);
+    switch (body->type) {
+        case eAsteroid :
+            radius = 0;
+            break;
+        case ePlanet :
+            radius = 1;
+            break;
+        case eStar :
+            radius = 2;
+            break;
+        default:
+            return 1;
+    }
+
+    addCircleToMatrix(spaceMap, body->location, radius);
     return 0;
 
 }
@@ -156,23 +171,15 @@ void connectDotsWithoutCrossing(SpaceMap *matrix, Location dot1, Location dot2, 
 }
 
 
-//int addExpeditiontoMap(SpaceMap* spaceMap, Expedition* expedition) {
-//
-//    Location start = {spaceMap->rows/}
-//    return 0;
-//}
 
-
-
-
-
-
-void freeMatrix(SpaceMap *matrix) {
-    for (int i = 0; i < matrix->rows; i++) {
-        free(matrix->data[i]);
+void freeSpaceMap(SpaceMap *spaceMap) {
+    if (spaceMap != NULL) {
+        for (int i = 0; i < spaceMap->rows; i++) {
+            free(spaceMap->data[i]);
+        }
+        free(spaceMap->data);
+        free(spaceMap);
     }
-    free(matrix->data);
-    free(matrix);
 }
 
 
