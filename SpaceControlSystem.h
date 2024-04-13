@@ -19,7 +19,7 @@ int addExpeditionToAgency(Agency *pAgency, SpaceControlSystem *pSystem);
 
 void spaceMap();
 void freeSystem(SpaceControlSystem *pSystem, Agency* pAgency);
-void printSpaceControlSystem(const SpaceControlSystem *pSystem);
+void printSpaceControlSystem(const SpaceControlSystem *pSystem, const Agency* pAgency);
 void findCelestialBody (const SpaceControlSystem* pSystem);
 void sortCelestialBody (SpaceControlSystem* pSystem);
 

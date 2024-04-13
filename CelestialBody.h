@@ -2,6 +2,7 @@
 #define FINAL_C_PROJECT_CELESTIALBODY_H
 #include "Location.h"
 #include "Date.h"
+#define MAX_DISTANCE 50
 typedef enum
 {
     eStar, eAsteroid, ePlanet, eNofTypes

@@ -57,7 +57,7 @@ int addCelestialBody(SpaceControlSystem *pSystem) {
 }
 
 int addExpeditionToAgency(Agency *pAgency, SpaceControlSystem *pSystem) {
-    printAgency(pAgency);
+    printAgencyManager(pAgency);
     int agencyIndex = -1;
     while (agencyIndex < 1 || agencyIndex > pAgency->agencyCounter) {
         printf("To which Agency you want to add an Expedition? Enter index (1 to %d): \n", pAgency->agencyCounter);
@@ -123,7 +123,7 @@ void freeSystem(SpaceControlSystem *pSystem, Agency *pAgency) {
 }
 
 
-void printSpaceControlSystem(const SpaceControlSystem *pSystem) {
+void printSpaceControlSystem(const SpaceControlSystem *pSystem, const Agency* pAgency) {
     if (pSystem == NULL) {
         printf("Error: SpaceControlSystem pointer is NULL.\n");
         return;
@@ -139,6 +139,8 @@ void printSpaceControlSystem(const SpaceControlSystem *pSystem) {
             printf("Celestial Body %d: NULL\n", i);
         }
     }
+
+    printAgencyManager(pAgency);
 }
 
 int saveSystemToFileTxt(const SpaceControlSystem *pSystem, const Agency *pAgency, const char *fileName) {

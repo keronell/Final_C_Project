@@ -184,12 +184,22 @@ void freeAgencyManager(Agency* pAgency) {
 //}
 int saveManagerToFileTxt(FILE *fp, const Agency* pAgency) {
     // Write only the number of agencies and expeditions directly
+    if (fp == NULL || pAgency == NULL) {
+        fprintf(stderr, "Invalid file pointer or agency pointer.\n");
+        return 1;
+    }
+
+    // Debug print to verify the number of expeditions
+    printf("Saving %d agencies and %d expeditions.\n", pAgency->agencyCounter, pAgency->numOfExpeditions);
+
+    // Write the number of agencies and expeditions
     fprintf(fp, "%d %d\n", pAgency->agencyCounter, pAgency->numOfExpeditions);
 
-    // Save each agency directly
+    // Save each agency
     for (int i = 0; i < pAgency->agencyCounter; i++) {
         if (saveSpaceAgencyToFileTxt(pAgency->agencyArr[i], fp)) {
-            return 1;  // Return error if saving fails
+            fprintf(stderr, "Failed to save agency data.\n");
+            return 1;
         }
     }
 
@@ -257,26 +267,38 @@ int loadManagerFromFileTxt(Agency *pAgency, FILE* fp) {
     return 0;
 }
 
-void printAgency(const Agency* pAgency)
+void printAgencyManager(const Agency* pAgency)
 {
-    printf("Total Agencies Managed: %d\n", pAgency->agencyCounter);
-    printf("Total Expeditions Managed: %d\n\n", pAgency->numOfExpeditions);
-    // Loop through each agency and use the provided printSpaceAgency function
-    for (int i = 0; i < pAgency->agencyCounter; i++) {
-        SpaceAgency* agency = pAgency->agencyArr[i];
-        if (agency != NULL) {
-            printf("Agency %d Details:\n", i + 1);
-            printSpaceAgency(agency);
-            printf("\n");
-        } else {
-            printf("Agency %d: [Data Not Available]\n", i + 1);
+    if (pAgency == NULL) {
+        printf("Error: Agency Manager pointer is NULL.\n");
+    } else {
+        // Print details about the Agency Manager
+        printf("Agency Manager Details:\n");
+        printf("Total Agencies Managed: %d\n", pAgency->agencyCounter);
+        printf("Total Expeditions Managed: %d\n\n", pAgency->numOfExpeditions);
+
+        // Loop through each agency and print its details
+        for (int i = 0; i < pAgency->agencyCounter; i++) {
+            SpaceAgency* agency = pAgency->agencyArr[i];
+            if (agency != NULL) {
+                printf("Agency %d Details:\n", i + 1);
+                printSpaceAgency(agency);
+                printf("\n");
+            } else {
+                printf("Agency %d: [Data Not Available]\n", i + 1);
+            }
         }
-    }
-    // Print details about each expedition using the provided printExpedition function
-    printf("Expedition Details:\n");
-    NODE* currentNode = pAgency->expeditionList.head.next;
-    while (currentNode != NULL && currentNode->key != NULL) {
-        printExpedition((Expedition*)currentNode->key);
-        currentNode = currentNode->next;
+
+        // Print details about each expedition
+        printf("Expedition Details:\n");
+        if(pAgency->numOfExpeditions == 0) {
+            printf("Currently there is no Expeditions planned!\n");
+            return;
+        }
+        NODE* currentNode = pAgency->expeditionList.head.next;
+        while (currentNode != NULL && currentNode->key != NULL) {
+            printExpedition((Expedition*)currentNode->key);
+            currentNode = currentNode->next;
+        }
     }
 }

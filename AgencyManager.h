@@ -23,7 +23,7 @@ int loadManagerFromFileBin(Agency* pAgency, const char* fileName);
 int saveManagerToFileTxt(FILE *fp, const Agency* pAgency);
 int loadManagerFromFileTxt(Agency *pAgency, FILE* fp);
 
-void printAgency(const Agency* pAgency);
+void printAgencyManager(const Agency* pAgency);
 
 
 

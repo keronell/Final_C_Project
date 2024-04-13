@@ -41,11 +41,22 @@ int getDistance() {
 }
 
 void getLocation(CelestialBody *pBody) {
-    int xAxis;
-    int yAxis;
+    int xAxis, yAxis;
 
-    printf("Type location of the object: (x and y axes from the earth) \n");
-    scanf("%d %d", &xAxis, &yAxis);
+    do {
+        printf("Type location of the object: (x and y axes from the earth, both between -50 and 50) \n");
+        printf("Enter x-coordinate: ");
+        scanf("%d", &xAxis);
+        printf("Enter y-coordinate: ");
+        scanf("%d", &yAxis);
+
+        if (xAxis < -MAX_DISTANCE || xAxis > MAX_DISTANCE || yAxis < -MAX_DISTANCE || yAxis > MAX_DISTANCE) {
+            printf("Both coordinates must be between -50 and 50.\n");
+        } else {
+            break;
+        }
+    } while (1);
+
     pBody->location.x = xAxis;
     pBody->location.y = yAxis;
 }
@@ -98,6 +109,7 @@ void saveCelestialBodyToFileTxt(FILE *fp, const CelestialBody *pBody) {
 }
 
 int loadCelestialBodyFromFile(CelestialBody *body, FILE *fp) {
+    getUniqueID(); //to update unic id
     if (fp == NULL || body == NULL) {
         printf("Error: Invalid file pointer or celestial body pointer.\n");
         return 0; // Failure due to invalid pointers
@@ -114,6 +126,7 @@ int loadCelestialBodyFromFile(CelestialBody *body, FILE *fp) {
         printf("Error reading celestial body data.\n");
         return 1;
     }
+
 
     return 0; // Success
 }

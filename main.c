@@ -79,7 +79,7 @@ int main() {
                     printf("Failed to create new Expedition!\n");
                 break;
             case 4:
-                printAgency(&pManager);
+                printAgencyManager(&pManager);
                 break;
             case 5:
                 printf("Printing the Expedition List...\n");
@@ -90,8 +90,7 @@ int main() {
                 // Call printCelestialBodiesDB() here
                 break;
             case 7:
-                printf("Printing all System Data...\n");
-                // Call printSystemData() here
+                printSpaceControlSystem(&pSystem, &pManager);
                 break;
             case 8:
                 printf("Searching for a Celestial Body in DataBase...\n");
