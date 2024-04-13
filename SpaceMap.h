@@ -6,7 +6,6 @@
 #include "SpaceControlSystem.h"
 #include "input.h"
 #include "AgencyManager.h"
-
 typedef struct {
 
     int rows;
@@ -15,10 +14,12 @@ typedef struct {
 
 } SpaceMap;
 
+typedef struct AgencyManager AgencyManager;
+
 int initSpaceMap (SpaceMap* spaceMap);
 
 int addCelestialBodytoMap(SpaceControlSystem* spaceControlSystem, int celestialBodyId);
-int addExpeditiontoMap(SpaceControlSystem, int expeditionId);
+int addExpeditiontoMap(AgencyManager* agencyManager, int expeditionId);
 
 void freeSpaceMap (SpaceMap* spaceMap);
 
@@ -27,6 +28,7 @@ void getTwoPositiveIntegers(int* rows, int* columns);
 void addCircleToMatrix(SpaceMap * matrix, Location center, int radius);
 void markCircleCells(SpaceMap * matrix, Location center, int radius);
 void addEarth (SpaceMap* spaceMap);
+
 
 
 

@@ -7,7 +7,6 @@
 #include "SpaceMap.h"
 
 
-
 void addEarth(SpaceMap *spaceMap) {
     CelestialBody Earth = {0000, 1000, 0, spaceMap->rows / 2, spaceMap->cols / 2, ePlanet};
     //addCelestialBodytoMap(spaceMap, &Earth);
@@ -29,21 +28,34 @@ int initSpaceMap(SpaceMap *spaceMap) {
     }
 
 
-    addEarth(spaceMap);
+    //addEarth(spaceMap);
 
     return 0;
 }
 
+CelestialBody *iterateBodies(CelestialBody **allBodies, int length, int id) {
+    for (int i = 0; i < length; i++) {
+        CelestialBody *body = *(allBodies + i);
+        if (body->ID == id) return body;
+    }
+    printf("cant locate object with such id");
+    return NULL;
+}
 
-int addCelestialBodytoMap(SpaceControlSystem* spaceControlSystem, int celestialBodyId) {
+int addCelestialBodytoMap(SpaceControlSystem *spaceControlSystem, int celestialBodyId) {
     if (!spaceControlSystem) {
         printf("cant proceed spaceControlSystem is null");
         return 1;
     }
+    CelestialBody *body = iterateBodies(spaceControlSystem->CelestialBodyArr, spaceControlSystem->numOfBodies,
+                                        celestialBodyId);
+    if (!body) return 1;
+
+    addCircleToMatrix(&spaceControlSystem->spaceMap, body->location, body->type);
+    return 0;
 
 
 }
-
 
 
 void markCircleCells(SpaceMap *matrix, Location center, int radius) {
@@ -152,10 +164,12 @@ void connectDotsWithoutCrossing(SpaceMap *matrix, Location dot1, Location dot2, 
 }
 
 
-int addExpeditiontoMap(AgencyManager* agencyManager, int expeditionId) {
+int addExpeditiontoMap(AgencyManager *agencyManager, int expeditionId) {
 
     return 0;
 }
+
+
 
 
 

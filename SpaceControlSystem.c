@@ -24,6 +24,8 @@ int initSystem(SpaceControlSystem* pSystem)
     // Set a default sorting option
     pSystem->sortOpt = eID; // Or any other default sorting option
 
+    initSpaceMap(&pSystem->spaceMap); // alex added it
+
     return 0; // Success
 }
 
