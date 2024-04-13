@@ -5,17 +5,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "SpaceMap.h"
-#include "input.h"
 
 
 
-
-void addEarth (SpaceMap* spaceMap) {
-    CelestialBody Earth = {0000, 1000, 0, spaceMap->rows/2, spaceMap->cols/2, ePlanet};
-    addCelestialBodytoMap(spaceMap, &Earth);
+void addEarth(SpaceMap *spaceMap) {
+    CelestialBody Earth = {0000, 1000, 0, spaceMap->rows / 2, spaceMap->cols / 2, ePlanet};
+    //addCelestialBodytoMap(spaceMap, &Earth);
 }
 
-int initSpaceMap (SpaceMap* spaceMap){
+int initSpaceMap(SpaceMap *spaceMap) {
     int size;
     printf("\n\nMap Initialization: \n");
     printf("enter size of the map: ");
@@ -23,12 +21,13 @@ int initSpaceMap (SpaceMap* spaceMap){
     spaceMap->rows = size;
     spaceMap->cols = size;
 
-    spaceMap->data = malloc(spaceMap->rows * sizeof(int*));
+    spaceMap->data = malloc(spaceMap->rows * sizeof(int *));
     if (spaceMap->data == NULL) return 1;
     for (int i = 0; i < spaceMap->rows; i++) {
         spaceMap->data[i] = malloc(spaceMap->cols * sizeof(int));
         if (!spaceMap->data[i]) return 1;
     }
+
 
     addEarth(spaceMap);
 
@@ -36,56 +35,18 @@ int initSpaceMap (SpaceMap* spaceMap){
 }
 
 
-int addCelestialBodytoMap (SpaceMap* spaceMap, CelestialBody* newBody){
-    int radius;
-    char sign;
-
-    if (!spaceMap || !newBody) {
-        printf("cant add new body");
+int addCelestialBodytoMap(SpaceControlSystem* spaceControlSystem, int celestialBodyId) {
+    if (!spaceControlSystem) {
+        printf("cant proceed spaceControlSystem is null");
         return 1;
     }
 
-    switch (newBody->type) {
-        case eAsteroid:
-            radius = 1;
-            sign = '!';
-            break;
-        case ePlanet:
-            radius = 2;
-            sign = 'o';
-            break;
-        case eStar:
-            radius = 3;
-            sign = '*';
-            break;
-        case eNofTypes:
-            radius = 0;
-            return 1;
-            break;
-    }
 
-    addCircleToMatrix(spaceMap,newBody->location, radius);
-    return 0;
 }
 
 
-int rmCelestialBody (CelestialBody* body);
-int rmExpedition (Expedition* expedition);
-void freeSpaceMap (SpaceMap* spaceMap);
 
-
-
-
-//void freeMatrix(SpaceMap *matrix) {
-//    for (int i = 0; i < matrix->rows; i++) {
-//        free(matrix->data[i]);
-//    }
-//    free(matrix->data);
-//    free(matrix);
-//}
-
-
-void markCircleCells(SpaceMap * matrix, Location center, int radius) {
+void markCircleCells(SpaceMap *matrix, Location center, int radius) {
     for (int i = center.x - radius; i <= center.x + radius; i++) {
         for (int j = center.y - radius; j <= center.y + radius; j++) {
             if (i >= 0 && i < matrix->rows && j >= 0 && j < matrix->cols) {
@@ -98,7 +59,7 @@ void markCircleCells(SpaceMap * matrix, Location center, int radius) {
     }
 }
 
-void addCircleToMatrix(SpaceMap * matrix, Location center, int radius) {
+void addCircleToMatrix(SpaceMap *matrix, Location center, int radius) {
     // Check if the new circle overlaps with existing circles
     for (int i = center.x - radius - 1; i <= center.x + radius + 1; i++) {
         for (int j = center.y - radius - 1; j <= center.y + radius + 1; j++) {
@@ -115,9 +76,9 @@ void addCircleToMatrix(SpaceMap * matrix, Location center, int radius) {
 }
 
 
-void printSpaceMap(SpaceMap * matrix) {
+void printSpaceMap(SpaceMap *matrix) {
 
-    for (int i = 0; i < matrix->cols*2; i++) {
+    for (int i = 0; i < matrix->cols * 2; i++) {
         printf("_");
     }
     for (int i = 0; i < matrix->rows; i++) {
@@ -130,25 +91,24 @@ void printSpaceMap(SpaceMap * matrix) {
             else printf("%c ", '^');
 
 
-            if (j == matrix->cols-1) printf("|");
+            if (j == matrix->cols - 1) printf("|");
         }
         printf("\n");
     }
-    for (int i = 0; i < matrix->cols*2; i++) {
+    for (int i = 0; i < matrix->cols * 2; i++) {
         printf("_");
     }
 }
 
 
-
-void plotPoint(SpaceMap * matrix, int x, int y, char symbol) {
+void plotPoint(SpaceMap *matrix, int x, int y, char symbol) {
     if (x >= 0 && x < matrix->cols && y >= 0 && y < matrix->rows) {
-        if(matrix->data[y][x] != 1)
+        if (matrix->data[y][x] != 1)
             matrix->data[y][x] = 2;
     }
 }
 
-void drawLine(SpaceMap * matrix, Location start, Location end, char symbol) {
+void drawLine(SpaceMap *matrix, Location start, Location end, char symbol) {
     int dx = abs(end.x - start.x);
     int dy = abs(end.y - start.y);
     int sx = start.x < end.x ? 1 : -1;
@@ -171,7 +131,7 @@ void drawLine(SpaceMap * matrix, Location start, Location end, char symbol) {
     }
 }
 
-void connectDotsWithoutCrossing(SpaceMap * matrix, Location dot1, Location dot2, char symbol) {
+void connectDotsWithoutCrossing(SpaceMap *matrix, Location dot1, Location dot2, char symbol) {
 
     int dx = abs(dot2.x - dot1.x);
     int dy = abs(dot2.y - dot1.y);
@@ -191,10 +151,22 @@ void connectDotsWithoutCrossing(SpaceMap * matrix, Location dot1, Location dot2,
     }
 }
 
-int addExpeditiontoMap(SpaceMap* spaceMap, Expedition* expedition){
-    Location start = {spaceMap->rows/2, spaceMap->cols/2};
-   // connectDotsWithoutCrossing(spaceMap, start, expedition->destination->location, '#');
+
+int addExpeditiontoMap(AgencyManager* agencyManager, int expeditionId) {
+
     return 0;
 }
+
+
+
+
+//void freeMatrix(SpaceMap *matrix) {
+//    for (int i = 0; i < matrix->rows; i++) {
+//        free(matrix->data[i]);
+//    }
+//    free(matrix->data);
+//    free(matrix);
+//}
+
 
 
