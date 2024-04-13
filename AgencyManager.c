@@ -206,7 +206,7 @@ int saveManagerToFileTxt(FILE *fp, const Manager* pAgency) {
     // Save each expedition directly
     NODE* currentNode = pAgency->expeditionList.head.next;
     while (currentNode != NULL) {
-        if (!saveExpeditionToFileTxt(currentNode->key, fp)) {
+        if (saveExpeditionToFileTxt(currentNode->key, fp)) {
             return 1;  // Return error if saving fails
         }
         currentNode = currentNode->next;
@@ -270,28 +270,28 @@ int loadManagerFromFileTxt(Manager *pAgency, FILE* fp) {
 void printAgencyManager(const Manager* pAgency)
 {
     if (pAgency == NULL) {
-        printf("Error: Manager Manager pointer is NULL.\n");
+        printf("Error: Agency manager pointer is NULL.\n");
     } else {
-        // Print details about the Manager Manager
-        printf("Manager Manager Details:\n");
-        printf("Total Agencies Managed: %d\n", pAgency->agencyCounter);
+
+        printf("AgencyManager Details:\n");
+        printf("Total Agencies: %d\n", pAgency->agencyCounter);
         printf("Total Expeditions Managed: %d\n\n", pAgency->numOfExpeditions);
 
         // Loop through each agency and print its details
         for (int i = 0; i < pAgency->agencyCounter; i++) {
             SpaceAgency* agency = pAgency->agencyArr[i];
             if (agency != NULL) {
-                printf("Manager %d Details:\n", i + 1);
+                printf("Agency -  %d:\n", i + 1);
                 printSpaceAgency(agency);
                 printf("\n");
             } else {
-                printf("Manager %d: [Data Not Available]\n", i + 1);
+                printf("Agency [%d]: [Data Not Available]\n", i + 1);
             }
         }
 
         // Print details about each expedition
         printf("Expedition Details:\n");
-        if(pAgency->numOfExpeditions == 0) {
+        if(pAgency->numOfExpeditions < 1) {
             printf("Currently there is no Expeditions planned!\n");
             return;
         }

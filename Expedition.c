@@ -30,7 +30,7 @@ int getDuration (){
     int num;
 
     while (1) {
-        printf("Enter a positive integer: ");
+        printf("Enter expected duration in years: ");
         if (scanf("%d", &num) != 1 || num <= 0) {
             // Clear input buffer
             while (getchar() != '\n');

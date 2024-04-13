@@ -8,18 +8,18 @@
 const int DAY_MONTHS[12] = { 31,28,31,30,31,30,31,31,30,31,30,31 };
 
 
-void getCorrectDate(Date* pDate)
-{
-	char date[MAX_STR_LEN];
-	int ok = 1;
+void getCorrectDate(Date* pDate) {
+    char date[MAX_STR_LEN];
+    int ok = 1;
 
-	do {
-		puts("Enter Flight Date dd/mm/yyyy\t");
-		myGets(date, MAX_STR_LEN, stdin);
-		ok = checkDate(date, pDate);
-		if (!ok)
-			printf("Error try again\n");
-	} while (!ok);
+    do {
+        puts("Enter Flight Date dd/mm/yyyy\t");
+        fflush(stdin); // Flush the input buffer to remove any leftover newline characters
+        myGets(date, MAX_STR_LEN, stdin);
+        ok = checkDate(date, pDate);
+        if (!ok)
+            printf("Error try again\n");
+    } while (!ok);
 }
 
 

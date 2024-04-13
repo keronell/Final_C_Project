@@ -33,7 +33,7 @@ void displayMenu()
 {
 
     printf("1. Add Celestial body.\n");
-    printf("2. Add agency to Manager Manager.\n");
+    printf("2. Add agency to Agency Manager.\n");
     printf("3. Start new Expedition.\n");
     printf("4. Print all Agencies.\n");
     printf("5. Print Expedition list.\n");

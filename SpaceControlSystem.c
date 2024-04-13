@@ -62,10 +62,13 @@ int addExpeditionToAgency(Manager *pAgency, SpaceControlSystem *pSystem) {
     while (agencyIndex < 1 || agencyIndex > pAgency->agencyCounter) {
         printf("To which Manager you want to add an Expedition? Enter index (1 to %d): \n", pAgency->agencyCounter);
         scanf("%d", &agencyIndex);
+        while (getchar() != '\n'); // Flush the newline character left by scanf
+
         if (agencyIndex < 1 || agencyIndex > pAgency->agencyCounter) {
             printf("Invalid Manager index. Please try again.\n");
         } else {
             agencyIndex--; // Adjust for zero-indexed array
+            break; // Correct index selected, exit the loop
         }
     }
 
@@ -76,7 +79,7 @@ int addExpeditionToAgency(Manager *pAgency, SpaceControlSystem *pSystem) {
 
     printf("Choose Celestial Bodies as a destination point:\n");
     for (int i = 0; i < pSystem->numOfBodies; i++) {
-        printf("%d) ", i + 1);
+        printf("Celestial body number - %d ", i + 1);
         printCelestialBody(pSystem->CelestialBodyArr[0]);
     }
 
@@ -84,10 +87,13 @@ int addExpeditionToAgency(Manager *pAgency, SpaceControlSystem *pSystem) {
     while (bodyIndex < 1 || bodyIndex > pSystem->numOfBodies) {
         printf("Select a celestial body for the expedition (enter index 1 to %d):\n", pSystem->numOfBodies);
         scanf("%d", &bodyIndex);
+        while (getchar() != '\n'); // Flush the newline character left by scanf
+
         if (bodyIndex < 1 || bodyIndex > pSystem->numOfBodies) {
             printf("Invalid Celestial Body index. Please try again.\n");
         } else {
-            bodyIndex--;  // Adjust for zero-indexed array
+            bodyIndex--;
+            break;
         }
     }
 
@@ -98,7 +104,10 @@ int addExpeditionToAgency(Manager *pAgency, SpaceControlSystem *pSystem) {
     }
 
     initExpedition(newExpedition, pSystem->CelestialBodyArr[bodyIndex]);
+    pAgency->agencyArr[agencyIndex]->expeditionID = newExpedition->id;
+    pAgency->numOfExpeditions++;
     printf("Expedition successfully added to Manager '%s'.\n", pAgency->agencyArr[agencyIndex]->name);
+
     return 0;
 }
 
@@ -136,7 +145,7 @@ void printSpaceControlSystem(const SpaceControlSystem *pSystem, const Manager* p
         if (pSystem->CelestialBodyArr[i] != NULL) {
             printCelestialBody(pSystem->CelestialBodyArr[i]);
         } else {
-            printf("Celestial Body %d: NULL\n", i);
+            printf("Celestial Body [%d]: NULL\n", i);
         }
     }
 
