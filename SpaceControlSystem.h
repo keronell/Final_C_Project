@@ -22,6 +22,7 @@ typedef struct {
 
 int initSystem(SpaceControlSystem *pSystem);
 int addCelestialBody(SpaceControlSystem *pSystem, CelestialBody *newBody);
+int addExpeditionToAgency(Agency *pAgency, SpaceControlSystem *pSystem);
 
 void spaceMap();
 void freeAllAllocatedMemory(SpaceControlSystem *pSystem);

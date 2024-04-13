@@ -55,6 +55,55 @@ int addCelestialBody(SpaceControlSystem* pSystem, CelestialBody* newBody)
     return 0; // Success
 }
 
+int addExpeditionToAgency(Agency *pAgency, SpaceControlSystem *pSystem)
+{
+    printAgency(pAgency);
+    int agencyIndex = -1;
+    while (agencyIndex < 1 || agencyIndex > pAgency->agencyCounter) {
+        printf("To which Agency you want to add an Expedition? Enter index (1 to %d): \n", pAgency->agencyCounter);
+        scanf("%d", &agencyIndex);
+        if (agencyIndex < 1 || agencyIndex > pAgency->agencyCounter) {
+            printf("Invalid Agency index. Please try again.\n");
+        } else {
+            agencyIndex--; // Adjust for zero-indexed array
+        }
+    }
+
+    if (pAgency->agencyArr[agencyIndex] == NULL) {
+        printf("Selected Agency is not available.\n");
+        return -1;
+    }
+
+    printf("Choose Celestial Bodies as a destination point:\n");
+    for (int i = 0; i < pSystem->numOfBodies; i++) {
+        printf("%d) ", i+1);
+        printCelestialBody(pSystem->CelestialBodyArr[0]);
+    }
+
+    int bodyIndex = -1;
+    while (bodyIndex < 1 || bodyIndex > pSystem->numOfBodies) {
+        printf("Select a celestial body for the expedition (enter index 1 to %d):\n", pSystem->numOfBodies);
+        scanf("%d", &bodyIndex);
+        if (bodyIndex < 1 || bodyIndex > pSystem->numOfBodies) {
+            printf("Invalid Celestial Body index. Please try again.\n");
+        } else {
+            bodyIndex--;  // Adjust for zero-indexed array
+        }
+    }
+
+    Expedition *newExpedition = (Expedition *)malloc(sizeof(Expedition));
+    if (newExpedition == NULL) {
+        printf("Failed to allocate memory for new Expedition.\n");
+        return 1;
+    }
+
+    initExpedition(newExpedition, pSystem->CelestialBodyArr[bodyIndex]);
+    printf("Expedition successfully added to Agency '%s'.\n", pAgency->agencyArr[agencyIndex]->name);
+    return 0;
+}
+
+
+
 void freeAllAllocatedMemory(SpaceControlSystem* pSystem) {
     if (pSystem == NULL) {
         return;
