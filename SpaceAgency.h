@@ -22,6 +22,6 @@ int     saveSpaceAgencyToFileBin(const SpaceAgency* pAgency, FILE *fp);
 int loadSpaceAgencyFromFileBin(SpaceAgency** pAgency, FILE* fp);
 
 int saveSpaceAgencyToFileTxt(const SpaceAgency* pAgency, FILE* fp);
-int loadSpaceAgencyToFileTxt(SpaceAgency* pAgency, FILE* fp);
+int loadSpaceAgencyFromFileTxt(SpaceAgency* pAgency, FILE* fp);
 
 #endif //FINAL_C_PROJECT_SPACEAGENCY_H

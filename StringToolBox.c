@@ -7,14 +7,34 @@
 
 
 
-char* getStrExactName(const char* msg)
-{
+char* getStrExactName(const char* msg) {
     char* str;
     char temp[MAX_STR_LEN];
-    printf("%s\t", msg);
-    myGets(temp, MAX_STR_LEN,stdin);
 
-    str = getDynStr(temp);
+    // Print the message, if any
+    if (msg != NULL) {
+        printf("%s", msg);
+    }
+
+    // Clear input buffer to avoid reading a leftover newline character
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF) { }
+
+    // Read string from user
+    if (fgets(temp, MAX_STR_LEN, stdin) == NULL) {
+        return NULL;
+    }
+
+    // Remove newline character if it's read
+    temp[strcspn(temp, "\n")] = '\0';
+
+    // Allocate memory and copy the string into it
+    str = (char*)malloc(strlen(temp) + 1);
+    if (str == NULL) {
+        return NULL; // Memory allocation failed
+    }
+    strcpy(str, temp);
+
     return str;
 }
 

@@ -6,14 +6,13 @@
 #include "StringToolBox.h"
 
 
-int initSystem(SpaceControlSystem* pSystem)
-{
+int initSystem(SpaceControlSystem *pSystem) {
     if (pSystem == NULL)
         return 1; // Indicate error
 
 
     // Allocate memory for the array of CelestialBody pointers with initial size of 1
-    pSystem->CelestialBodyArr = (CelestialBody**)malloc(sizeof(CelestialBody*));
+    pSystem->CelestialBodyArr = (CelestialBody **) malloc(sizeof(CelestialBody *));
     if (pSystem->CelestialBodyArr == NULL)
         return -1; // Indicate error
 
@@ -25,15 +24,14 @@ int initSystem(SpaceControlSystem* pSystem)
     // Set a default sorting option
     pSystem->sortOpt = eNone; // Or any other default sorting option
 
-    initSpaceMap(&pSystem->spaceMap); // alex added it
+    //initSpaceMap(&pSystem->spaceMap); // alex added it
 
 
     return 0; // Success
 }
 
-int addCelestialBody(SpaceControlSystem* pSystem)
-{
-    CelestialBody* newBody = (CelestialBody*)malloc(sizeof(CelestialBody));
+int addCelestialBody(SpaceControlSystem *pSystem) {
+    CelestialBody *newBody = (CelestialBody *) malloc(sizeof(CelestialBody));
     if (newBody == NULL) {
         printf("Error: Memory allocation for new CelestialBody failed.\n");
         return 1;
@@ -42,7 +40,8 @@ int addCelestialBody(SpaceControlSystem* pSystem)
     initCelestialBody(newBody);
 
     // Resize the array to hold one more CelestialBody pointer
-    CelestialBody** tempArr = (CelestialBody**)realloc(pSystem->CelestialBodyArr, (pSystem->numOfBodies + 1) * sizeof(CelestialBody*));
+    CelestialBody **tempArr = (CelestialBody **) realloc(pSystem->CelestialBodyArr,
+                                                         (pSystem->numOfBodies + 1) * sizeof(CelestialBody *));
     if (tempArr == NULL) {
         printf("Error: Memory reallocation failed.\n");
         free(newBody);
@@ -53,12 +52,11 @@ int addCelestialBody(SpaceControlSystem* pSystem)
     pSystem->CelestialBodyArr[pSystem->numOfBodies] = newBody;
     pSystem->numOfBodies++;
 
-    addCelestialBodytoMap(&pSystem->spaceMap, newBody); // Adding each new body to the spaceMap
+    //addCelestialBodytoMap(&pSystem->spaceMap, newBody); // Adding each new body to the spaceMap
     return 0; // Success
 }
 
-int addExpeditionToAgency(Agency *pAgency, SpaceControlSystem *pSystem)
-{
+int addExpeditionToAgency(Agency *pAgency, SpaceControlSystem *pSystem) {
     printAgency(pAgency);
     int agencyIndex = -1;
     while (agencyIndex < 1 || agencyIndex > pAgency->agencyCounter) {
@@ -78,7 +76,7 @@ int addExpeditionToAgency(Agency *pAgency, SpaceControlSystem *pSystem)
 
     printf("Choose Celestial Bodies as a destination point:\n");
     for (int i = 0; i < pSystem->numOfBodies; i++) {
-        printf("%d) ", i+1);
+        printf("%d) ", i + 1);
         printCelestialBody(pSystem->CelestialBodyArr[0]);
     }
 
@@ -93,7 +91,7 @@ int addExpeditionToAgency(Agency *pAgency, SpaceControlSystem *pSystem)
         }
     }
 
-    Expedition *newExpedition = (Expedition *)malloc(sizeof(Expedition));
+    Expedition *newExpedition = (Expedition *) malloc(sizeof(Expedition));
     if (newExpedition == NULL) {
         printf("Failed to allocate memory for new Expedition.\n");
         return 1;
@@ -105,28 +103,28 @@ int addExpeditionToAgency(Agency *pAgency, SpaceControlSystem *pSystem)
 }
 
 
-
-void freeAllAllocatedMemory(SpaceControlSystem* pSystem) {
-    if (pSystem == NULL) {
-        return;
-    }
-
+void freeSystem(SpaceControlSystem *pSystem, Agency *pAgency) {
     if (pSystem->CelestialBodyArr != NULL) {
         for (int i = 0; i < pSystem->numOfBodies; i++) {
             if (pSystem->CelestialBodyArr[i] != NULL) {
-                freeCelestialBody(pSystem->CelestialBodyArr[i]);
+                freeCelestialBody(
+                        pSystem->CelestialBodyArr[i]);  // Assumes this function correctly frees a CelestialBody
                 pSystem->CelestialBodyArr[i] = NULL;
             }
         }
         free(pSystem->CelestialBodyArr);
         pSystem->CelestialBodyArr = NULL;
     }
+    // freeSpaceMap(pSystem->spaceMap); // Uncomment and implement if there's a space map or similar structure
+
+    if (pAgency != NULL) {
+        freeAgencyManager(pAgency);
+    }
 }
 
-void printSpaceControlSystem(const SpaceControlSystem* pSystem)
-{
-    if (pSystem == NULL)
-    {
+
+void printSpaceControlSystem(const SpaceControlSystem *pSystem) {
+    if (pSystem == NULL) {
         printf("Error: SpaceControlSystem pointer is NULL.\n");
         return;
     }
@@ -134,116 +132,94 @@ void printSpaceControlSystem(const SpaceControlSystem* pSystem)
     printf("Number of Celestial Bodies: %d\n", pSystem->numOfBodies);
     printf("Celestial Bodies:\n");
 
-    for (int i = 0; i < pSystem->numOfBodies; i++)
-    {
-        if (pSystem->CelestialBodyArr[i] != NULL)
-        {
+    for (int i = 0; i < pSystem->numOfBodies; i++) {
+        if (pSystem->CelestialBodyArr[i] != NULL) {
             printCelestialBody(pSystem->CelestialBodyArr[i]);
-        }
-        else
-        {
+        } else {
             printf("Celestial Body %d: NULL\n", i);
         }
     }
 }
-int saveSystemToFileTxt(const SpaceControlSystem *pSystem, const Agency *pAgency, const char *fileName)
-{
+
+int saveSystemToFileTxt(const SpaceControlSystem *pSystem, const Agency *pAgency, const char *fileName) {
     if (pSystem == NULL) {
-        printf("System is not initialized! \n");
+        printf("System is not initialized!\n");
         return 1;
     }
 
     FILE *fp = fopen(fileName, "w");
     if (!fp) {
-        printf("Cant open file ('%s') for writing.\n", fileName);
+        printf("Cannot open file ('%s') for writing.\n", fileName);
         return 1;
     }
 
-    // Write the details of the Space Control System
-    fprintf(fp, "Space Control System Details:\n");
-    fprintf(fp, "Total Celestial Bodies: %d\n", pSystem->numOfBodies);
-    fprintf(fp, "Sorting Option: %d\n\n", pSystem->sortOpt);
+    // Save the number of celestial bodies and the sorting option directly
+    fprintf(fp, "%d %d\n", pSystem->numOfBodies, pSystem->sortOpt);
 
+    // Save each celestial body directly
     for (int i = 0; i < pSystem->numOfBodies; i++) {
-        fprintf(fp, "Celestial Body %d:\n", i + 1);
         if (pSystem->CelestialBodyArr[i] != NULL) {
             saveCelestialBodyToFileTxt(fp, pSystem->CelestialBodyArr[i]);
-        } else {
-            fprintf(fp, "  [Data Not Available]\n");
         }
     }
-    if(saveManagerToFileTxt(pAgency,fileName)){
+
+    // Save agencies directly
+    if (saveManagerToFileTxt(fp, pAgency)) {
         printf("Failed to save Manager data to file!\n");
+        fclose(fp);
         return 1;
     }
-
 
     fclose(fp);
     return 0;
 }
 
 int loadSystemFromFileTxt(SpaceControlSystem *pSystem, Agency *pAgency, const char *fileName) {
-    if (pSystem == NULL) {
-        printf("System is not initialized! \n");
-        return 1;
-    }
-
     FILE *fp = fopen(fileName, "r");
     if (!fp) {
         printf("Cannot open file ('%s') for reading.\n", fileName);
         return 1;
     }
 
-    char buffer[MAX_STR_LEN];
-    if (fgets(buffer, sizeof(buffer), fp) == NULL) {
+    // Read the number of celestial bodies and sorting option
+    if (fscanf(fp, "%d %d", &pSystem->numOfBodies, &pSystem->sortOpt) != 2) {
+        printf("Failed to read system details.\n");
         fclose(fp);
         return 1;
     }
 
-    int numOfBodies;
-    if (fscanf(fp, "Total Celestial Bodies: %d\n", &numOfBodies) != 1) {
-        fclose(fp);
-        return 1;
-    }
-
-    int sortOpt;
-    if (fscanf(fp, "Sorting Option: %d\n\n", &sortOpt) != 1) {
-        fclose(fp);
-        return 1; // Error parsing sorting option
-    }
-
-    // Initialize the system with obtained data
-    pSystem->numOfBodies = numOfBodies;
-    pSystem->sortOpt = sortOpt;
-
-    // Allocate memory for celestial bodies array
-    pSystem->CelestialBodyArr = (CelestialBody**)malloc(numOfBodies * sizeof(CelestialBody*));
+    // Allocate memory for celestial bodies
+    pSystem->CelestialBodyArr = (CelestialBody**) malloc(pSystem->numOfBodies * sizeof(CelestialBody*));
     if (pSystem->CelestialBodyArr == NULL) {
+        printf("Memory allocation failed for celestial bodies.\n");
         fclose(fp);
-        return 1; // Memory allocation failed
-
+        return 1;
     }
 
-    // Read celestial bodies
-    for (int i = 0; i < numOfBodies; i++) {
-        fgets(buffer, sizeof(buffer), fp); // Read header line for each body
-        pSystem->CelestialBodyArr[i] = (CelestialBody*)malloc(sizeof(CelestialBody));
+    for (int i = 0; i < pSystem->numOfBodies; i++) {
+        pSystem->CelestialBodyArr[i] = (CelestialBody*) malloc(sizeof(CelestialBody));
         if (pSystem->CelestialBodyArr[i] == NULL) {
-            // Free previously allocated memory
-            for (int j = 0; j < i; j++) {
-                free(pSystem->CelestialBodyArr[j]);
-            }
-            free(pSystem->CelestialBodyArr);
+            printf("Memory allocation failed for a celestial body.\n");
             fclose(fp);
             return 1;
         }
-        loadCelestialBodyFromFile(pSystem->CelestialBodyArr[i], fp);
+        if (loadCelestialBodyFromFile(pSystem->CelestialBodyArr[i], fp)) {
+            printf("Failed to load celestial body.\n");
+            fclose(fp);
+            return 1;
+        }
     }
 
-    // Optional: Load additional system components, like agencies
+    if (loadManagerFromFileTxt(pAgency, fp)) {
+        printf("Failed to load agency details.\n");
+        fclose(fp);
+        return 1;
+    }
+
     fclose(fp);
     return 0;
 }
+
 
 eSortOption showSortMenu() {
     int opt;

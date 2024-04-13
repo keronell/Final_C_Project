@@ -32,7 +32,7 @@ int saveExpeditionToFileBin(const Expedition* expedition, FILE* fp);
 int loadExpeditionFromFileBin(Expedition* expedition, FILE* fp);
 
 int saveExpeditionToFileTxt(const Expedition* pExpedition, FILE* fp);
-int loadExpeditionFromFileTxt(FILE* fp, Expedition* expedition);
+int loadExpeditionFromFileTxt(Expedition* expedition,FILE* fp);
 
 
 #endif //FINAL_C_PROJECT_EXPEDITION_H

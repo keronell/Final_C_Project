@@ -93,7 +93,8 @@ CMakeFiles/Final_C_Project.dir/AgencyManager.c.o: /Users/keronell/Desktop/Progra
   /Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/FileManager.h \
   /Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/GeneralList.h \
   /Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/Location.h \
-  /Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/SpaceAgency.h
+  /Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/SpaceAgency.h \
+  /Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/StringToolBox.h
 
 CMakeFiles/Final_C_Project.dir/CelestialBody.c.o: /Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/CelestialBody.c \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/Availability.h \
@@ -547,6 +548,7 @@ CMakeFiles/Final_C_Project.dir/SpaceAgency.c.o: /Users/keronell/Desktop/Programm
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/AvailabilityInternalLegacy.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/AvailabilityVersions.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/_ctermid.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/_ctype.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/_stdio.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/_types.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/_types/_intmax_t.h \
@@ -562,6 +564,7 @@ CMakeFiles/Final_C_Project.dir/SpaceAgency.c.o: /Users/keronell/Desktop/Programm
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/arm/endian.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/arm/signal.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/arm/types.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/ctype.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/libkern/_OSByteOrder.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/libkern/arm/OSByteOrder.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/mach/arm/_structs.h \
@@ -574,6 +577,7 @@ CMakeFiles/Final_C_Project.dir/SpaceAgency.c.o: /Users/keronell/Desktop/Programm
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/malloc/_malloc.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/malloc/_malloc_type.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/malloc/_ptrcheck.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/runetype.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/secure/_common.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/secure/_stdio.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/secure/_string.h \
@@ -619,6 +623,7 @@ CMakeFiles/Final_C_Project.dir/SpaceAgency.c.o: /Users/keronell/Desktop/Programm
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/sys/_types/_uintptr_t.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/sys/_types/_va_list.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/sys/_types/_wchar_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/sys/_types/_wint_t.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/sys/appleapiopts.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/sys/cdefs.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/sys/resource.h \
@@ -1064,8 +1069,6 @@ CMakeFiles/Final_C_Project.dir/main.c.o: /Users/keronell/Desktop/Programming/C\ 
 
 /Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/Date.c:
 
-/Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/StringToolBox.h:
-
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/runetype.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/_types/_intmax_t.h:
@@ -1263,6 +1266,8 @@ CMakeFiles/Final_C_Project.dir/main.c.o: /Users/keronell/Desktop/Programming/C\ 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/sys/_types/_wint_t.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/AvailabilityInternal.h:
+
+/Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/StringToolBox.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/sys/_types/_seek_set.h:
 

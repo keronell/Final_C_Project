@@ -16,7 +16,6 @@ void welcomeScreen(SpaceControlSystem *pSystem, Agency *pAgency)
 {
     printf("\n--- Welcome to Space Control System  ---\n");
     if(dataLoadLogic(pSystem, pAgency)) {
-        printf("Failed reading data from file!\n");
         printf("---- INITIALIZING FRESH START SYSTEM CREATION ----\n");
         if(initSystem(pSystem)){
             printf("Failed to initialize System!\n");
@@ -36,7 +35,7 @@ void displayMenu()
     printf("1. Add Celestial body.\n");
     printf("2. Add agency to Agency Manager.\n");
     printf("3. Start new Expedition.\n");
-    printf("4. Print current Space map.\n");
+    printf("4. Print all Agencies.\n");
     printf("5. Print Expedition list.\n");
     printf("6. Print Celestial bodies DataBase.\n");
     printf("7. Print all System Data.\n");
@@ -80,7 +79,7 @@ int main() {
                     printf("Failed to create new Expedition!\n");
                 break;
             case 4:
-                printf("Printing the current Space Map...\n");
+                printAgency(&pManager);
                 break;
             case 5:
                 printf("Printing the Expedition List...\n");
@@ -104,16 +103,18 @@ int main() {
                 break;
             case 0:
                 printf("Saving current Data and exiting...\n");
-                // Call saveDataAndExit() here
+                dataSaveLogic(&pSystem,&pManager);
+                    freeSystem(&pSystem,&pManager);
                 exit(0);
                 break;
             default:
                 printf("Invalid choice, please enter a number from 0 to 9.\n");
                 break;
         }
+
     }
 
-    return 0;
+
 }
 
 
@@ -121,23 +122,51 @@ int dataLoadLogic(SpaceControlSystem *pSystem, Agency *pAgency)
 {
     int choice = -1;
 
-    while (choice < 3 && choice >0) {
+    while (choice != 0) {
         printf("Choose from which origin you want to Load data:\n");
         printf("1] Binary file.\n");
         printf("2] Text file.\n");
+        printf("0] Create fresh start.\n");
+        printf("Enter your choice: ");
         scanf("%d", &choice);
+
         switch (choice) {
             case 1:
-//                loadSystemFromFileBin(pSystem, pAgency,SystemDataBin )
-                break;
-            case 2:
-                if(loadSystemFromFileTxt(pSystem, pAgency,SystemDataTxt ))
+                // Assuming loadSystemFromFileBin() is defined correctly elsewhere
+                if (loadSystemFromFileTxt(pSystem, pAgency, SystemDataBin)) {
+                    printf("Failed to load from binary file.\n");
                     return 1;
-                break;
+                }
+                return 0;  // Successful load, exit the loop
+
+            case 2:
+                if (loadSystemFromFileTxt(pSystem, pAgency, SystemDataTxt)) {
+                    printf("Failed to load from text file.\n");
+                    return 1;
+                }
+                return 0;  // Successful load, exit the loop
+
+            case 0:
+                printf("creating...\n");
+                break;  // Exit the loop
 
             default:
                 printf("Invalid choice, please try again.\n");
+                break;
         }
     }
-    return 0;
+    return 1;
+}
+
+void dataSaveLogic(const SpaceControlSystem *pSystem, const Agency *pAgency)
+{
+
+    if(saveSystemToFileTxt(pSystem, pAgency,SystemDataTxt))
+        printf("Failed to save in text file.\n");
+
+
+//    if(saveSystemToFileBin(pSystem, pAgency. SystemDataBin))
+//    {
+//
+//    }
 }

@@ -18,12 +18,15 @@ int addCelestialBody(SpaceControlSystem *pSystem);
 int addExpeditionToAgency(Agency *pAgency, SpaceControlSystem *pSystem);
 
 void spaceMap();
-void freeAllAllocatedMemory(SpaceControlSystem *pSystem);
+void freeSystem(SpaceControlSystem *pSystem, Agency* pAgency);
 void printSpaceControlSystem(const SpaceControlSystem *pSystem);
 void findCelestialBody (const SpaceControlSystem* pSystem);
 void sortCelestialBody (SpaceControlSystem* pSystem);
+
+
 int saveSystemToFileTxt(const SpaceControlSystem *pSystem, const Agency *pAgency, const char *fileName);
 int loadSystemFromFileTxt(SpaceControlSystem *pSystem, Agency *pAgency, const char *fileName);
+
 int saveSystemToFileBin(const SpaceControlSystem *pSystem, const Agency *pAgency, const char *fileName);
 int loadSystemFromFileBin(SpaceControlSystem *pSystem, Agency *pAgency, char *fileName);
 

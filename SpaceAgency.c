@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <ctype.h>
 
 #include "SpaceAgency.h"
 #include "StringToolBox.h"
@@ -97,39 +98,43 @@ int loadSpaceAgencyFromFileBin(SpaceAgency **pAgency, FILE *fp) {
 }
 
 int saveSpaceAgencyToFileTxt(const SpaceAgency* pAgency, FILE* fp) {
-    if (fprintf(fp, "Agency Name: %s\n", pAgency->name) < 0 ||
-        fprintf(fp, "Expedition ID: %d\n\n", pAgency->expeditionID) < 0) {
+    if (fp == NULL || pAgency == NULL) {
+        printf("Invalid file pointer or agency pointer.\n");
+        return 1;
+    }
+
+    // Write agency name and expedition ID directly to the file
+    if (fprintf(fp, "%s %d\n", pAgency->name, pAgency->expeditionID) < 0) {
         printf("Failed to write agency data to file.\n");
-        return 0;
+        return 1;
     }
-    return 1;
+    return 0;
 }
-int loadSpaceAgencyToFileTxt(SpaceAgency* pAgency, FILE* fp)
-{
-    if (pAgency == NULL || fp == NULL) {
-        printf("Invalid parameters.\n");
+int loadSpaceAgencyFromFileTxt(SpaceAgency* pAgency, FILE* fp) {
+    if (fp == NULL || pAgency == NULL) {
+        printf("Invalid file pointer or agency pointer.\n");
         return 1;
     }
 
-    // Read the agency name from the file
-    pAgency->name = getStrExactNameFromFile("Reading Agency Name:", fp);
+    // Read the agency name and the expedition ID in one go.
+    char nameBuffer[100];  // Increase size as needed
+    int expeditionID;
+    if (fscanf(fp, "%99s %d", nameBuffer, &expeditionID) != 2) {  // Use %99s to prevent buffer overflow
+        printf("Failed to read agency name and expedition ID from file.\n");
+        return 1;
+    }
+
+    // Allocate memory for the agency name
+    pAgency->name = strdup(nameBuffer);
     if (pAgency->name == NULL) {
-        printf("Failed to read agency name from file or name is not available.\n");
+        printf("Failed to allocate memory for agency name.\n");
         return 1;
     }
 
-    // Read the expedition ID from the file
-    char buffer[MAX_STR_LEN];
-    if (fgets(buffer, sizeof(buffer), fp) == NULL) {
-        printf("Failed to read expedition ID from file.\n");
-        free(pAgency->name);
-        return 1;
-    }
-    if (sscanf(buffer, "Expedition ID: %d", &pAgency->expeditionID) != 1) {
-        printf("Expedition ID formatted incorrectly or missing.\n");
-        free(pAgency->name);
-        return 1;
-    }
+    pAgency->expeditionID = expeditionID;
 
-    return 0; // Successfully loaded the agency data
+    // Consume the newline character if necessary to clean up for the next read
+    fscanf(fp, "\n");
+
+    return 0;
 }

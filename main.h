@@ -5,6 +5,12 @@
 
 void welcomeScreen(SpaceControlSystem *pSystem, Agency *pAgency);
 void displayMenu();
+
 int menu();
-void MapTest ();
+
+void MapTest();
+
+
+//Save, Load functions
 int dataLoadLogic(SpaceControlSystem *pSystem, Agency *pAgency);
+void dataSaveLogic(const SpaceControlSystem *pSystem, const Agency *pAgency);

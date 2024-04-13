@@ -15,12 +15,13 @@ typedef struct
 int initAgency(Agency* pAgency);
 
 int addSpaceAgency(Agency* pAgency);
-void freeAgency(Agency* pAgency);
+void freeAgencyManager(Agency* pAgency);
 
-int		saveManagerToFileBin(const Agency* pAgency, const char* fileName);
+int		saveManagerToFileBin(FILE *fp, const Agency* pAgency);
 int loadManagerFromFileBin(Agency* pAgency, const char* fileName);
 
-int saveManagerToFileTxt(const Agency* pAgency, const char* fileName);
+int saveManagerToFileTxt(FILE *fp, const Agency* pAgency);
+int loadManagerFromFileTxt(Agency *pAgency, FILE* fp);
 
 void printAgency(const Agency* pAgency);
 

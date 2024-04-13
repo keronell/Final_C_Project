@@ -161,57 +161,43 @@ int loadExpeditionFromFileBin(Expedition* expedition, FILE* fp)
 }
 
 int saveExpeditionToFileTxt(const Expedition* pExpedition, FILE* fp) {
-    if (fprintf(fp, "Expedition ID: %d\n", pExpedition->id) < 0 ||
-        fprintf(fp, "Duration: %d days\n", pExpedition->duration) < 0 ||
-        fprintf(fp, "Destination ID: %d\n", pExpedition->destinationID) < 0) {
-        printf("Failed to write expedition data to file.\n");
-        return 0;
+    if (!fp || !pExpedition) {
+        printf("Invalid file pointer or expedition data.\n");
+        return 1; // Return 1 for error
     }
-    return 1;
+
+    // Write expedition data separated by spaces
+    if (fprintf(fp, "%d %d %d %d %d-%d-%d\n",
+                pExpedition->id,
+                pExpedition->duration,
+                pExpedition->destinationID,
+                pExpedition->type,
+                pExpedition->startDate.year,
+                pExpedition->startDate.month,
+                pExpedition->startDate.day) < 0) {
+        printf("Failed to write expedition data to file.\n");
+        return 1; // Return 1 for error
+    }
+    return 0; // Return 0 for success
 }
-int loadExpeditionFromFileTxt(FILE* fp, Expedition* expedition)
-{
-        if (fp == NULL || expedition == NULL) {
-            printf("Invalid parameters for loading expedition.\n");
-            return 0;
-        }
+int loadExpeditionFromFileTxt(Expedition* expedition, FILE* fp) {
+    if (!fp || !expedition) {
+        printf("Invalid parameters for loading expedition.\n");
+        return 1; // Return 1 for error
+    }
 
-        char buffer[MAX_STR_LEN];
+    // Read expedition data from file
+    if (fscanf(fp, "%d %d %d %d %d-%d-%d\n",
+               &expedition->id,
+               &expedition->duration,
+               &expedition->destinationID,
+               (int*)&expedition->type,
+               &expedition->startDate.year,
+               &expedition->startDate.month,
+               &expedition->startDate.day) != 7) {
+        printf("Failed to read expedition data from file.\n");
+        return 1; // Return 1 for error
+    }
 
-        // Read the Expedition ID
-        if (fgets(buffer, sizeof(buffer), fp) == NULL || sscanf(buffer, "Expedition ID: %d", &expedition->id) != 1) {
-            printf("Failed to read expedition ID.\n");
-            return 0;
-        }
-
-        // Read the Duration
-        if (fgets(buffer, sizeof(buffer), fp) == NULL || sscanf(buffer, "Duration: %d days", &expedition->duration) != 1) {
-            printf("Failed to read expedition duration.\n");
-            return 0;
-        }
-
-        // Read the Destination ID
-        if (fgets(buffer, sizeof(buffer), fp) == NULL || sscanf(buffer, "Destination ID: %d", &expedition->destinationID) != 1) {
-            printf("Failed to read destination ID.\n");
-            return 0;
-        }
-
-        // Optional: Read the Expedition Type if saved as text or numeric ID
-        if (fgets(buffer, sizeof(buffer), fp) == NULL || sscanf(buffer, "Type: %d", (int*)&expedition->type) != 1) {
-            printf("Failed to read expedition type.\n");
-            return 0;
-        }
-
-        // Optional: Read the start date if included
-        int year, month, day;
-        if (fgets(buffer, sizeof(buffer), fp) == NULL || sscanf(buffer, "Start Date: %d-%d-%d", &year, &month, &day) != 3) {
-            printf("Failed to read start date.\n");
-            return 0;
-        }
-        expedition->startDate.year = year;
-        expedition->startDate.month = month;
-        expedition->startDate.day = day;
-
-        return 1; // Success
-
+    return 0; // Return 0 for success
 }

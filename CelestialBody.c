@@ -7,10 +7,9 @@
 #include "StringToolBox.h"
 
 
-const char* str[eNofTypes] = {"Star", "Asteroid", "Planet"};
+const char *str[eNofTypes] = {"Star", "Asteroid", "Planet"};
 
-int     initCelestialBody(CelestialBody* pBody)
-{
+int initCelestialBody(CelestialBody *pBody) {
     printf("Celestial body initialization: \n");
     pBody->ID = getUniqueID();
     pBody->size = getSize();
@@ -22,30 +21,26 @@ int     initCelestialBody(CelestialBody* pBody)
 }
 
 
-int      getUniqueID()
-{
+int getUniqueID() {
     static int id = 100000;
     return id++;
 }
 
-int     getSize()
-{
+int getSize() {
     int size;
     printf("Enter a radius: (in km)\n");
     scanf("%d", &size);
     return size;
 }
 
-int    getDistance()
-{
+int getDistance() {
     int distance;
     printf("Enter a distance: (in light years)\n");
     scanf("%d", &distance);
     return distance;
 }
 
-void    getLocation(CelestialBody* pBody)
-{
+void getLocation(CelestialBody *pBody) {
     int xAxis;
     int yAxis;
 
@@ -69,15 +64,14 @@ CelestialBodyType chooseCelestialBodyType() {
         scanf("%d", &choice);
     }
 
-    return (CelestialBodyType)choice;
+    return (CelestialBodyType) choice;
 }
 
-void freeCelestialBody(CelestialBody* pBody)
-{
+void freeCelestialBody(CelestialBody *pBody) {
     free(pBody);
 }
 
-void    printCelestialBody(const CelestialBody* pBody) {
+void printCelestialBody(const CelestialBody *pBody) {
     if (pBody != NULL) {
         printf("\nID:\t\t\t%d\n", pBody->ID);
         printf("Size:\t\t%d km\n", pBody->size);
@@ -87,28 +81,39 @@ void    printCelestialBody(const CelestialBody* pBody) {
     }
 }
 
-void saveCelestialBodyToFileTxt(FILE* fp, const CelestialBody* pBody) {
+void saveCelestialBodyToFileTxt(FILE *fp, const CelestialBody *pBody) {
     if (fp == NULL || pBody == NULL) {
         fprintf(stderr, "Error: Invalid file pointer or celestial body pointer.\n");
         return;
     }
 
-    // Print celestial body details to the file
-    fprintf(fp, "Celestial Body ID: %d\n", pBody->ID);
-    fprintf(fp, "Type: %s\n", str[pBody->type]); // Assumes 'str' is accessible here as well
-    fprintf(fp, "Size: %d km\n", pBody->size);
-    fprintf(fp, "Distance: %d light years\n", pBody->distance);
-    fprintf(fp, "Location: (%d, %d)\n\n", pBody->location.x, pBody->location.y);
+    // Print celestial body details to the file in a single line
+    fprintf(fp, "%d %d %d %d %d %d\n",
+            pBody->ID,
+            pBody->type,
+            pBody->size,
+            pBody->distance,
+            pBody->location.x,
+            pBody->location.y);
 }
 
-int loadCelestialBodyFromFile(CelestialBody* body, FILE* fp) {
-    // Implement loading logic for a celestial body based on the format used in saveSystemToFileTxt
-    char buffer[MAX_STR_LEN];
-    if (fgets(buffer, sizeof(buffer), fp) == NULL) return 0; // Read body info line
+int loadCelestialBodyFromFile(CelestialBody *body, FILE *fp) {
+    if (fp == NULL || body == NULL) {
+        printf("Error: Invalid file pointer or celestial body pointer.\n");
+        return 0; // Failure due to invalid pointers
+    }
 
-    // Example of parsing the celestial body data
-    sscanf(buffer, "ID: %d, Type: %d, Size: %d km, Distance: %d light years, Location: (%d,%d)\n",
-           &body->ID, &body->type, &body->size, &body->distance, &body->location.x, &body->location.y);
+    // Read the celestial body data from a single line
+    if (fscanf(fp, "%d %d %d %d %d %d",
+               &body->ID,
+               &body->type, // Assuming 'type' is read as an integer and matches enum values
+               &body->size,
+               &body->distance,
+               &body->location.x,
+               &body->location.y) != 6) {
+        printf("Error reading celestial body data.\n");
+        return 1;
+    }
 
-    return 1;
+    return 0; // Success
 }

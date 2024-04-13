@@ -2,7 +2,7 @@
 #define FINAL_C_PROJECT_STRINGTOOLBOX_H
 
 
-#define MAX_STR_LEN 255
+#define MAX_STR_LEN 256
 
 
 char*	getStrExactName(const char* msg);
