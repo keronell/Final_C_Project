@@ -31,19 +31,21 @@ int initSystem(SpaceControlSystem* pSystem)
     return 0; // Success
 }
 
-int addCelestialBody(SpaceControlSystem* pSystem, CelestialBody* newBody)
+int addCelestialBody(SpaceControlSystem* pSystem)
 {
-    if (pSystem == NULL || newBody == NULL)
-    {
-        printf("Error: Invalid parameters.\n");
-        return -1;
+    CelestialBody* newBody = (CelestialBody*)malloc(sizeof(CelestialBody));
+    if (newBody == NULL) {
+        printf("Error: Memory allocation for new CelestialBody failed.\n");
+        return 1;
     }
+
+    initCelestialBody(newBody);
 
     // Resize the array to hold one more CelestialBody pointer
     CelestialBody** tempArr = (CelestialBody**)realloc(pSystem->CelestialBodyArr, (pSystem->numOfBodies + 1) * sizeof(CelestialBody*));
-    if (tempArr == NULL)
-    {
+    if (tempArr == NULL) {
         printf("Error: Memory reallocation failed.\n");
+        free(newBody);
         return -1;
     }
 
@@ -51,7 +53,7 @@ int addCelestialBody(SpaceControlSystem* pSystem, CelestialBody* newBody)
     pSystem->CelestialBodyArr[pSystem->numOfBodies] = newBody;
     pSystem->numOfBodies++;
 
-    addCelestialBodytoMap(&pSystem->spaceMap, newBody); //adding each new body to the spaceMap
+    addCelestialBodytoMap(&pSystem->spaceMap, newBody); // Adding each new body to the spaceMap
     return 0; // Success
 }
 
@@ -241,4 +243,79 @@ int loadSystemFromFileTxt(SpaceControlSystem *pSystem, Agency *pAgency, const ch
     fclose(fp);
     return 0;
 }
+
+eSortOption showSortMenu() {
+    int opt;
+    printf("Base on what field do you want to sort?\n");
+    do {
+        for (int i = 1; i < eNofSortOpt; i++)
+            printf("Enter %d for %s\n", i, sortOptStr[i]);
+        scanf("%d", &opt);
+    } while (opt < 0 || opt >= eNofSortOpt);
+
+    return (eSortOption) opt;
+}
+
+
+void findCelestialBody(const SpaceControlSystem *pSystem) {
+    int (*compare)(const void *air1, const void *air2) = NULL;
+    CelestialBody b = {0};
+    CelestialBody *pBody = &b;
+
+    switch (pSystem->sortOpt) {
+        case eDistance:
+            printf("%s\t", "Origin:");
+            b.distance = getPositveInt(0);
+            compare = compareBodyByDistance;
+            break;
+
+        case eType:
+            printf("%s\t", "Destination:");
+            b.type = chooseCelestialBodyType();
+            compare = compareBodyByType;
+            break;
+
+        case eDate:
+            getCorrectDate(&b.dateOfDiscovery);
+            compare = compareBodyByDate;
+            break;
+
+    }
+
+    if (compare != NULL) {
+        CelestialBody **pBodies = bsearch(&pBody, pSystem->CelestialBodyArr, pSystem->numOfBodies,
+                                          sizeof(CelestialBody *), compare);
+        if (pBodies == NULL)
+            printf("Flight was not found\n");
+        else {
+            printf("Flight found, ");
+            printCelestialBody(pBody);
+        }
+    } else {
+        printf("The search cannot be performed, array not sorted\n");
+    }
+
+}
+
+//void sortCelestialBody(SpaceControlSystem *pSystem) {
+//    pComp->flightSortOpt = showSortMenu();
+//    int (*compare)(const void *air1, const void *air2) = NULL;
+//
+//    switch (pComp->flightSortOpt) {
+//        case eSourceCode:
+//            compare = compareFlightBySourceCode;
+//            break;
+//        case eDestCode:
+//            compare = compareFlightByDestCode;
+//            break;
+//        case eDate:
+//            compare = compareFlightByDate;
+//            break;
+//    }
+//
+//    if (compare != NULL)
+//        qsort(pComp->flightArr, pComp->flightCount, sizeof(Flight * ), compare);
+//
+//}
+//
 

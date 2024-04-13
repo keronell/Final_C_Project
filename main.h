@@ -3,11 +3,13 @@
 #include "FileManager.h"
 #include "SpaceMap.h"
 
-#define AgencyManagerBin "AgencyManager.bin"
-#define AgencyManagerTxt "AgencyManager.txt"
+#define SystemDataBin "AgencyManager.bin"
+#define SystemDataTxt "SystemData.txt"
 
+void welcomeScreen(SpaceControlSystem *pSystem, Agency *pAgency);
 void displayMenu();
 int menu();
 void MapTest ();
+int dataLoadLogic(SpaceControlSystem *pSystem, Agency *pAgency);
 
 

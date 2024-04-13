@@ -26,28 +26,31 @@ int initAgency(Agency* pAgency)
     return 0;
 }
 
-int addSpaceAgency(Agency* pAgency, SpaceAgency* newAgency)
+int addSpaceAgency(Agency* pAgency)
 {
-    if (pAgency == NULL || newAgency == NULL)
-    {
-        printf("Error: Invalid parameters.\n");
+    SpaceAgency* newAgency = (SpaceAgency*)malloc(sizeof(SpaceAgency));
+    if (newAgency == NULL) {
+        printf("Error: Memory allocation for new SpaceAgency failed.\n");
         return 1; // Error code
     }
 
+    // Initialize the new SpaceAgency or set default values
+    initSpaceAgency(newAgency); // Assume this function exists and sets up the new agency
+
+    // Resize the agency array to accommodate one more SpaceAgency pointer
     int newSize = pAgency->agencyCounter + 1;
     SpaceAgency** tempArr = (SpaceAgency**)realloc(pAgency->agencyArr, newSize * sizeof(SpaceAgency*));
-    if (tempArr == NULL)
-    {
+    if (tempArr == NULL) {
         printf("Error: Memory reallocation failed.\n");
+        free(newAgency); // Important to free the allocated memory if reallocation fails
         return 1; // Error code
     }
 
     pAgency->agencyArr = tempArr;
-
     pAgency->agencyArr[pAgency->agencyCounter] = newAgency;
     pAgency->agencyCounter++;
 
-    return 0; // Success
+    return 0;
 }
 
 void freeAgency(Agency* pAgency) {

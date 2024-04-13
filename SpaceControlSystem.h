@@ -21,7 +21,7 @@ typedef struct {
 } SpaceControlSystem;
 
 int initSystem(SpaceControlSystem *pSystem);
-int addCelestialBody(SpaceControlSystem *pSystem, CelestialBody *newBody);
+int addCelestialBody(SpaceControlSystem *pSystem);
 int addExpeditionToAgency(Agency *pAgency, SpaceControlSystem *pSystem);
 
 void spaceMap();
@@ -38,6 +38,8 @@ int loadSystemFromFileTxt(SpaceControlSystem *pSystem, Agency *pAgency, const ch
 
 int saveSystemToFileBin(const SpaceControlSystem *pSystem, const Agency *pAgency, const char *fileName);
 int loadSystemFromFileBin(SpaceControlSystem *pSystem, Agency *pAgency, char *fileName);
+
+void findCelestialBody(const SpaceControlSystem *pSystem);
 
 
 

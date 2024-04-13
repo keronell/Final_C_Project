@@ -1,148 +1,136 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
-
 #include "SpaceControlSystem.h"
 #include "AgencyManager.h"
-#include "CelestialBody.h"
-#include "Expedition.h"
 #include "main.h"
-void MapTest (){
-    int choice  = 1;
 
-    SpaceControlSystem system;
-    initSystem(&system);
-
-    CelestialBody body1 = {1111, 10, 3, {1,2, 2027}, {4, 3,}, eStar};
-    CelestialBody body2 = {1112, 10, 20, {7,2, 2027},{23, 13,}, eStar};
-    CelestialBody body3 = {1113, 10, 16, {1,11, 2027},{16, 8,}, eAsteroid};
-
-    addCelestialBody(&system, &body1);
-    addCelestialBody(&system, &body2);
-    addCelestialBody(&system, &body3);
-
-   printSpaceMap(&system.spaceMap);
-
-    printSpaceControlSystem(&system);
-
-
-
+void welcomeScreen(SpaceControlSystem *pSystem, Agency *pAgency)
+{
+    printf("\n--- Welcome to Space Control System  ---\n");
+    if(dataLoadLogic(pSystem, pAgency)) {
+        printf("Failed reading data from file!\n");
+        printf("---- INITIALIZING FRESH START SYSTEM CREATION ----\n");
+        if(initSystem(pSystem)){
+            printf("Failed to initialize System!\n");
+            return;
+        } else if(initAgency(pAgency)){
+            printf("Failed to initialize Agency manager!\n");
+            return;
+        }
+    }
+    else
+        printf("---- DATABASE LOADED SUCCESSFULLY ----\n");
 }
 
+void displayMenu()
+{
 
-
-void displayMenu() {
-
-    //  menu options:
-    //  automatic DB load
-    //  1) add Celestial body
-    //  2) add expedition
-    //  3) add agency
-    //  4) print space map
-    //  5) calculate expedition time
-    //  6) print all bodies DB
-    //  7) print all expeditions
-    //  8) print all agencies
-
-//    printf("\n--- Welcome to Space Control System  ---\n");
-//    printf("---- LOADING CELESTIAL BODIES DATABASE ----\n");
-//    if(loadDB())
-//        printf("---- DATABASE LOADED SUCCESSFULLY ----\n");
-//    else
-//        printf("Error while loading Database!\n");
-//
-//    printf("1. Option One\n");
-//    printf("2. Option Two\n");
-//    printf("3. Option Three\n");
-//    printf("4. Exit\n");
-//    printf("Enter your choice (1-4): ");
-    SpaceControlSystem controlSystem;
-    initSystem(&controlSystem);
-
-    // Initialize Agency Manager
-    Agency agencyManager;
-    initAgency(&agencyManager);
-
-    // Initialize 3 Space Agencies
-    SpaceAgency agency1, agency2, agency3;
-    initSpaceAgency(&agency1);
-    initSpaceAgency(&agency2);
-    initSpaceAgency(&agency3);
-
-    // Add Space Agencies to Agency Manager
-    addSpaceAgency(&agencyManager, &agency1);
-    addSpaceAgency(&agencyManager, &agency2);
-    addSpaceAgency(&agencyManager, &agency3);
-
-    // Initialize 10 Celestial Bodies
-    CelestialBody bodies[10];
-    for (int i = 0; i < 3; i++) {
-        initCelestialBody(&bodies[i]);
-        // Add each celestial body to the Space Control System
-        addCelestialBody(&controlSystem, &bodies[i]);
-    }
-
-    Expedition expedition1, expedition2;
-
-    if (initExpedition(&expedition1, &bodies[0]) != 0) {
-        printf("Failed to initialize the first expedition.\n");
-        return ;
-    }
-
-    if (initExpedition(&expedition2, &bodies[1]) != 0) {
-        printf("Failed to initialize the second expedition.\n");
-        return ;
-    }
-
-
-//    saveManagerToFileTxt(&agencyManager, AgencyManagerTxt);
-//    printAgency(&agencyManager);
-//    freeAgency(&agencyManager);
-//    printf("Done!\n");
-//    int i;
-//    scanf("%d",&i);
-//    loadManagerFromFileBin(&agencyManager,AgencyManagerTxt);
-//    printAgency(&agencyManager);
-
+    printf("1. Add Celestial body.\n");
+    printf("2. Add agency to Agency Manager.\n");
+    printf("3. Start new Expedition.\n");
+    printf("4. Print current Space map.\n");
+    printf("5. Print Expedition list.\n");
+    printf("6. Print Celestial bodies DataBase.\n");
+    printf("7. Print all System Data.\n");
+    printf("8. Search for Celestial body in DataBase.\n");
+    printf("9. Sort Celestial Bodies.\n");
+    printf("0. Save current Data and EXIT.\n");
 
 }
 
 
 
 int main() {
-//    int choice;
-//    char term;
-//
-//    while(1) {
-//        displayMenu();
-//
-//        if (scanf("%d%c", &choice, &term) != 2 || term != '\n') {
-//            printf("Invalid input, please enter a number.\n");
-//            // Clear the input buffer
-//            while (getchar() != '\n');
-//        } else {
-//            switch (choice) {
-//                case 1:
-//
-//                    break;
-//                case 2:
-//
-//                    break;
-//                case 3:
-//
-//                    break;
-//                case 4:
-//                    printf("Exiting the program.\n");
-//                    return 0;
-//                default:
-//                    printf("Invalid choice, please try again.\n");
-//            }
-//        }
-//    }
+
+    SpaceControlSystem pSystem;
+    Agency pManager;
+
+    welcomeScreen(&pSystem,&pManager);
+    int choice;
+
+    while(1) {
+        displayMenu();
+
+        if (scanf("%d", &choice) != 1) {
+            printf("Invalid input! Please enter a number.\n");
+            // Clear the input buffer
+            while (getchar() != '\n');
+            continue;
+        }
+
+        switch (choice) {
+            case 1:
+                if(addCelestialBody(&pSystem))
+                    printf("Failed to add new Celestial Body!\n");
+                break;
+            case 2:
+               if(addSpaceAgency(&pManager))
+                   printf("Failed to add new Agency to Manager!\n");
+                break;
+            case 3:
+                if(addExpeditionToAgency(&pManager,&pSystem))
+                    printf("Failed to create new Expedition!\n");
+                break;
+            case 4:
+                printf("Printing the current Space Map...\n");
+                break;
+            case 5:
+                printf("Printing the Expedition List...\n");
+                // Call printExpeditionList() here
+                break;
+            case 6:
+                printf("Printing the Celestial Bodies DataBase...\n");
+                // Call printCelestialBodiesDB() here
+                break;
+            case 7:
+                printf("Printing all System Data...\n");
+                // Call printSystemData() here
+                break;
+            case 8:
+                printf("Searching for a Celestial Body in DataBase...\n");
+                // Call searchCelestialBody() here
+                break;
+            case 9:
+                printf("Sorting Celestial Bodies...\n");
+                // Call sortCelestialBodies() here
+                break;
+            case 0:
+                printf("Saving current Data and exiting...\n");
+                // Call saveDataAndExit() here
+                exit(0);
+                break;
+            default:
+                printf("Invalid choice, please enter a number from 0 to 9.\n");
+                break;
+        }
+    }
+
+    return 0;
+}
 
 
+int dataLoadLogic(SpaceControlSystem *pSystem, Agency *pAgency)
+{
+    int choice = -1;
 
- MapTest();
-    //displayMenu();
+    while (choice < 3 && choice >0) {
+        printf("Choose from which origin you want to Load data:\n");
+        printf("1] Binary file.\n");
+        printf("2] Text file.\n");
+        scanf("%d", &choice);
+        switch (choice) {
+            case 1:
+//                loadSystemFromFileBin(pSystem, pAgency,SystemDataBin )
+                break;
+            case 2:
+                if(loadSystemFromFileTxt(pSystem, pAgency,SystemDataTxt ))
+                    return 1;
+                break;
+
+            default:
+                printf("Invalid choice, please try again.\n");
+        }
+    }
+    return 0;
 }

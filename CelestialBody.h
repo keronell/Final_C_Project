@@ -39,4 +39,8 @@ void printCelestialBody(const CelestialBody* pBody);
 void saveCelestialBodyToFileTxt(FILE* fp, const CelestialBody* pBody);
 int loadCelestialBodyFromFile(CelestialBody* body, FILE* fp);
 
+int	    compareBodyByDistance(const void* body1, const void* body2);
+int		compareBodyByDate(const void* body1, const void* body2);
+int		compareBodyByType(const void* body1, const void* body2);
+
 #endif //FINAL_C_PROJECT_CELESTIALBODY_H
