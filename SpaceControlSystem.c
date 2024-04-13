@@ -321,3 +321,77 @@ void sortCelestialBody(SpaceControlSystem *pSystem) {
         qsort(pSystem->CelestialBodyArr, pSystem->numOfBodies, sizeof(CelestialBody * ), compare);
 
 }
+
+
+int saveSystemToFileBin(const SpaceControlSystem *pSystem, const Manager *pAgency, const char *fileName) {
+    FILE *fp = fopen(fileName, "wb");  // Open the file in binary write mode
+    if (!fp) {
+        printf("Cannot open file ('%s') for writing.\n", fileName);
+        return 1;
+    }
+
+    // Save number of celestial bodies
+    if (fwrite(&pSystem->numOfBodies, sizeof(pSystem->numOfBodies), 1, fp) != 1) {
+        printf("Failed to write number of celestial bodies.\n");
+        fclose(fp);
+        return 1;
+    }
+
+    // Save celestial bodies
+    for (int i = 0; i < pSystem->numOfBodies; i++) {
+        if (pSystem->CelestialBodyArr[i] && saveCelestialBodyToFileBin(pSystem->CelestialBodyArr[i], fp)) {
+            fclose(fp);
+            return 1;  // Return 1 for error
+        }
+    }
+
+    // Save the agency information
+    if (saveManagerToFileBin(fp, pAgency)) {
+        fclose(fp);
+        return 1;  // Return 1 for error
+    }
+
+    fclose(fp);
+    return 0;
+}
+
+int loadSystemFromFileBin(SpaceControlSystem *pSystem, Manager *pAgency, const char *fileName) {
+    FILE *fp = fopen(fileName, "rb");  // Open the file in binary read mode
+    if (!fp) {
+        printf("Cannot open file ('%s') for reading.\n", fileName);
+        return 1;
+    }
+
+    // Read number of celestial bodies
+    if (fread(&pSystem->numOfBodies, sizeof(pSystem->numOfBodies), 1, fp) != 1) {
+        printf("Failed to read number of celestial bodies.\n");
+        fclose(fp);
+        return 1;
+    }
+
+    // Allocate and load celestial bodies
+    pSystem->CelestialBodyArr = (CelestialBody **)malloc(pSystem->numOfBodies * sizeof(CelestialBody *));
+    if (pSystem->CelestialBodyArr == NULL) {
+        printf("Memory allocation failed for celestial bodies.\n");
+        fclose(fp);
+        return 1;
+    }
+
+    for (int i = 0; i < pSystem->numOfBodies; i++) {
+        pSystem->CelestialBodyArr[i] = (CelestialBody *)malloc(sizeof(CelestialBody));
+        if (pSystem->CelestialBodyArr[i] == NULL || loadCelestialBodyFromFileBin(pSystem->CelestialBodyArr[i], fp)) {
+            fclose(fp);
+            return 1;  // Return 1 for error
+        }
+    }
+
+    // Load the agency information
+    if (loadManagerFromFileBin(pAgency, fp)) {
+        fclose(fp);
+        return 1;  // Return 1 for error
+    }
+
+    fclose(fp);
+    return 0;
+}
+

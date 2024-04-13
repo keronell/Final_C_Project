@@ -45,57 +45,7 @@ void printSpaceAgency(const SpaceAgency *pAgency) {
 }
 
 
-int saveSpaceAgencyToFileBin(const SpaceAgency *pAgency, FILE *fp) {
-    if (pAgency == NULL || fp == NULL) {
-        printf("Invalid function parameter.\n");
-        return 0;
-    }
 
-    // Save the agency name if present
-    if (!writeStringToFile(pAgency->name, fp, "Error writing agency name.\n")) {
-        return 0;
-    }
-
-    // Save the expedition ID
-    if (!writeIntToFile(pAgency->expeditionID, fp, "Error writing agency expedition ID!\n")) {
-        return 0;
-    }
-
-    return 1;
-}
-
-int loadSpaceAgencyFromFileBin(SpaceAgency **pAgency, FILE *fp) {
-    if (fp == NULL) {
-        printf("File pointer is NULL.\n");
-        return 0;
-    }
-
-    *pAgency = (SpaceAgency*)malloc(sizeof(SpaceAgency));
-    if (*pAgency == NULL) {
-        printf("Memory allocation failed for SpaceAgency.\n");
-        return 0;
-    }
-
-    // Read the name of the agency
-    char* name = readStringFromFile(fp, "Failed to read agency name.\n");
-    if (name == NULL) {
-        free(*pAgency);
-        *pAgency = NULL;
-        return 0;
-    }
-    (*pAgency)->name = name;
-
-
-    // Read the expedition ID
-    if (!readIntFromFile(&(*pAgency)->expeditionID, fp, "Failed to read expedition ID.\n")) {
-        free((*pAgency)->name);
-        free(*pAgency);
-        *pAgency = NULL;
-        return 0;
-    }
-
-    return 1;
-}
 
 int saveSpaceAgencyToFileTxt(const SpaceAgency* pAgency, FILE* fp) {
     if (fp == NULL || pAgency == NULL) {
@@ -117,7 +67,7 @@ int loadSpaceAgencyFromFileTxt(SpaceAgency* pAgency, FILE* fp) {
     }
 
     // Read the agency name and the expedition ID in one go.
-    char nameBuffer[100];  // Increase size as needed
+    char nameBuffer[MAX_STR_LEN];  // Increase size as needed
     int expeditionID;
     if (fscanf(fp, "%99s %d", nameBuffer, &expeditionID) != 2) {  // Use %99s to prevent buffer overflow
         printf("Failed to read agency name and expedition ID from file.\n");
@@ -138,3 +88,63 @@ int loadSpaceAgencyFromFileTxt(SpaceAgency* pAgency, FILE* fp) {
 
     return 0;
 }
+
+int saveSpaceAgencyToFileBin(const SpaceAgency* pAgency, FILE* fp) {
+    if (fp == NULL || pAgency == NULL) {
+        fprintf(stderr, "Invalid file pointer or agency pointer.\n");
+        return 1; // Error
+    }
+
+    // Save the length of the agency name and the name itself
+    int nameLength = strlen(pAgency->name) + 1; // Include null terminator
+    if (fwrite(&nameLength, sizeof(nameLength), 1, fp) != 1 ||
+        fwrite(pAgency->name, sizeof(char), nameLength, fp) != nameLength) {
+        fprintf(stderr, "Failed to write agency name.\n");
+        return 1; // Error
+    }
+
+    // Save the expedition ID
+    if (fwrite(&pAgency->expeditionID, sizeof(pAgency->expeditionID), 1, fp) != 1) {
+        fprintf(stderr, "Failed to write expedition ID.\n");
+        return 1; // Error
+    }
+
+    return 0; // Success
+}
+
+int loadSpaceAgencyFromFileBin(SpaceAgency* pAgency, FILE* fp) {
+    if (fp == NULL || pAgency == NULL) {
+        printf("Invalid file pointer or agency pointer.\n");
+        return 1; // Error
+    }
+
+    // Read the length of the agency name and the name itself
+    int nameLength;
+    if (fread(&nameLength, sizeof(nameLength), 1, fp) != 1) {
+        printf("Failed to read the length of agency name.\n");
+        return 1; // Error
+    }
+
+    // Allocate memory for the agency name
+    pAgency->name = (char*)malloc(nameLength * sizeof(char));
+    if (pAgency->name == NULL) {
+        printf("Memory allocation failed for agency name.\n");
+        return 1; // Error
+    }
+
+    if (fread(pAgency->name, sizeof(char), nameLength, fp) != nameLength) {
+        printf("Failed to read agency name.\n");
+        free(pAgency->name);
+        return 1; // Error
+    }
+
+    // Read the expedition ID
+    if (fread(&pAgency->expeditionID, sizeof(pAgency->expeditionID), 1, fp) != 1) {
+        printf("Failed to read expedition ID.\n");
+        free(pAgency->name);
+        return 1; // Error
+    }
+
+    return 0; // Success
+}
+

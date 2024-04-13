@@ -88,77 +88,92 @@ int saveExpeditionToFileBin(const Expedition* expedition, FILE* fp)
 {
     if (expedition == NULL || fp == NULL) {
         printf("Invalid parameters for saving expedition.\n");
-        return 0;
+        return 1; // Error
     }
 
     // Write the Expedition ID
     if (fwrite(&expedition->id, sizeof(expedition->id), 1, fp) != 1) {
         printf("Failed to write expedition ID.\n");
-        return 0;
+        return 1; // Error
     }
 
     // Write the Expedition Type
     if (fwrite(&expedition->type, sizeof(expedition->type), 1, fp) != 1) {
         printf("Failed to write expedition type.\n");
-        return 0;
+        return 1; // Error
     }
 
     // Write the destination ID
-    if (writeIntToFile(expedition->destinationID,fp,  "Failed to write destination ID.\n") != 1) {
-        return 0;
+    if (writeIntToFile(expedition->destinationID, fp, "Failed to write destination ID.\n") != 1) {
+        return 1; // Error
     }
 
     // Write the start date
     if (fwrite(&expedition->startDate, sizeof(expedition->startDate), 1, fp) != 1) {
         printf("Failed to write start date.\n");
-        return 0;
+        return 1; // Error
     }
 
     // Write the duration of the expedition
-    if (writeIntToFile(expedition->duration,fp, "Failed to write duration.\n") != 1) {
-        return 0;
+    if (writeIntToFile(expedition->duration, fp, "Failed to write duration.\n") != 1) {
+        return 1; // Error
     }
 
-    return 1; // Success
+    return 0; // Success
 }
 
-int loadExpeditionFromFileBin(Expedition* expedition, FILE* fp)
-{
+
+int loadExpeditionFromFileBin(Expedition* expedition, FILE* fp) {
     if (expedition == NULL || fp == NULL) {
         printf("Invalid parameters for loading expedition.\n");
-        return 0;
+        return 1; // Error due to invalid parameters
     }
 
     // Read the Expedition ID
-    if (!readIntFromFile(&(expedition->id), fp, "Failed to read expedition ID.\n")) {
-        return 0;
+    if (fread(&(expedition->id), sizeof(expedition->id), 1, fp) != 1) {
+        printf("Failed to read expedition ID.\n");
+        return 1; // Return error
     }
 
     // Read the Expedition Type
-    if (!readIntFromFile((int*)&(expedition->type), fp, "Failed to read expedition type.\n")) {
-        return 0;
+    int typeTemp;
+    if (fread(&typeTemp, sizeof(typeTemp), 1, fp) != 1) {
+        printf("Failed to read expedition type.\n");
+        return 1; // Return error
+    }
+    expedition->type = (ExpeditionType)typeTemp; // Cast and assign to enum type
+
+    // Read the destination ID
+    if (fread(&(expedition->destinationID), sizeof(expedition->destinationID), 1, fp) != 1) {
+        printf("Failed to read destination ID.\n");
+        return 1; // Return error
     }
 
-    int destinationId;
-    if (!readIntFromFile(&expedition->destinationID, fp, "Failed to read destination ID.\n")) {
-        return 0;
+    // Read the start date components
+    if (fread(&(expedition->startDate.day), sizeof(expedition->startDate.day), 1, fp) != 1) {
+        printf("Failed to read start day.\n");
+        return 1; // Return error
     }
-    if (!readIntFromFile(&(expedition->startDate.day), fp, "Failed to read start day.\n")) {
-        return 0;
+    if (fread(&(expedition->startDate.month), sizeof(expedition->startDate.month), 1, fp) != 1) {
+        printf("Failed to read start month.\n");
+        return 1; // Return error
     }
-    if (!readIntFromFile(&(expedition->startDate.month), fp, "Failed to read start month.\n")) {
-        return 0;
-    }
-    if (!readIntFromFile(&(expedition->startDate.year), fp, "Failed to read start year.\n")) {
-        return 0;
-    }
-
-    if (!readIntFromFile(&(expedition->duration), fp, "Failed to read duration.\n")) {
-        return 0;
+    if (fread(&(expedition->startDate.year), sizeof(expedition->startDate.year), 1, fp) != 1) {
+        printf("Failed to read start year.\n");
+        return 1; // Return error
     }
 
-    return 1; // Success
+    // Read the duration of the expedition
+    if (fread(&(expedition->duration), sizeof(expedition->duration), 1, fp) != 1) {
+        printf("Failed to read duration.\n");
+        return 1; // Return error
+    }
+
+    return 0; // Success indicates all components were read without error
 }
+
+
+
 
 int saveExpeditionToFileTxt(const Expedition* pExpedition, FILE* fp) {
     if (!fp || !pExpedition) {

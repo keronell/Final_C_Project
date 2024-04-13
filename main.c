@@ -132,7 +132,7 @@ int dataLoadLogic(SpaceControlSystem *pSystem, Manager *pAgency)
         switch (choice) {
             case 1:
                 // Assuming loadSystemFromFileBin() is defined correctly elsewhere
-                if (loadSystemFromFileTxt(pSystem, pAgency, SystemDataBin)) {
+                if (loadSystemFromFileBin(pSystem, pAgency, SystemDataBin)) {
                     printf("Failed to load from binary file.\n");
                     return 1;
                 }
@@ -161,11 +161,9 @@ void dataSaveLogic(const SpaceControlSystem *pSystem, const Manager *pAgency)
 {
 
     if(saveSystemToFileTxt(pSystem, pAgency,SystemDataTxt))
-        printf("Failed to save in text file.\n");
+        printf("Failed to save in to text file.\n");
 
 
-//    if(saveSystemToFileBin(pSystem, pAgency. SystemDataBin))
-//    {
-//
-//    }
+    if(saveSystemToFileBin(pSystem, pAgency, SystemDataBin))
+        printf("Failed to save in to binary file.\n");
 }

@@ -5,6 +5,7 @@
 
 #include "CelestialBody.h"
 #include "StringToolBox.h"
+#include "FileManager.h"
 
 
 const char *str[eNofTypes] = {"Star", "Asteroid", "Planet"};
@@ -132,6 +133,46 @@ int loadCelestialBodyFromFile(CelestialBody *body, FILE *fp) {
     return 0; // Success
 }
 
+
+int saveCelestialBodyToFileBin(const CelestialBody *pBody, FILE *fp) {
+    if (fp == NULL || pBody == NULL) {
+        fprintf(stderr, "Error: Invalid file pointer or celestial body pointer.\n");
+        return 1;
+    }
+
+    // Write each component of CelestialBody to the file
+    if (!writeIntToFile(pBody->ID, fp, "Error writing celestial body ID.\n")) return 1;
+    if (!writeIntToFile(pBody->type, fp, "Error writing celestial body type.\n")) return 1;
+    if (!writeIntToFile(pBody->size, fp, "Error writing celestial body size.\n")) return 1;
+    if (!writeIntToFile(pBody->distance, fp, "Error writing celestial body distance.\n")) return 1;
+    if (!writeIntToFile(pBody->location.x, fp, "Error writing celestial body location x.\n")) return 1;
+    if (!writeIntToFile(pBody->location.y, fp, "Error writing celestial body location y.\n")) return 1;
+
+    return 0;  // Success
+}
+
+
+int loadCelestialBodyFromFileBin(CelestialBody *pBody, FILE *fp) {
+    if (fp == NULL || pBody == NULL) {
+        printf("Error: Invalid file pointer or celestial body pointer.\n");
+        return 1;
+    }
+
+    int tempType;
+
+    // Read each component of CelestialBody from the file
+    if (!readIntFromFile(&pBody->ID, fp, "Error reading celestial body ID.\n")) return 1;
+    if (!readIntFromFile(&tempType, fp, "Error reading celestial body type.\n")) return 1;
+    pBody->type = (CelestialBodyType)tempType; // Cast and assign to enum
+    if (!readIntFromFile(&pBody->size, fp, "Error reading celestial body size.\n")) return 1;
+    if (!readIntFromFile(&pBody->distance, fp, "Error reading celestial body distance.\n")) return 1;
+    if (!readIntFromFile(&pBody->location.x, fp, "Error reading celestial body location x.\n")) return 1;
+    if (!readIntFromFile(&pBody->location.y, fp, "Error reading celestial body location y.\n")) return 1;
+
+    return 0;
+}
+
+
 int compareBodyByDistance(const void *body1, const void *body2){
     const CelestialBody * pBody1 = *(const CelestialBody **)body1;
     const CelestialBody * pBody2 = *(const CelestialBody **)body2;
@@ -144,8 +185,8 @@ int compareBodyByType(const void *body1, const void *body2){
     return pBody1->type - pBody2->type;
 }
 
-int compareBodyByDate(const void *body1, const void *body2){
-    const CelestialBody * pBody1 = *(const CelestialBody **)body1;
-    const CelestialBody * pBody2 = *(const CelestialBody **)body2;
-    return compareDate(&pBody1->dateOfDiscovery,&pBody2->dateOfDiscovery);
+int compareBodyByDate(const void *body1, const void *body2) {
+    const CelestialBody *pBody1 = *(const CelestialBody **) body1;
+    const CelestialBody *pBody2 = *(const CelestialBody **) body2;
+    return compareDate(&pBody1->dateOfDiscovery, &pBody2->dateOfDiscovery);
 }

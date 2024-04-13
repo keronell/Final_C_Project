@@ -18,8 +18,8 @@ int     addExpedition(SpaceAgency *pAgency, Expedition* pExpedition);
 void freeSpaceAgency(SpaceAgency* agency);
 void    printSpaceAgency(const SpaceAgency* pAgency);
 
-int     saveSpaceAgencyToFileBin(const SpaceAgency* pAgency, FILE *fp);
-int loadSpaceAgencyFromFileBin(SpaceAgency** pAgency, FILE* fp);
+int saveSpaceAgencyToFileBin(const SpaceAgency* pAgency, FILE* fp);
+int loadSpaceAgencyFromFileBin(SpaceAgency* pAgency, FILE* fp);
 
 int saveSpaceAgencyToFileTxt(const SpaceAgency* pAgency, FILE* fp);
 int loadSpaceAgencyFromFileTxt(SpaceAgency* pAgency, FILE* fp);

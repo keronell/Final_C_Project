@@ -28,7 +28,7 @@ int saveSystemToFileTxt(const SpaceControlSystem *pSystem, const Manager *pAgenc
 int loadSystemFromFileTxt(SpaceControlSystem *pSystem, Manager *pAgency, const char *fileName);
 
 int saveSystemToFileBin(const SpaceControlSystem *pSystem, const Manager *pAgency, const char *fileName);
-int loadSystemFromFileBin(SpaceControlSystem *pSystem, Manager *pAgency, char *fileName);
+int loadSystemFromFileBin(SpaceControlSystem *pSystem, Manager *pAgency, const char *fileName) ;
 
 void findCelestialBody(const SpaceControlSystem *pSystem);
 void sortCelestialBody(SpaceControlSystem *pSystem);
