@@ -108,14 +108,14 @@ int loadSpaceAgencyToFileTxt(SpaceAgency* pAgency, FILE* fp)
 {
     if (pAgency == NULL || fp == NULL) {
         printf("Invalid parameters.\n");
-        return 0;
+        return 1;
     }
 
     // Read the agency name from the file
     pAgency->name = getStrExactNameFromFile("Reading Agency Name:", fp);
     if (pAgency->name == NULL) {
         printf("Failed to read agency name from file or name is not available.\n");
-        return 0;
+        return 1;
     }
 
     // Read the expedition ID from the file
@@ -123,13 +123,13 @@ int loadSpaceAgencyToFileTxt(SpaceAgency* pAgency, FILE* fp)
     if (fgets(buffer, sizeof(buffer), fp) == NULL) {
         printf("Failed to read expedition ID from file.\n");
         free(pAgency->name);
-        return 0;
+        return 1;
     }
     if (sscanf(buffer, "Expedition ID: %d", &pAgency->expeditionID) != 1) {
         printf("Expedition ID formatted incorrectly or missing.\n");
         free(pAgency->name);
-        return 0;
+        return 1;
     }
 
-    return 1; // Successfully loaded the agency data
+    return 0; // Successfully loaded the agency data
 }

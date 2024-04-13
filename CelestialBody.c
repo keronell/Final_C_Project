@@ -4,6 +4,7 @@
 #include <ctype.h>
 
 #include "CelestialBody.h"
+#include "StringToolBox.h"
 
 
 const char* str[eNofTypes] = {"Star", "Asteroid", "Planet"};
@@ -86,4 +87,30 @@ void    printCelestialBody(const CelestialBody* pBody) {
         printf("Type:\t\t%s\n", str[pBody->type]);
         printf("Location:\t(%d,%d)\n", pBody->location.x, pBody->location.y);
     }
+}
+
+void saveCelestialBodyToFileTxt(FILE* fp, const CelestialBody* pBody) {
+    if (fp == NULL || pBody == NULL) {
+        fprintf(stderr, "Error: Invalid file pointer or celestial body pointer.\n");
+        return;
+    }
+
+    // Print celestial body details to the file
+    fprintf(fp, "Celestial Body ID: %d\n", pBody->ID);
+    fprintf(fp, "Type: %s\n", str[pBody->type]); // Assumes 'str' is accessible here as well
+    fprintf(fp, "Size: %d km\n", pBody->size);
+    fprintf(fp, "Distance: %d light years\n", pBody->distance);
+    fprintf(fp, "Location: (%d, %d)\n\n", pBody->location.x, pBody->location.y);
+}
+
+int loadCelestialBodyFromFile(CelestialBody* body, FILE* fp) {
+    // Implement loading logic for a celestial body based on the format used in saveSystemToFileTxt
+    char buffer[MAX_STR_LEN];
+    if (fgets(buffer, sizeof(buffer), fp) == NULL) return 0; // Read body info line
+
+    // Example of parsing the celestial body data
+    sscanf(buffer, "ID: %d, Type: %d, Size: %d km, Distance: %d light years, Location: (%d,%d)\n",
+           &body->ID, &body->type, &body->size, &body->distance, &body->location.x, &body->location.y);
+
+    return 1;
 }

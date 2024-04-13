@@ -96,14 +96,14 @@ void displayMenu() {
     }
 
 
-    saveManagerToFileTxt(&agencyManager, AgencyManagerTxt);
-    printAgency(&agencyManager);
-    freeAgency(&agencyManager);
-    printf("Done!\n");
-    int i;
-    scanf("%d",&i);
-    loadManagerFromFileBin(&agencyManager,AgencyManagerTxt);
-    printAgency(&agencyManager);
+//    saveManagerToFileTxt(&agencyManager, AgencyManagerTxt);
+//    printAgency(&agencyManager);
+//    freeAgency(&agencyManager);
+//    printf("Done!\n");
+//    int i;
+//    scanf("%d",&i);
+//    loadManagerFromFileBin(&agencyManager,AgencyManagerTxt);
+//    printAgency(&agencyManager);
 
 
 }

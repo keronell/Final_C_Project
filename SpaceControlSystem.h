@@ -21,17 +21,23 @@ typedef struct {
 } SpaceControlSystem;
 
 int initSystem(SpaceControlSystem *pSystem);
-
 int addCelestialBody(SpaceControlSystem *pSystem, CelestialBody *newBody);
 
 void spaceMap();
-
 void freeAllAllocatedMemory(SpaceControlSystem *pSystem);
-
 void printSpaceControlSystem(const SpaceControlSystem *pSystem);
+
 
 void findCelestialBody (const SpaceControlSystem* pSystem);
 
 void sortCelestialBody (SpaceControlSystem* pSystem);
+
+int saveSystemToFileTxt(const SpaceControlSystem *pSystem, const Agency *pAgency, const char *fileName);
+int loadSystemFromFileTxt(SpaceControlSystem *pSystem, Agency *pAgency, const char *fileName);
+
+int saveSystemToFileBin(const SpaceControlSystem *pSystem, const Agency *pAgency, const char *fileName);
+int loadSystemFromFileBin(SpaceControlSystem *pSystem, Agency *pAgency, char *fileName);
+
+
 
 #endif //FINAL_C_PROJECT_SPACECONTROLSYSTEM_H
