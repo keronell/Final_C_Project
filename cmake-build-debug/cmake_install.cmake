@@ -1,4 +1,4 @@
-# Install script for directory: /Users/itaminoko/Documents/GitHub/Final_C_Project
+# Install script for directory: /Users/keronell/Desktop/Programming/C (ubuntu)/Final_project/Final_C_Project
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/Users/itaminoko/Documents/GitHub/Final_C_Project/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/Users/keronell/Desktop/Programming/C (ubuntu)/Final_project/Final_C_Project/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
