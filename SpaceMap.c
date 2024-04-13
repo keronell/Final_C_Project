@@ -9,7 +9,7 @@
 
 void addEarth(SpaceMap *spaceMap) {
     CelestialBody Earth = {0000, 1000, 0, spaceMap->rows / 2, spaceMap->cols / 2, ePlanet};
-    //addCelestialBodytoMap(spaceMap, &Earth);
+    addCelestialBodytoMap(spaceMap, &Earth);
 }
 
 int initSpaceMap(SpaceMap *spaceMap) {
@@ -27,19 +27,19 @@ int initSpaceMap(SpaceMap *spaceMap) {
     }
 
 
-    //addEarth(spaceMap);
+    addEarth(spaceMap);
 
     return 0;
 }
 
-//CelestialBody *iterateBodies(CelestialBody **allBodies, int length, int id) {
-//    for (int i = 0; i < length; i++) {
-//        CelestialBody *body = *(allBodies + i);
-//        if (body->ID == id) return body;
-//    }
-//    printf("cant locate object with such id");
-//    return NULL;
-//}
+CelestialBody *iterateBodies(CelestialBody **allBodies, int length, int id) {
+    for (int i = 0; i < length; i++) {
+        CelestialBody *body = *(allBodies + i);
+        if (body->ID == id) return body;
+    }
+    printf("cant locate object with such id");
+    return NULL;
+}
 
 int addCelestialBodytoMap(SpaceMap *spaceMap, CelestialBody *body) {
     if (!spaceMap || !body) {
@@ -171,13 +171,13 @@ void connectDotsWithoutCrossing(SpaceMap *matrix, Location dot1, Location dot2, 
 
 
 
-//void freeMatrix(SpaceMap *matrix) {
-//    for (int i = 0; i < matrix->rows; i++) {
-//        free(matrix->data[i]);
-//    }
-//    free(matrix->data);
-//    free(matrix);
-//}
+void freeMatrix(SpaceMap *matrix) {
+    for (int i = 0; i < matrix->rows; i++) {
+        free(matrix->data[i]);
+    }
+    free(matrix->data);
+    free(matrix);
+}
 
 
 
