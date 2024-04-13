@@ -284,24 +284,24 @@ void findCelestialBody(const SpaceControlSystem *pSystem) {
 
 }
 
-//void sortCelestialBody(SpaceControlSystem *pSystem) {
-//    pComp->flightSortOpt = showSortMenu();
-//    int (*compare)(const void *air1, const void *air2) = NULL;
-//
-//    switch (pComp->flightSortOpt) {
-//        case eSourceCode:
-//            compare = compareFlightBySourceCode;
-//            break;
-//        case eDestCode:
-//            compare = compareFlightByDestCode;
-//            break;
-//        case eDate:
-//            compare = compareFlightByDate;
-//            break;
-//    }
-//
-//    if (compare != NULL)
-//        qsort(pComp->flightArr, pComp->flightCount, sizeof(Flight * ), compare);
-//
-//}
-//
+void sortCelestialBody(SpaceControlSystem *pSystem) {
+    pSystem->sortOpt = showSortMenu();
+    int (*compare)(const void *air1, const void *air2) = NULL;
+
+    switch (pSystem->sortOpt) {
+        case eDistance:
+            compare = compareBodyByDistance;
+            break;
+        case eType:
+            compare = compareBodyByType;
+            break;
+        case eDate:
+            compare = compareBodyByDate;
+            break;
+    }
+
+    if (compare != NULL)
+        qsort(pSystem->CelestialBodyArr, pSystem->numOfBodies, sizeof(CelestialBody * ), compare);
+
+}
+

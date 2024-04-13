@@ -21,6 +21,8 @@ typedef struct {
 
 } SpaceControlSystem;
 
+
+
 eSortOption showSortMenu();
 
 int initSystem(SpaceControlSystem *pSystem);

@@ -14,6 +14,7 @@ void	getCorrectDate(Date* pDate);
 int		checkDate(char* date, Date* pDate);
 void	printDate(const Date* pDate);
 char*   createDateString(const Date* pDate);
+int		compareDate(const void* d1, const void* d2);
 
 int		 equalDate(const Date* pDate1, const Date* pDate2);
 #endif

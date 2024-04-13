@@ -2,46 +2,52 @@
 #define FINAL_C_PROJECT_CELESTIALBODY_H
 
 
-
 #include "Location.h"
 #include "Date.h"
 
-typedef enum
-{
+typedef enum {
     eStar, eAsteroid, ePlanet, eNofTypes
 } CelestialBodyType;
 
 
-typedef struct
-{
-    int                 ID;
-    int                 size;
-    int                 distance;
-    Date                dateOfDiscovery;
-    Location            location;
-    CelestialBodyType   type;
-}CelestialBody;
+typedef struct {
+    int ID;
+    int size;
+    int distance;
+    Date dateOfDiscovery;
+    Location location;
+    CelestialBodyType type;
+} CelestialBody;
 
 
+int getUniqueID();
+
+int getSize();
+
+int initCelestialBody(CelestialBody *pBody);
+
+int getDistance(CelestialBody *body);
+
+void getLocation(CelestialBody *pBody);
+
+CelestialBodyType chooseCelestialBodyType();
+
+void printCBody(CelestialBody *CBody);
 
 
-int     initCelestialBody(CelestialBody* pBody);
-int     getDistance(CelestialBody* body);
-void    getLocation(CelestialBody* pBody);
-CelestialBodyType   chooseCelestialBodyType();
-void    printCBody (CelestialBody* CBody);
+void freeCelestialBody(CelestialBody *pBody);
+
+void printCelestialBody(const CelestialBody *pBody);
+
+void saveCelestialBodyToFileTxt(FILE *fp, const CelestialBody *pBody);
+
+int loadCelestialBodyFromFile(CelestialBody *body, FILE *fp);
 
 
-void    freeCelestialBody(CelestialBody* pBody);
+int compareBodyByDistance(const void *body1, const void *body2);
 
-void    printCelestialBody(const CelestialBody* pBody);
+int compareBodyByDate(const void *body1, const void *body2);
 
-void    saveCelestialBodyToFileTxt(FILE* fp, const CelestialBody* pBody);
-int     loadCelestialBodyFromFile(CelestialBody* body, FILE* fp);
+int compareBodyByType(const void *body1, const void *body2);
 
-
-
-int	    compareBodyByDistance(const void* body1, const void* body2);
-int		compareBodyByDate(const void* body1, const void* body2);
-int		compareBodyByType(const void* body1, const void* body2);
 #endif //FINAL_C_PROJECT_CELESTIALBODY_H
