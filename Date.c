@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <time.h>
 #include "Date.h"
 #include "StringToolBox.h"
 
@@ -13,7 +14,7 @@ void getCorrectDate(Date* pDate) {
     int ok = 1;
 
     do {
-        puts("Enter Flight Date dd/mm/yyyy\t");
+        puts("Enter Date dd/mm/yyyy\t");
         fflush(stdin); // Flush the input buffer to remove any leftover newline characters
         myGets(date, MAX_STR_LEN, stdin);
         ok = checkDate(date, pDate);
@@ -88,4 +89,23 @@ int		compareDate(const void* d1, const void* d2){
         return -1;
 
     return 0;
+}
+
+void setCurrentDate(Date* datePtr) {
+    if (datePtr == NULL) {
+        printf("Error: NULL pointer received.\n");
+        return;
+    }
+
+    time_t now;
+    struct tm* localTime;
+
+    // Get the current time
+    now = time(NULL);
+    localTime = localtime(&now);
+
+    // Update the fields of the Date struct with the current date
+    datePtr->day = localTime->tm_mday;
+    datePtr->month = localTime->tm_mon + 1;  // tm_mon is 0-indexed, so add 1
+    datePtr->year = localTime->tm_year + 1900;  // tm_year is years since 1900
 }

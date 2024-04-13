@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "GeneralList.h"
+#include "Expedition.h"
 
 
 //////////////////////////////////////////
@@ -35,7 +36,7 @@ NODE* L_insert(NODE* pNode, DATA Value)
 {
 	NODE* tmp;
 
-	if ( !pNode ) 
+	if ( !pNode )
 		return NULL;
 
 	tmp = (NODE*)malloc(sizeof(NODE));	// new node

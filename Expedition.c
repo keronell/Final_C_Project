@@ -76,11 +76,11 @@ void printExpedition (Expedition* expedition){
         return;
     }
     printf("____________________\n");
-    printf("mission:\nid: %d\n", expedition->id);
-    printf("type: %s\n", ExpeditionTypesStr[expedition->type]);
-    printf("target: %d\n", expedition->destinationID);
-    printf("start: %d##%d##%d\n", expedition->startDate.day, expedition->startDate.month, expedition->startDate.year);
-    printf("duration: %d", expedition->duration);
+    printf("Expedition:\nid: %d\n", expedition->id);
+    printf("Goal: %s\n", ExpeditionTypesStr[expedition->type]);
+    printf("Destination ID: %d\n", expedition->destinationID);
+    printf("Expedition starts: %d/%d/%d\n", expedition->startDate.day, expedition->startDate.month, expedition->startDate.year);
+    printf("Duration: %d\n", expedition->duration);
 }
 
 
@@ -163,10 +163,19 @@ int loadExpeditionFromFileBin(Expedition* expedition, FILE* fp)
 int saveExpeditionToFileTxt(const Expedition* pExpedition, FILE* fp) {
     if (!fp || !pExpedition) {
         printf("Invalid file pointer or expedition data.\n");
-        return 1; // Return 1 for error
+        return 1; // Error
     }
 
-    // Write expedition data separated by spaces
+    // Detailed debug output to trace the source of bad values
+    printf("Debug: Saving Expedition ID %d, Duration %d, Dest ID %d, Type %d, Date %d-%d-%d\n",
+           pExpedition->id,
+           pExpedition->duration,
+           pExpedition->destinationID,
+           pExpedition->type,
+           pExpedition->startDate.year,
+           pExpedition->startDate.month,
+           pExpedition->startDate.day);
+
     if (fprintf(fp, "%d %d %d %d %d-%d-%d\n",
                 pExpedition->id,
                 pExpedition->duration,
@@ -176,9 +185,9 @@ int saveExpeditionToFileTxt(const Expedition* pExpedition, FILE* fp) {
                 pExpedition->startDate.month,
                 pExpedition->startDate.day) < 0) {
         printf("Failed to write expedition data to file.\n");
-        return 1; // Return 1 for error
+        return 1;
     }
-    return 0; // Return 0 for success
+    return 0;
 }
 int loadExpeditionFromFileTxt(Expedition* expedition, FILE* fp) {
     if (!fp || !expedition) {

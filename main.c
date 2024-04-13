@@ -83,8 +83,7 @@ int main() {
                 printAgencyManager(&pManager);
                 break;
             case 5:
-                printf("Printing the Expedition List...\n");
-                // Call printExpeditionList() here
+                printExpeditionList( &pManager);
                 break;
             case 6:
                 printf("Printing the Celestial Bodies DataBase...\n");

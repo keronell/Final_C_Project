@@ -15,6 +15,7 @@ int		checkDate(char* date, Date* pDate);
 void	printDate(const Date* pDate);
 char*   createDateString(const Date* pDate);
 int		compareDate(const void* d1, const void* d2);
+void setCurrentDate(Date* datePtr);
 
 int		 equalDate(const Date* pDate1, const Date* pDate2);
 #endif

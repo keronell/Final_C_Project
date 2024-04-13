@@ -238,6 +238,7 @@ CMakeFiles/Final_C_Project.dir/Date.c.o: /Users/keronell/Desktop/Programming/C\ 
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/sys/_pthread/_pthread_types.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/sys/_symbol_aliasing.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/sys/_types.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/sys/_types/_clock_t.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/sys/_types/_ct_rune_t.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/sys/_types/_dev_t.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/sys/_types/_errno_t.h \
@@ -258,6 +259,8 @@ CMakeFiles/Final_C_Project.dir/Date.c.o: /Users/keronell/Desktop/Programming/C\ 
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/sys/_types/_sigset_t.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/sys/_types/_size_t.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/sys/_types/_ssize_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/sys/_types/_time_t.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/sys/_types/_timespec.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/sys/_types/_timeval.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/sys/_types/_u_int16_t.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/sys/_types/_u_int32_t.h \
@@ -274,6 +277,7 @@ CMakeFiles/Final_C_Project.dir/Date.c.o: /Users/keronell/Desktop/Programming/C\ 
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/sys/signal.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/sys/stdio.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/sys/wait.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/time.h \
   /Library/Developer/CommandLineTools/usr/lib/clang/15.0.0/include/stdint.h \
   /Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/Date.h \
   /Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/StringToolBox.h
@@ -537,7 +541,11 @@ CMakeFiles/Final_C_Project.dir/GeneralList.c.o: /Users/keronell/Desktop/Programm
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/sys/stdio.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/sys/wait.h \
   /Library/Developer/CommandLineTools/usr/lib/clang/15.0.0/include/stdint.h \
-  /Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/GeneralList.h
+  /Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/CelestialBody.h \
+  /Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/Date.h \
+  /Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/Expedition.h \
+  /Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/GeneralList.h \
+  /Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/Location.h
 
 CMakeFiles/Final_C_Project.dir/Location.c.o: /Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/Location.c \
   /Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/Location.h
@@ -1067,6 +1075,10 @@ CMakeFiles/Final_C_Project.dir/main.c.o: /Users/keronell/Desktop/Programming/C\ 
 
 /Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/Expedition.c:
 
+/Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/time.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/sys/_types/_timespec.h:
+
 /Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/Date.c:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/runetype.h:
@@ -1173,6 +1185,8 @@ CMakeFiles/Final_C_Project.dir/main.c.o: /Users/keronell/Desktop/Programming/C\ 
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/_stdio.h:
 
+/Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/sys/_types/_time_t.h:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/alloca.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/stdlib.h:
@@ -1204,6 +1218,8 @@ CMakeFiles/Final_C_Project.dir/main.c.o: /Users/keronell/Desktop/Programming/C\ 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/sys/_endian.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/arm/endian.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/sys/_types/_clock_t.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/secure/_common.h:
 

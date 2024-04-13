@@ -204,7 +204,7 @@ int saveManagerToFileTxt(FILE *fp, const Manager* pAgency) {
     }
 
     // Save each expedition directly
-    NODE* currentNode = pAgency->expeditionList.head.next;
+    NODE* currentNode = pAgency->expeditionList.head.next;  // Start from the first actual node after the dummy head node
     while (currentNode != NULL) {
         if (saveExpeditionToFileTxt(currentNode->key, fp)) {
             return 1;  // Return error if saving fails
@@ -255,13 +255,18 @@ int loadManagerFromFileTxt(Manager *pAgency, FILE* fp) {
             free(newNode);
             return 1;
         }
-        if (!loadExpeditionFromFileTxt((Expedition*)newNode->key, fp)) {
+
+
+
+        pAgency->numOfExpeditions++;
+        if (loadExpeditionFromFileTxt((Expedition*)newNode->key, fp)) {
             printf("Failed to load expedition.\n");
             free(newNode->key);
             free(newNode);
             return 1;
         }
-        L_insert(&(pAgency->expeditionList.head), newNode);
+        newNode->next = pAgency->expeditionList.head.next;
+        pAgency->expeditionList.head.next = newNode;
     }
 
     return 0;
@@ -300,5 +305,31 @@ void printAgencyManager(const Manager* pAgency)
             printExpedition((Expedition*)currentNode->key);
             currentNode = currentNode->next;
         }
+    }
+}
+
+void printExpeditionList(Manager* pAgency)
+{
+    if (pAgency == NULL) {
+        printf("Error: Manager pointer is NULL.\n");
+        return;
+    }
+
+    if (pAgency->expeditionList.head.next == NULL) {
+        printf("No expeditions in the list.\n");
+        return;
+    }
+
+    printf("Expedition List:\n");
+    NODE* currentNode = pAgency->expeditionList.head.next;
+    int count = 0;
+    while (currentNode != NULL) {
+        printf("Expedition %d:\n", ++count);
+        if (currentNode->key != NULL) {
+            printExpedition((Expedition*)currentNode->key);
+        } else {
+            printf("  Warning: Null expedition data.\n");
+        }
+        currentNode = currentNode->next;
     }
 }

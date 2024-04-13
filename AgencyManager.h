@@ -24,7 +24,7 @@ int saveManagerToFileTxt(FILE *fp, const Manager* pAgency);
 int loadManagerFromFileTxt(Manager *pAgency, FILE* fp);
 
 void printAgencyManager(const Manager* pAgency);
-
+void printExpeditionList(Manager* pAgency);
 
 
 #endif //FINAL_C_PROJECT_AGENCYMANAGER_H

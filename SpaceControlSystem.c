@@ -104,6 +104,17 @@ int addExpeditionToAgency(Manager *pAgency, SpaceControlSystem *pSystem) {
     }
 
     initExpedition(newExpedition, pSystem->CelestialBodyArr[bodyIndex]);
+
+    NODE* newNode = (NODE*) malloc(sizeof(NODE));
+    if (newNode == NULL) {
+        printf("Failed to allocate memory for new list node.\n");
+        free(newExpedition);
+        return -1;
+    }
+    newNode->key = newExpedition;
+    newNode->next = pAgency->expeditionList.head.next;
+    pAgency->expeditionList.head.next = newNode;
+    printExpedition(newExpedition);
     pAgency->agencyArr[agencyIndex]->expeditionID = newExpedition->id;
     pAgency->numOfExpeditions++;
     printf("Expedition successfully added to Manager '%s'.\n", pAgency->agencyArr[agencyIndex]->name);

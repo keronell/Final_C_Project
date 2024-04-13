@@ -14,7 +14,7 @@ int initCelestialBody(CelestialBody *pBody) {
     pBody->ID = getUniqueID();
     pBody->size = getSize();
     pBody->distance = getDistance();
-    getCorrectDate(&pBody->dateOfDiscovery);
+    setCurrentDate(&pBody->dateOfDiscovery);
     getLocation(pBody);
     pBody->type = chooseCelestialBodyType();
 

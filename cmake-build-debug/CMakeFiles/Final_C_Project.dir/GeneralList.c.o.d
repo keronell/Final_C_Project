@@ -78,4 +78,8 @@ CMakeFiles/Final_C_Project.dir/GeneralList.c.o: \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/malloc/_ptrcheck.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/sys/_types/_dev_t.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX14.4.sdk/usr/include/sys/_types/_mode_t.h \
-  /Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/./GeneralList.h
+  /Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/./GeneralList.h \
+  /Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/./Expedition.h \
+  /Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/./Date.h \
+  /Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/./CelestialBody.h \
+  /Users/keronell/Desktop/Programming/C\ (ubuntu)/Final_project/Final_C_Project/./Location.h
