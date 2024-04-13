@@ -24,7 +24,7 @@ int initSystem(SpaceControlSystem *pSystem) {
     // Set a default sorting option
     pSystem->sortOpt = eNone; // Or any other default sorting option
 
-    //initSpaceMap(&pSystem->spaceMap); // alex added it
+    initSpaceMap(&pSystem->spaceMap);
 
 
     return 0; // Success
@@ -197,6 +197,7 @@ int saveSystemToFileTxt(const SpaceControlSystem *pSystem, const Manager *pAgenc
 }
 
 int loadSystemFromFileTxt(SpaceControlSystem *pSystem, Manager *pAgency, const char *fileName) {
+    initSpaceMap(&pSystem->spaceMap);
     FILE *fp = fopen(fileName, "r");
     if (!fp) {
         printf("Cannot open file ('%s') for reading.\n", fileName);
@@ -218,6 +219,8 @@ int loadSystemFromFileTxt(SpaceControlSystem *pSystem, Manager *pAgency, const c
         return 1;
     }
 
+    addEarth(&pSystem->spaceMap);
+
     for (int i = 0; i < pSystem->numOfBodies; i++) {
         pSystem->CelestialBodyArr[i] = (CelestialBody*) malloc(sizeof(CelestialBody));
         if (pSystem->CelestialBodyArr[i] == NULL) {
@@ -230,6 +233,7 @@ int loadSystemFromFileTxt(SpaceControlSystem *pSystem, Manager *pAgency, const c
             fclose(fp);
             return 1;
         }
+        addCelestialBodytoMap(&pSystem->spaceMap, pSystem->CelestialBodyArr[i]);
     }
 
     if (loadManagerFromFileTxt(pAgency, fp)) {
@@ -240,6 +244,7 @@ int loadSystemFromFileTxt(SpaceControlSystem *pSystem, Manager *pAgency, const c
 
     fclose(fp);
     return 0;
+
 }
 
 
@@ -356,6 +361,7 @@ int saveSystemToFileBin(const SpaceControlSystem *pSystem, const Manager *pAgenc
 }
 
 int loadSystemFromFileBin(SpaceControlSystem *pSystem, Manager *pAgency, const char *fileName) {
+    initSpaceMap(&pSystem->spaceMap);
     FILE *fp = fopen(fileName, "rb");  // Open the file in binary read mode
     if (!fp) {
         printf("Cannot open file ('%s') for reading.\n", fileName);
@@ -377,12 +383,16 @@ int loadSystemFromFileBin(SpaceControlSystem *pSystem, Manager *pAgency, const c
         return 1;
     }
 
+    addEarth(&pSystem->spaceMap);
+
     for (int i = 0; i < pSystem->numOfBodies; i++) {
         pSystem->CelestialBodyArr[i] = (CelestialBody *)malloc(sizeof(CelestialBody));
         if (pSystem->CelestialBodyArr[i] == NULL || loadCelestialBodyFromFileBin(pSystem->CelestialBodyArr[i], fp)) {
             fclose(fp);
             return 1;  // Return 1 for error
         }
+
+        addCelestialBodytoMap(&pSystem->spaceMap, pSystem->CelestialBodyArr[i]);
     }
 
     // Load the agency information

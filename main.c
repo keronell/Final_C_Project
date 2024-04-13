@@ -100,6 +100,9 @@ int main() {
                 printf("Sorting Celestial Bodies...\n");
                 // Call sortCelestialBodies() here
                 break;
+            case 10:
+                printSpaceMap(&pSystem.spaceMap);
+                break;
             case 0:
                 printf("Saving current Data and exiting...\n");
                 dataSaveLogic(&pSystem,&pManager);

@@ -10,9 +10,8 @@ void addEarth(SpaceMap *spaceMap) {
 }
 
 int initSpaceMap(SpaceMap *spaceMap) {
-    int size;
-    printf("\n\nMap Initialization\nenter size: ");
-    size = getPositveInt(10);
+    int size = 100;
+
     spaceMap->rows = size;
     spaceMap->cols = size;
 
