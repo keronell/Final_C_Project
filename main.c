@@ -12,7 +12,7 @@
 
 
 
-void welcomeScreen(SpaceControlSystem *pSystem, Agency *pAgency)
+void welcomeScreen(SpaceControlSystem *pSystem, Manager *pAgency)
 {
     printf("\n--- Welcome to Space Control System  ---\n");
     if(dataLoadLogic(pSystem, pAgency)) {
@@ -21,7 +21,7 @@ void welcomeScreen(SpaceControlSystem *pSystem, Agency *pAgency)
             printf("Failed to initialize System!\n");
             return;
         } else if(initAgency(pAgency)){
-            printf("Failed to initialize Agency manager!\n");
+            printf("Failed to initialize Manager manager!\n");
             return;
         }
     }
@@ -33,7 +33,7 @@ void displayMenu()
 {
 
     printf("1. Add Celestial body.\n");
-    printf("2. Add agency to Agency Manager.\n");
+    printf("2. Add agency to Manager Manager.\n");
     printf("3. Start new Expedition.\n");
     printf("4. Print all Agencies.\n");
     printf("5. Print Expedition list.\n");
@@ -41,6 +41,7 @@ void displayMenu()
     printf("7. Print all System Data.\n");
     printf("8. Search for Celestial body in DataBase.\n");
     printf("9. Sort Celestial Bodies.\n");
+    printf("10. Show map of Celestial Bodies.\n");
     printf("0. Save current Data and EXIT.\n");
 
 }
@@ -50,7 +51,7 @@ void displayMenu()
 int main() {
 
     SpaceControlSystem pSystem;
-    Agency pManager;
+    Manager pManager;
 
     welcomeScreen(&pSystem,&pManager);
     int choice;
@@ -72,7 +73,7 @@ int main() {
                 break;
             case 2:
                 if(addSpaceAgency(&pManager))
-                    printf("Failed to add new Agency to Manager!\n");
+                    printf("Failed to add new Manager to Manager!\n");
                 break;
             case 3:
                 if(addExpeditionToAgency(&pManager,&pSystem))
@@ -117,7 +118,7 @@ int main() {
 }
 
 
-int dataLoadLogic(SpaceControlSystem *pSystem, Agency *pAgency)
+int dataLoadLogic(SpaceControlSystem *pSystem, Manager *pAgency)
 {
     int choice = -1;
 
@@ -157,7 +158,7 @@ int dataLoadLogic(SpaceControlSystem *pSystem, Agency *pAgency)
     return 1;
 }
 
-void dataSaveLogic(const SpaceControlSystem *pSystem, const Agency *pAgency)
+void dataSaveLogic(const SpaceControlSystem *pSystem, const Manager *pAgency)
 {
 
     if(saveSystemToFileTxt(pSystem, pAgency,SystemDataTxt))

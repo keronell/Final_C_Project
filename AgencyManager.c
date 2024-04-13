@@ -5,7 +5,7 @@
 #include "FileManager.h"
 #include "StringToolBox.h"
 
-int initAgency(Agency* pAgency)
+int initAgency(Manager* pAgency)
 {
     if (pAgency == NULL)
         return 1;
@@ -21,7 +21,7 @@ int initAgency(Agency* pAgency)
     return 0;
 }
 
-int addSpaceAgency(Agency* pAgency)
+int addSpaceAgency(Manager* pAgency)
 {
     SpaceAgency* newAgency = (SpaceAgency*)malloc(sizeof(SpaceAgency));
     if (newAgency == NULL) {
@@ -48,7 +48,7 @@ int addSpaceAgency(Agency* pAgency)
     return 0;
 }
 
-void freeAgencyManager(Agency* pAgency) {
+void freeAgencyManager(Manager* pAgency) {
 
     if (pAgency == NULL) {
         return;
@@ -69,12 +69,12 @@ void freeAgencyManager(Agency* pAgency) {
     pAgency->agencyCounter = 0;
     pAgency->numOfExpeditions = 0;
 }
-//int		saveManagerToFileBin(const Agency* pAgency, const char* fileName)
+//int		saveManagerToFileBin(const Manager* pAgency, const char* fileName)
 //{
 //    FILE* fp;
 //    fp = fopen(fileName, "wb");
 //    if (!fp) {
-//        printf("Error open Agency file to write\n");
+//        printf("Error open Manager file to write\n");
 //        return 0;
 //    }
 //
@@ -105,11 +105,11 @@ void freeAgencyManager(Agency* pAgency) {
 //    return 1;
 //}
 //
-//int loadManagerFromFileBin(Agency* pAgency, const char* fileName) {
+//int loadManagerFromFileBin(Manager* pAgency, const char* fileName) {
 //    FILE* fp;
 //    fp = fopen(fileName, "rb");  // Open file in binary read mode
 //    if (!fp) {
-//        printf("Error open Agency file to read\n");
+//        printf("Error open Manager file to read\n");
 //        return 0;
 //    }
 //
@@ -182,7 +182,7 @@ void freeAgencyManager(Agency* pAgency) {
 //    fclose(fp);
 //    return 1;
 //}
-int saveManagerToFileTxt(FILE *fp, const Agency* pAgency) {
+int saveManagerToFileTxt(FILE *fp, const Manager* pAgency) {
     // Write only the number of agencies and expeditions directly
     if (fp == NULL || pAgency == NULL) {
         fprintf(stderr, "Invalid file pointer or agency pointer.\n");
@@ -213,7 +213,7 @@ int saveManagerToFileTxt(FILE *fp, const Agency* pAgency) {
     }
     return 0;
 }
-int loadManagerFromFileTxt(Agency *pAgency, FILE* fp) {
+int loadManagerFromFileTxt(Manager *pAgency, FILE* fp) {
     int numOfExpeditions;
     // Read only the number of agencies and expeditions directly
     if (fscanf(fp, "%d %d", &pAgency->agencyCounter, &numOfExpeditions) != 2) {
@@ -267,13 +267,13 @@ int loadManagerFromFileTxt(Agency *pAgency, FILE* fp) {
     return 0;
 }
 
-void printAgencyManager(const Agency* pAgency)
+void printAgencyManager(const Manager* pAgency)
 {
     if (pAgency == NULL) {
-        printf("Error: Agency Manager pointer is NULL.\n");
+        printf("Error: Manager Manager pointer is NULL.\n");
     } else {
-        // Print details about the Agency Manager
-        printf("Agency Manager Details:\n");
+        // Print details about the Manager Manager
+        printf("Manager Manager Details:\n");
         printf("Total Agencies Managed: %d\n", pAgency->agencyCounter);
         printf("Total Expeditions Managed: %d\n\n", pAgency->numOfExpeditions);
 
@@ -281,11 +281,11 @@ void printAgencyManager(const Agency* pAgency)
         for (int i = 0; i < pAgency->agencyCounter; i++) {
             SpaceAgency* agency = pAgency->agencyArr[i];
             if (agency != NULL) {
-                printf("Agency %d Details:\n", i + 1);
+                printf("Manager %d Details:\n", i + 1);
                 printSpaceAgency(agency);
                 printf("\n");
             } else {
-                printf("Agency %d: [Data Not Available]\n", i + 1);
+                printf("Manager %d: [Data Not Available]\n", i + 1);
             }
         }
 

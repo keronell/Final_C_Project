@@ -52,25 +52,25 @@ int addCelestialBody(SpaceControlSystem *pSystem) {
     pSystem->CelestialBodyArr[pSystem->numOfBodies] = newBody;
     pSystem->numOfBodies++;
 
-    //addCelestialBodytoMap(&pSystem->spaceMap, newBody); // Adding each new body to the spaceMap
+    addCelestialBodytoMap(&pSystem->spaceMap, newBody); // Adding each new body to the spaceMap
     return 0; // Success
 }
 
-int addExpeditionToAgency(Agency *pAgency, SpaceControlSystem *pSystem) {
+int addExpeditionToAgency(Manager *pAgency, SpaceControlSystem *pSystem) {
     printAgencyManager(pAgency);
     int agencyIndex = -1;
     while (agencyIndex < 1 || agencyIndex > pAgency->agencyCounter) {
-        printf("To which Agency you want to add an Expedition? Enter index (1 to %d): \n", pAgency->agencyCounter);
+        printf("To which Manager you want to add an Expedition? Enter index (1 to %d): \n", pAgency->agencyCounter);
         scanf("%d", &agencyIndex);
         if (agencyIndex < 1 || agencyIndex > pAgency->agencyCounter) {
-            printf("Invalid Agency index. Please try again.\n");
+            printf("Invalid Manager index. Please try again.\n");
         } else {
             agencyIndex--; // Adjust for zero-indexed array
         }
     }
 
     if (pAgency->agencyArr[agencyIndex] == NULL) {
-        printf("Selected Agency is not available.\n");
+        printf("Selected Manager is not available.\n");
         return -1;
     }
 
@@ -98,12 +98,12 @@ int addExpeditionToAgency(Agency *pAgency, SpaceControlSystem *pSystem) {
     }
 
     initExpedition(newExpedition, pSystem->CelestialBodyArr[bodyIndex]);
-    printf("Expedition successfully added to Agency '%s'.\n", pAgency->agencyArr[agencyIndex]->name);
+    printf("Expedition successfully added to Manager '%s'.\n", pAgency->agencyArr[agencyIndex]->name);
     return 0;
 }
 
 
-void freeSystem(SpaceControlSystem *pSystem, Agency *pAgency) {
+void freeSystem(SpaceControlSystem *pSystem, Manager *pAgency) {
     if (pSystem->CelestialBodyArr != NULL) {
         for (int i = 0; i < pSystem->numOfBodies; i++) {
             if (pSystem->CelestialBodyArr[i] != NULL) {
@@ -123,7 +123,7 @@ void freeSystem(SpaceControlSystem *pSystem, Agency *pAgency) {
 }
 
 
-void printSpaceControlSystem(const SpaceControlSystem *pSystem, const Agency* pAgency) {
+void printSpaceControlSystem(const SpaceControlSystem *pSystem, const Manager* pAgency) {
     if (pSystem == NULL) {
         printf("Error: SpaceControlSystem pointer is NULL.\n");
         return;
@@ -143,7 +143,7 @@ void printSpaceControlSystem(const SpaceControlSystem *pSystem, const Agency* pA
     printAgencyManager(pAgency);
 }
 
-int saveSystemToFileTxt(const SpaceControlSystem *pSystem, const Agency *pAgency, const char *fileName) {
+int saveSystemToFileTxt(const SpaceControlSystem *pSystem, const Manager *pAgency, const char *fileName) {
     if (pSystem == NULL) {
         printf("System is not initialized!\n");
         return 1;
@@ -176,7 +176,7 @@ int saveSystemToFileTxt(const SpaceControlSystem *pSystem, const Agency *pAgency
     return 0;
 }
 
-int loadSystemFromFileTxt(SpaceControlSystem *pSystem, Agency *pAgency, const char *fileName) {
+int loadSystemFromFileTxt(SpaceControlSystem *pSystem, Manager *pAgency, const char *fileName) {
     FILE *fp = fopen(fileName, "r");
     if (!fp) {
         printf("Cannot open file ('%s') for reading.\n", fileName);
@@ -236,64 +236,68 @@ eSortOption showSortMenu() {
 }
 
 
-//void findCelestialBody(const SpaceControlSystem *pSystem) {
-//    int (*compare)(const void *air1, const void *air2) = NULL;
-//    CelestialBody b = {0};
-//    CelestialBody *pBody = &b;
-//
-//    switch (pSystem->sortOpt) {
-//        case eDistance:
-//            printf("%s\t", "Origin:");
-//            b.distance = getPositveInt(0);
-//            compare = compareBodyByDistance;
-//            break;
-//
-//        case eType:
-//            printf("%s\t", "Destination:");
-//            b.type = chooseCelestialBodyType();
-//            compare = compareBodyByType;
-//            break;
-//
-//        case eDate:
-//            getCorrectDate(&b.dateOfDiscovery);
-//            compare = compareBodyByDate;
-//            break;
-//
-//    }
-//
-//    if (compare != NULL) {
-//        CelestialBody **pBodies = bsearch(&pBody, pSystem->CelestialBodyArr, pSystem->numOfBodies,
-//                                          sizeof(CelestialBody *), compare);
-//        if (pBodies == NULL)
-//            printf("Flight was not found\n");
-//        else {
-//            printf("Flight found, ");
-//            printCelestialBody(pBody);
-//        }
-//    } else {
-//        printf("The search cannot be performed, array not sorted\n");
-//    }
-//
-//}
+void findCelestialBody(const SpaceControlSystem *pSystem) {
+    int (*compare)(const void *air1, const void *air2) = NULL;
+    CelestialBody b = {0};
+    CelestialBody *pBody = &b;
 
-//void sortCelestialBody(SpaceControlSystem *pSystem) {
-//    pComp->flightSortOpt = showSortMenu();
-//    int (*compare)(const void *air1, const void *air2) = NULL;
-//
-//    switch (pComp->flightSortOpt) {
-//        case eSourceCode:
-//            compare = compareFlightBySourceCode;
-//            break;
-//        case eDestCode:
-//            compare = compareFlightByDestCode;
-//            break;
-//        case eDate:
-//            compare = compareFlightByDate;
-//            break;
-//    }
-//
-//    if (compare != NULL)
-//        qsort(pComp->flightArr, pComp->flightCount, sizeof(Flight * ), compare);
-//
-//}
-//
+    switch (pSystem->sortOpt) {
+        case eDistance:
+            printf("%s\t", "Origin:");
+            b.distance = getPositveInt(0);
+            compare = compareBodyByDistance;
+            break;
+
+        case eType:
+            printf("%s\t", "Destination:");
+            b.type = chooseCelestialBodyType();
+            compare = compareBodyByType;
+            break;
+
+        case eDate:
+            getCorrectDate(&b.dateOfDiscovery);
+            compare = compareBodyByDate;
+            break;
+        default:
+            printf("cant find as the array is not sorted");
+            return;
+
+    }
+
+    if (compare != NULL) {
+        CelestialBody **pBodies = bsearch(&pBody, pSystem->CelestialBodyArr, pSystem->numOfBodies,
+                                          sizeof(CelestialBody *), compare);
+        if (pBodies == NULL)
+            printf("Flight was not found\n");
+        else {
+            printf("Flight found, ");
+            printCelestialBody(pBody);
+        }
+    } else {
+        printf("The search cannot be performed, array not sorted\n");
+    }
+
+}
+
+void sortCelestialBody(SpaceControlSystem *pSystem) {
+    pSystem->sortOpt = showSortMenu();
+    int (*compare)(const void *air1, const void *air2) = NULL;
+
+    switch (pSystem->sortOpt) {
+        case eDistance:
+            compare = compareBodyByDistance;
+            break;
+        case eType:
+            compare = compareBodyByType;
+            break;
+        case eDate:
+            compare = compareBodyByDate;
+            break;
+        default:
+            return;
+    }
+
+    if (compare != NULL)
+        qsort(pSystem->CelestialBodyArr, pSystem->numOfBodies, sizeof(CelestialBody * ), compare);
+
+}

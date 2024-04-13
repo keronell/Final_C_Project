@@ -10,20 +10,20 @@ typedef struct
     SpaceAgency**	agencyArr;
     int         numOfExpeditions;
     LIST        expeditionList;
-}Agency;
+}Manager;
 
-int initAgency(Agency* pAgency);
+int initAgency(Manager* pAgency);
 
-int addSpaceAgency(Agency* pAgency);
-void freeAgencyManager(Agency* pAgency);
+int addSpaceAgency(Manager* pAgency);
+void freeAgencyManager(Manager* pAgency);
 
-int		saveManagerToFileBin(FILE *fp, const Agency* pAgency);
-int loadManagerFromFileBin(Agency* pAgency, const char* fileName);
+int		saveManagerToFileBin(FILE *fp, const Manager* pAgency);
+int loadManagerFromFileBin(Manager* pAgency, const char* fileName);
 
-int saveManagerToFileTxt(FILE *fp, const Agency* pAgency);
-int loadManagerFromFileTxt(Agency *pAgency, FILE* fp);
+int saveManagerToFileTxt(FILE *fp, const Manager* pAgency);
+int loadManagerFromFileTxt(Manager *pAgency, FILE* fp);
 
-void printAgencyManager(const Agency* pAgency);
+void printAgencyManager(const Manager* pAgency);
 
 
 

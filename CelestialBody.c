@@ -14,6 +14,7 @@ int initCelestialBody(CelestialBody *pBody) {
     pBody->ID = getUniqueID();
     pBody->size = getSize();
     pBody->distance = getDistance();
+    getCorrectDate(&pBody->dateOfDiscovery);
     getLocation(pBody);
     pBody->type = chooseCelestialBodyType();
 
@@ -129,4 +130,16 @@ int loadCelestialBodyFromFile(CelestialBody *body, FILE *fp) {
 
 
     return 0; // Success
+}
+
+int compareBodyByDistance(const void *pBody1, const void *pBody2){
+    return 0;
+}
+
+int compareBodyByType(const void *pBody1, const void *pBody2){
+    return 0;
+}
+
+int compareBodyByDate(const void *pBody1, const void *pBody2){
+    return 0;
 }

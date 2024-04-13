@@ -13,7 +13,7 @@ void initSpaceAgency(SpaceAgency *pAgency) {
     if (pAgency == NULL)
         return;
 
-    pAgency->name = getStrExactName("Enter Agency name:\n");
+    pAgency->name = getStrExactName("Enter Manager name:\n");
     pAgency->expeditionID = 0;
 
 }
@@ -35,11 +35,11 @@ void freeSpaceAgency(SpaceAgency *agency) {
 
 void printSpaceAgency(const SpaceAgency *pAgency) {
     if (pAgency == NULL) {
-        printf("Space Agency data is not available.\n");
+        printf("Space Manager data is not available.\n");
         return;
     }
 
-    printf("Space Agency Name:\t\t %s\n", pAgency->name);
+    printf("Space Manager Name:\t\t %s\n", pAgency->name);
 
     printf("Expedition destination ID: \t %d\n", pAgency->expeditionID);
 }

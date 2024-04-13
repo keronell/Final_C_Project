@@ -14,7 +14,7 @@ typedef struct {
 } SpaceMap;
 
 
-typedef struct AgencyManager AgencyManager;
+typedef  Manager Manager;
 
 int initSpaceMap (SpaceMap* spaceMap);
 

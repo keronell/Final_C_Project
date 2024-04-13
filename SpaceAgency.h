@@ -2,7 +2,7 @@
 #define FINAL_C_PROJECT_SPACEAGENCY_H
 
 #include "Expedition.h"
-//#include "AgencyManager.h"
+//#include "Manager.h"
 
 typedef struct
 {
