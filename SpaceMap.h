@@ -18,7 +18,7 @@ typedef struct AgencyManager AgencyManager;
 
 int initSpaceMap (SpaceMap* spaceMap);
 
-int addCelestialBodytoMap(SpaceControlSystem* spaceControlSystem, int celestialBodyId);
+int addCelestialBodytoMap(SpaceMap* spaceMap, CelestialBody *body);
 int addExpeditiontoMap(AgencyManager* agencyManager, int expeditionId);
 
 void freeSpaceMap (SpaceMap* spaceMap);

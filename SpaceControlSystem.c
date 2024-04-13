@@ -49,6 +49,7 @@ int addCelestialBody(SpaceControlSystem* pSystem, CelestialBody* newBody)
     pSystem->CelestialBodyArr[pSystem->numOfBodies] = newBody;
     pSystem->numOfBodies++;
 
+    addCelestialBodytoMap(&pSystem->spaceMap, newBody); //adding each new body to the spaceMap
     return 0; // Success
 }
 

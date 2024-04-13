@@ -33,27 +33,22 @@ int initSpaceMap(SpaceMap *spaceMap) {
     return 0;
 }
 
-CelestialBody *iterateBodies(CelestialBody **allBodies, int length, int id) {
-    for (int i = 0; i < length; i++) {
-        CelestialBody *body = *(allBodies + i);
-        if (body->ID == id) return body;
-    }
-    printf("cant locate object with such id");
-    return NULL;
-}
+//CelestialBody *iterateBodies(CelestialBody **allBodies, int length, int id) {
+//    for (int i = 0; i < length; i++) {
+//        CelestialBody *body = *(allBodies + i);
+//        if (body->ID == id) return body;
+//    }
+//    printf("cant locate object with such id");
+//    return NULL;
+//}
 
-int addCelestialBodytoMap(SpaceControlSystem *spaceControlSystem, int celestialBodyId) {
-    if (!spaceControlSystem) {
-        printf("cant proceed spaceControlSystem is null");
+int addCelestialBodytoMap(SpaceMap *spaceMap, CelestialBody *body) {
+    if (!spaceMap || !body) {
+        printf("cant proceed spaceControlSystem of body is null");
         return 1;
     }
-    CelestialBody *body = iterateBodies(spaceControlSystem->CelestialBodyArr, spaceControlSystem->numOfBodies,
-                                        celestialBodyId);
-    if (!body) return 1;
-
-    addCircleToMatrix(&spaceControlSystem->spaceMap, body->location, body->type);
+    addCircleToMatrix(spaceMap, body->location, body->type);
     return 0;
-
 
 }
 
@@ -90,9 +85,10 @@ void addCircleToMatrix(SpaceMap *matrix, Location center, int radius) {
 
 void printSpaceMap(SpaceMap *matrix) {
 
-    for (int i = 0; i < matrix->cols * 2; i++) {
-        printf("_");
+    for (int i = 0; i < matrix->cols; i++) {
+        printf("_ ");
     }
+    printf("\n");
     for (int i = 0; i < matrix->rows; i++) {
         for (int j = 0; j < matrix->cols; j++) {
             if (j == 0) printf("|");
@@ -107,8 +103,9 @@ void printSpaceMap(SpaceMap *matrix) {
         }
         printf("\n");
     }
-    for (int i = 0; i < matrix->cols * 2; i++) {
-        printf("_");
+    printf("\n");
+    for (int i = 0; i < matrix->cols; i++) {
+        printf("_ ");
     }
 }
 
@@ -164,11 +161,11 @@ void connectDotsWithoutCrossing(SpaceMap *matrix, Location dot1, Location dot2, 
 }
 
 
-int addExpeditiontoMap(AgencyManager *agencyManager, int expeditionId) {
-
-    return 0;
-}
-
+//int addExpeditiontoMap(AgencyManager *agencyManager, int expeditionId) {
+//
+//    return 0;
+//}
+//
 
 
 
